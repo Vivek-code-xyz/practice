@@ -1,0 +1,130 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    height: 100vh;
+    width: 100vw;
+}
+
+.container{
+    background-color: rgb(43, 39, 39);
+    padding: 4rem;
+    display: grid;
+    justify-content: center;
+    /* grid-template-columns: repeat(4 ,1fr); */
+    /* grid-template-columns: minmax(100px,200px)  minmax(100px,200px)  minmax(100px,200px)  minmax(100px,200px); */
+    grid-template-columns: repeat(auto-fit,minmax(100px,270px));
+    height: 100%;
+    gap: 1rem;
+    justify-content: end; /*this shifts whole  to refrence axis in parent box*/
+   
+    /* align-items: end;
+    justify-items: center; */           /*it shifts items in grid box*/
+
+    place-items: end center;
+    /* place-items:align-items justify-items */
+
+    
+    
+    
+}
+
+.box{
+    
+    background-color: yellowgreen;
+    color: rgb(56, 30, 222);
+    font-size: 3rem;
+    height: 100px;
+    width: 100px;
+}
+
+
+
+.box2{
+    /* justify-self: start;
+    align-self: end; */
+    place-self: end start;
+}
+
+
+
+
+
+/* ===============================
+   CSS GRID FUNCTIONS EXPLAINED
+   =============================== */
+
+/* minmax(min, max):
+   - Defines a grid track with a minimum and maximum size.
+   - The track will never shrink below the min value 
+     and never grow beyond the max value.
+   - Example: minmax(200px, 1fr)
+     -> Track will be at least 200px, but can expand up to 1fr if space allows.
+*/
+
+
+/* repeat(auto-fill, minmax()):
+   - auto-fill creates as many columns (or rows) as can fit 
+     inside the container, even if some of them end up empty.
+   - Useful for responsive layouts where items wrap automatically.
+   - Example: repeat(auto-fill, minmax(200px, 1fr))
+     -> Grid will create as many 200px–1fr wide columns as fit,
+        possibly leaving empty tracks at the end.
+*/
+
+
+/* repeat(auto-fit, minmax()):
+   - auto-fit is similar to auto-fill, but it will collapse 
+     any empty tracks so they don’t occupy space.
+   - This makes the grid “fit” only the actual items.
+   - Example: repeat(auto-fit, minmax(200px, 1fr))
+     -> Creates responsive columns that expand to fill the row 
+        without leaving gaps for unused tracks.
+*/
+
+
+
+/* ========================================
+   DIFFERENCE: justify-content vs justify-items
+   ======================================== */
+
+/* justify-content:
+   - Applies to the entire grid/flex container.
+   - Controls how the whole content (all grid/flex items as a group)
+     is positioned along the horizontal axis (main axis in flex).
+   - Example values: start, end, center, space-between, space-around.
+   - Think: "How should the whole group of items be spaced horizontally?"
+*/
+
+/* justify-items:
+   - Applies to individual grid items inside each cell.
+   - Controls how the content of each item is aligned 
+     within its own grid area (horizontally).
+   - Example values: start, end, center, stretch.
+   - Think: "How should each single item be aligned inside its cell?"
+*/
+
+
+/* ========================================
+   DIFFERENCE: align-items vs align-content
+   ======================================== */
+
+/* align-items:
+   - Applies to items inside the grid/flex container.
+   - Controls how items are aligned vertically (cross-axis) 
+     within their own cell/row.
+   - Example values: start, end, center, stretch.
+   - Think: "How should each item sit inside its row/cell vertically?"
+*/
+
+/* align-content:
+   - Applies to the entire grid/flex container (when there’s extra space).
+   - Controls spacing/alignment of the *whole group of rows or columns*
+     along the vertical axis (cross-axis).
+   - Example values: start, end, center, space-between, space-around, stretch.
+   - Think: "How should all the rows (as a block) be spaced vertically?"
+*/
+

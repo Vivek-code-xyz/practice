@@ -1,0 +1,170 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    height: 100vh;
+    width: 100vw;
+}
+
+
+.container{
+    height: 100%;
+    width: 100%;
+    background-color: rgb(0, 0, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.orbit{
+    height: 150px;
+    width: 150px;
+    /* background-color: green; */
+    position: relative;
+    
+}
+
+.sun{
+    height: 130px;
+    width: 130px;
+    background-color: yellow;
+    box-shadow: 0px 0px 5px 2px yellow ;
+     display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    position: absolute;
+   
+
+    right: 80px;
+    bottom: 50px;
+
+}
+
+.mercury{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 50px;
+    width: 50px;
+    background-color: rgb(125, 117, 118);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    /* animation: name duration timing-function delay iteration-count direction fill-mode; */
+
+    animation: mercury 2s linear 10ms infinite;
+    
+
+}
+
+@keyframes mercury {
+    from{
+        transform: rotate(0deg) translate(150px) rotate(0deg);
+    }
+    to{
+        transform: rotate(360deg) translate(150px) rotate(-360deg);
+
+    }
+    
+}
+
+.venus{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 80px;
+    width: 80px;
+    background-color: rgba(179, 98, 109, 0.893);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    /* animation: name duration timing-function delay iteration-count direction fill-mode; */
+
+    animation:venus 3s linear 10ms infinite;
+    
+
+}
+
+@keyframes venus {
+    from{
+        transform: rotate(0deg) translate(220px) rotate(0deg);
+    }
+    to{
+        transform: rotate(360deg) translate(220px) rotate(-360deg);
+
+    }
+    
+}
+
+.earth{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100px;
+    width: 100px;
+    background-color: rgb(69, 77, 230);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    /* animation: name duration timing-function delay iteration-count direction fill-mode; */
+
+    animation: earth 4s linear 10ms infinite;
+    
+
+}
+
+@keyframes earth {
+    from{
+        transform: rotate(0deg) translate(300px) rotate(0deg);
+    }
+    to{
+        transform: rotate(360deg) translate(300px) rotate(-360deg);
+
+    }
+    
+}
+
+
+
+.mars{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height:70px;
+    width: 70px;
+    background-color: rgb(244, 119, 52);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    /* animation: name duration timing-function delay iteration-count direction fill-mode; */
+
+    animation: mars 5s linear 10ms infinite;
+    
+
+}
+
+@keyframes mars {
+    from{
+        transform: rotate(0deg) translate(380px) rotate(0deg);
+    }
+    to{
+        transform: rotate(360deg) translate(380px) rotate(-360deg);
+
+    }
+    
+}
+
+

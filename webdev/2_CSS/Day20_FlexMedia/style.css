@@ -1,0 +1,92 @@
+.container{
+    background-color: aquamarine;
+    display: flex;
+    height: 800px;
+    align-items: center;
+    justify-content: center;
+}
+
+.box{
+    height: 170px;
+    width: 170px;
+    border: 3px black solid;
+
+    margin: 5px;
+
+    font-size: 20px;
+    font-weight: bold;
+    color: azure;
+    
+} 
+
+.box1{
+    background-color: cadetblue;
+    /* flex-shrink: 2;*/    /*shrinks 2x fast then other when space is contraction*/
+    /*flex-basis: 40%;   */ /* overwrite the height or width of flex item and give its mention height or width*/
+
+     flex: 1 2 40%;
+}
+
+.box2{
+    background-color: coral;
+    flex-grow: 1;    /*grows till the parent container has space in main axis*/
+}
+
+.box3{
+    background-color: cornflowerblue;
+    order: -1; /*appear first*/
+    flex-grow: 1.5; 
+    align-self: flex-start;
+}
+
+.box4{
+    background-color: hotpink;
+   align-self: flex-end;
+}
+
+
+
+
+
+
+/*Flex Items*/
+/* Flex items = direct children of flex container 
+   They can grow, shrink, and align automatically 
+   based on flex properties like flex-grow, flex-shrink, flex-basis */
+
+/* order */
+/* order = controls the visual order of flex items 
+   default is 0, smaller value appears first, larger appears later */
+
+
+
+
+
+/* flex-grow = how much an item can grow to fill extra space 
+   default 0 (no grow), larger value = grows more */
+
+
+/* flex-shrink = how much an item will shrink if space is tight 
+   default 1 (shrinks), 0 = no shrink, larger value = shrinks more */
+
+
+/* Flex-basis in simple words
+
+👉 Think of it as the starting size of a flex item.
+👉 Before flex items grow (flex-grow) or shrink (flex-shrink), the browser looks at flex-basis to decide how much space each item should take initially.
+👉 Example:
+
+👉 flex-basis: 200px; → item starts at 200px wide.
+
+👉 flex-basis: 30%; → item starts at 30% of container.
+
+👉 flex-basis: auto; → item’s size is based on content or its width. */
+
+/* short cut for above three trios */
+/* flex: [flex grow] [flex shrink] [flex basis] */
+
+
+
+
+/* align-self = sets alignment of a single flex item (cross-axis) 
+   overrides align-items, values: flex-start, flex-end, center, stretch */

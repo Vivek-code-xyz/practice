@@ -1,0 +1,14 @@
+*{
+    margin: 0;
+}
+
+h1{
+    background-color: darkcyan;
+    position: fixed;
+    padding-left: 60px;
+    width: 100%;
+}
+p{
+    padding: 60px;
+}
+

@@ -1,0 +1,40 @@
+body{
+    background-image: url(./Database-Management-Systems.jpg);
+    /* background-repeat: no-repeat; */
+    background-color: rgb(224, 238, 155);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1{
+    background-color: beige;
+    color: rgb(171, 10, 47);
+}
+
+section{
+    background-color: bisque;
+}
+
+footer{
+    background-color:rgb(230, 188, 126);
+}
+
+section> h2{
+    color: rgba(224, 34, 34,0.8);
+    background-color: rgb(157, 231, 190);
+}
+
+ul{
+    background-color: beige;
+    color: rgb(108, 108, 243);
+}
+
+#fff{
+    background-color: rgb(98, 198, 165);
+    color: brown;
+}
+
+p{
+    background-color: rgb(207, 173, 133);
+    color: rgb(79, 79, 247);
+}
+

@@ -1,0 +1,20 @@
+<!-- adding ./ in img src tag before file name of image will jump to parent folder which contains that file
+same if you add ../ in front it will access parent's parent folder
+
+like if i want to access image which is present on Day2 folder from Day 3 using img tag so 
+first i jump to webdev folder by adding ../  then adding name of child folder to access(Day2) then
+1 extra / then image file name and done -->
+
+ <img src="./Mindimg.jpeg" height="100" widht="100"> <!-- can access image of own folder -->
+
+ <img src="../Day2/LandScape.jpg" height="100" width="100"> <!-- can access image of parent's folder -->
+
+<!-- 
+ ./  -> access to all same level files on own folder
+ ../  -> one level up
+ ../../ -> two level up
+ ../../../ ->  tree level up
+
+
+ /filename  ->one level down
+ /filename/filename  ->two level down -->

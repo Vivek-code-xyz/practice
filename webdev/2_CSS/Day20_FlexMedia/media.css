@@ -1,0 +1,26 @@
+.container{
+
+    background-color: aquamarine;
+    border: 3px black solid;
+    display: flex;
+}
+
+.box{
+    height: 170px;
+    width: 170px;
+    background-color:rgb(62, 62, 243);
+    margin: 10px;
+    border:3px black solid;
+}
+
+@media(max-width:400px){
+    .container{
+        background-color: rgb(88, 121, 230);
+        flex-direction: column;
+    }
+    .box{
+        height: 70px;
+        width: 70px;
+        background-color: aquamarine;
+    }
+}

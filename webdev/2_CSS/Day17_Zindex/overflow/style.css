@@ -1,0 +1,65 @@
+.cont{
+    background-color:aquamarine;
+
+    display:inline-block;
+
+    /* margin-left: 120px; */
+    margin-top: 60px;
+}
+
+.box{
+    display: inline-block;
+    height: 140px;
+    width: 140px;
+
+    
+    
+}
+
+
+
+.box1{
+    background-color: coral;
+  overflow: scroll;
+}
+
+.box2{
+    background-color:deeppink;
+    
+    overflow:hidden;
+   
+    
+}
+
+.box3{
+    background-color: darkorchid;
+
+    overflow: auto;
+}
+
+.box4{
+    background-color: lightgreen;
+
+    overflow: visible;
+}
+
+
+/*
+
+overflow: visible(default)  /  hidden  / scroll  /  auto
+
+visible → Content overflows outside the element’s box.
+No scrollbars are provided, everything remains visible.
+
+hidden → Content outside the element’s box is clipped.
+The hidden part cannot be scrolled into view.
+
+scroll → Content is clipped but scrollbars are always shown.
+User can scroll even if content fits inside.
+
+auto → Content is clipped when necessary.
+Scrollbars appear only if the content overflows.
+
+
+
+*/

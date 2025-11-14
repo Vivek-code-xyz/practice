@@ -1,0 +1,33 @@
+/* name ke sath  */
+h1{
+    color: brown;
+}
+
+/* change by rgb  ---> 0 to 255 */
+h2{
+    color: rgb(12, 146, 151);
+}
+
+/* change by hexa decimal */
+/* first use # and then 6 digit hexa*/
+#first{
+    color: #13df43ee;
+}
+
+/* color by hsl --> hue saturation lightness */
+/* hue --> color type with values from 0 ->360
+saturation--> intensity of color 
+lightness --> light in the color */
+
+p{
+    /* color:hsl(hue, saturation, lightness) */
+    color: hsla(241, 62%, 54%,0.7);
+}
+
+
+/* now another factor transparency a */
+/* a represent transparency of color from 0.0 to 1 */
+/* we can also add a into hexa desimal and hsl */
+#second{
+    color: rgb(215, 79, 194,0.6);
+}

@@ -1,0 +1,105 @@
+*{
+    margin: 0px;
+}
+
+.container{
+    height: 100vh;
+    background-color:bisque;
+    display: flex;
+    flex-direction: row;       /* default is row itself(child arrange in row wise from left to right)*/
+    /*Now Child Will Arrange In Column wise Left to Right */
+
+    justify-content:space-evenly;    /* GO To Line 61*/  /*It Applies On The Direction Of Main Axis*/
+    align-items: baseline;          /*go To Line 71*/  /*Applies On The Direciton Of Main Axis*/
+
+    flex-wrap: wrap;   /*Line 81*/
+
+    align-content:center;      /*Line 91*/
+
+}
+
+.box{
+    height: 170px;
+    width: 170px;
+    border: 5px black solid;
+    margin: 5px;
+    color: azure;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.box1{
+    background-color: cornflowerblue;
+}
+
+.box2{
+    background-color:coral;
+}
+
+.box3{
+    background-color:blueviolet;
+}
+
+.box4{
+    background-color: crimson;
+}
+
+
+
+
+/* flexbox means flexible box model */
+
+/* display flex in parent can arrange childs of that parent in line of main axis(default is row wise) */
+
+/* flex direction: row or column or row-reverse or column-reverse; */
+/*cross axis is perpedicular to main axis....*/
+
+
+
+/* if flex direction is column so verticle line is main axis and horizontal is cross axis...and vice versa  */
+
+
+
+
+
+
+
+/* justify-content: flex-start;   -> Items align at the start of the container (default). */
+/* justify-content: flex-end;     -> Items align at the end of the container. */
+/* justify-content: center;       -> Items align at the center of the container. */
+/* justify-content: space-between;-> First item at start, last at end, equal space between items. */
+/* justify-content: space-around; -> Equal space around all items, edges have half-space. */
+/* justify-content: space-evenly; -> Equal space between items and container edges. */
+
+
+
+/* align-items: stretch;   -> Items stretch to fill container height (default). */
+/* align-items: flex-start;-> Items align at the top of the container. */
+/* align-items: flex-end;  -> Items align at the bottom of the container. */
+/* align-items: center;    -> Items align at the vertical center. */
+/* align-items: baseline;  -> Items align based on their text baseline. */
+
+
+/* flex-wrap helps when flex items don't fit in one line.  
+   It allows items to move (wrap) onto new lines instead of shrinking too small. */
+
+/* flex-wrap: nowrap;        -> All items stay in one line (default). */
+/* flex-wrap: wrap;          -> Items wrap onto the next line if space is not enough. */
+/* flex-wrap: wrap-reverse;  -> Items wrap onto the next line but in reverse order. */
+
+
+/* align-content controls spacing between multiple rows (or columns) of flex items.  
+   It only works when flex-wrap is enabled and there are multiple lines. */
+
+/* align-content: stretch;       -> Rows stretch to fill container (default). */
+/* align-content: flex-start;    -> Rows pack at the top of the container. */
+/* align-content: flex-end;      -> Rows pack at the bottom of the container. */
+/* align-content: center;        -> Rows pack at the vertical center. */
+/* align-content: space-between; -> First row at top, last at bottom, equal space between rows. */
+/* align-content: space-around;  -> Equal space around each row, edges have half-space. */
+/* align-content: space-evenly;  -> Equal space between rows and container edges. */
+
+
+/* flex-flow: column wrap; */
+/*flex flow contains combined flex-direction and flex-wrap commands*/
+

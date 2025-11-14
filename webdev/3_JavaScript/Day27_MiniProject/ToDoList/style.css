@@ -1,0 +1,141 @@
+body {
+    background-color: #1e1e2e;
+    color: #e4e4e7;
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    margin: 0;
+    padding: 40px 20px;
+}
+
+.container {
+    background-color: #2a2a3b;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+    transition: box-shadow 0.3s ease;
+}
+
+.container:hover {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+h1 {
+    color: #f2f2f7;
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+
+form {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+#task {
+    background-color: #1b1b28;
+    color: #f5f5f7;
+    border: 1px solid #3a3a4a;
+    border-radius: 8px;
+    padding: 10px 12px;
+    width: 70%;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#task:focus {
+    border-color: #646cff;
+    box-shadow: 0 0 8px rgba(100, 108, 255, 0.3);
+}
+
+button[type="submit"] {
+    background-color: #3b3b5c;
+    color: #f5f5f7;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #50507a;
+    box-shadow: 0 4px 10px rgba(80, 80, 122, 0.4);
+}
+
+
+#allTask {
+    margin-top: 30px;
+    padding: 20px 0;
+    width: 100%;
+    max-width: 420px;
+    border-top: 1px solid #3a3a4a;
+    border-bottom: 1px solid #3a3a4a;
+}
+
+
+#Content {
+    background-color: #262637;
+    border: 1px solid #38384a;
+    color: #e0e0e3;
+    padding: 12px 14px;
+    margin-bottom: 12px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: box-shadow 0.3s ease;
+}
+
+#Content:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+#added_task {
+    flex: 1;
+    text-align: left;
+    margin-right: 10px;
+}
+
+#deletebtn, #Donebtn {
+    background-color: #3b3b5c;
+    color: #f5f5f7;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#deletebtn:hover, #Donebtn:hover {
+    background-color: #50507a;
+    box-shadow: 0 3px 8px rgba(80, 80, 122, 0.4);
+}
+
+#Donebtn {
+    background-color: #356f48;
+}
+
+#Donebtn:hover {
+    background-color: #469d65;
+    box-shadow: 0 3px 8px rgba(70, 157, 101, 0.4);
+}
+
+#deletebtn {
+    background-color: #7a3a3a;
+    margin-left: 5px;
+}
+
+#deletebtn:hover {
+    background-color: #a24e4e;
+    box-shadow: 0 3px 8px rgba(162, 78, 78, 0.4);
+}

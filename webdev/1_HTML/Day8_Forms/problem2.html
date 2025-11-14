@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JEE Registration</title>
+</head>
+<body>
+    <!-- <h1>IIT-JEE Registration Form</h1> -->
+    <form action="server_url">  <!--in action tag we give the URL of server to which i have to send form data -->
+        <fieldset>           <!-- fieldset makes box around the output of code inside it ,  used for grouping-->
+        <legend>IIT-JEE Registration Form</legend>     <!--legend gives text at fieldset box-->
+            <label for="fname">Full Name : </label>
+            <input type="text" id="fname" name="Name" >
+            <br><br>
+
+            <label for="mail">Email id : </label>
+            <input type="email" id="mail" name="email">
+            <br><br>
+
+            <label for="contect">Phone Number : </label>
+            <input type="tel" id="contect" name="contect of employee">
+            <br><br>
+
+            <label for="pass">PassWord : </label>
+            <input type="password" id="pass" name="password">
+
+            <br><br>
+
+            <label>Gender : </label>
+            <input type="radio" id="male" name="gender" value="male">
+            <label for="male">Male </label>
+            <input type="radio" id="fem" name="gender" value="female">
+            <label for="fem">Female </label>
+            <input type="radio" id="sex" name="gender" value="other">
+            <label for="sex">Other </label>
+
+            <br><br>
+
+            <label for="dob">Date Of Birth : </label>
+            <input type="date" id="dob" name="DOB" min="2001-01-01" max="2007-12-31">
+            <br><br>
+
+            <label for="School">School Name : </label>
+            <input type="text" id="School" name="school">
+            <br><br>
+
+            <label for="bor">Board : </label>
+            <select name="board" id="bor">    <!--select gives dropedown option services via option tags-->
+                <option value="" selected disabled>Select Your Board</option>
+                <option value="CBSE">CBSE</option>
+                <option value="CISCE">CISCE</option>
+                <option value="NIOS">NIOS</option>
+                <option value="StateBoard">State Board</option>
+                <option value="Other">Other</option>
+            </select>
+            <br><br>
+
+            <label for="passing">Year Of Passing : </label>
+            <input type="number" min="2020" max="2026" id="passing" name="Passing Year">
+            <br><br>
+
+            <label for="Center">Exam Center : </label>
+            <select name="Exam Center" id="Center">
+                <option value="" selected disabled>Select Center</option>
+                <option value="Ahmedabad">Ahmedabad</option>
+                <option value="Surat">Surat</option>
+                <option value="Rajkot">Rajkot</option>
+                <option value="Vadodara">Vadodara</option>
+            </select>
+
+            <br><br>
+
+            <button>Register</button>
+        </fieldset>
+    </form>
+    
+</body>
+</html>

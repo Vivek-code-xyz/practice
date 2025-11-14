@@ -1,0 +1,19 @@
+/* this is exaple of external css */
+
+
+div{
+    background-color: bisque;
+}
+
+#one{
+    background-color: rgb(153, 229, 229);
+}
+
+.two{
+    background-color: rgb(82, 208, 208);
+}
+
+#mill{
+    background-color: beige;
+}
+

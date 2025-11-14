@@ -1,0 +1,52 @@
+.one{
+    background-color: aquamarine;
+    margin: 20px;
+
+    width: 200px;
+    height: 200px;
+}
+
+.two{
+    display: inline;   /*now .two is inline*/
+    background-color: lightskyblue;
+    margin: 20px;
+     width: 200px;
+    height: 200px;
+}
+
+span{
+
+    background-color: orange;
+    margin: 20px;
+    width: 200px;
+    height: 200px;
+    display: block;  /*now the span tag is block*/
+
+    /*OR*/
+
+    display: inline-block;     /*inline with width and height arrangements*/
+}
+
+
+p{
+    background-color: lightgrey;
+}
+
+
+/*Inference
+
+You can not give height and width to an inline object like span
+
+also inline tag only display horizontal margins
+they have vertical margin but can not display it
+
+to perform this operatiion
+you can use 
+                display:block;
+ attribute to make span block element
+
+or if you want to change height and width of inline element without
+explicitely convertion it into block use
+
+    display:inline-block;  
+*/

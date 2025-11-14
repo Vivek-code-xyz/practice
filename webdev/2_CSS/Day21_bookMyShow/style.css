@@ -1,0 +1,205 @@
+*{
+    margin: 0;
+    padding: 0;;
+}
+
+
+
+
+.logo{
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(203, 70, 70);
+    padding: 1rem;
+}
+
+.left{
+    color:white;
+}
+
+.right button{
+    margin-left: 0.5 rem;
+    background-color: rgb(203, 70, 70);
+    color: whitesmoke;
+    border: none;
+    padding: 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+
+
+
+.search{
+    display: flex;
+    justify-content: center;
+    padding: 1rem 0rem;
+    background-color: rgb(174, 174, 174);
+}
+
+
+.searching{
+    width: 400px;
+    max-width: 60%;
+    height:20px;
+    margin-right: 1rem;
+    padding: 0.5rem;
+    font-size: 1.1rem;
+    border-radius: 5px;
+}
+
+.search >button{
+    font-size: 1.3rem;
+    background-color: rgb(218, 48, 48);
+    color: whitesmoke;
+    font-weight: bold;
+    padding: 0rem 0.5rem;
+    border-radius: 5px;
+
+}
+
+
+
+.banner{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url(./image1.jpg);
+    padding: 2rem 0rem;
+}
+
+.banner h2{
+    color: whitesmoke;
+    font-size: 1.8rem;
+    background-color: black;
+    padding: 0.2rem;
+}
+
+.banner button{
+    background-color: rgb(206, 51, 51);
+    color: whitesmoke;
+    font-size: 1.4rem;
+    margin-top: 1rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 5px;
+}
+
+.title,.events{
+    text-align: center;
+    padding: 1rem;
+}
+
+.title h2,.events h3{
+    font-size: 2.5rem;
+}
+
+
+button:hover{
+    background-color: rgb(193, 53, 53);
+}
+
+.movie{
+    display: flex;
+    overflow-x: scroll;
+}
+.movie::-webkit-scrollbar{display: none;}
+.pics::-webkit-scrollbar{display: none;}
+.image{
+    height: 300px;
+}
+
+.card{
+    border: 0.5rem solid rgb(213, 203, 211);
+    background-color:  rgb(213, 203, 211);
+    text-align: center;
+    border-radius: 5px;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.box{
+    height: 200px;
+    border-radius: 5px;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+.card>h2{
+    font-size: 1.7rem;
+    font-weight: bold;
+}
+
+
+.bottom{
+    margin-top: 2rem;
+    text-align: center;
+}
+
+
+.bottom>img{
+    max-width: 75%;
+    border-radius: 10px;
+}
+
+.pics{
+    display: flex;
+    overflow-x: scroll;
+}
+
+@media(max-width:600px){
+    .logo{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .right{
+        display: flex;
+        flex-direction: column;
+
+        padding-top: 1rem;
+        
+    }
+
+    .movie,.pics{
+        flex-direction: column;
+    }
+
+    .card,.visual{
+        margin-top:0.5rem;
+    }
+}
+
+.visual{
+    display: flex;
+}
+.movie,.pics{
+    margin-left: 70px;
+    margin-right: 63px;
+    
+}
+
+.box,.image{
+    border-radius: 5px;
+}
+
+footer{
+    background-color: rgb(76, 76, 76);
+    margin-top: 1rem;
+    height: 40px;
+    text-align: center;
+    padding: 1rem;
+}
+
+footer>p{
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: whitesmoke;
+    
+}
+
+
+img:hover{
+    transform: scale(1.03);
+}

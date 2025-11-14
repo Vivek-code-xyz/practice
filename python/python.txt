@@ -1,0 +1,2 @@
+-> data types
+  int, float, string, boolean, None(capital N only)

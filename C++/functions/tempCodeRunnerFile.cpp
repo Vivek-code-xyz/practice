@@ -1,0 +1,1 @@
+(armstrong(n,digit))?"yes":"no"

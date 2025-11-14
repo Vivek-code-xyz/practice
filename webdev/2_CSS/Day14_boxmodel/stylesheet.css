@@ -1,0 +1,19 @@
+h1{
+    width: 200px;
+    height: 200px;
+    
+    /*
+    box-sizing: content-box;  -->this makes content box with given width and height(200*200)
+    this is by default applied by web browser
+    
+    box-sizing: border-box; ---> this makes whole box(including content+padding+border) with given width and height
+    in this way the size of content box will be decided according to size of padding and border width given
+    */
+    
+    border: 5px blue solid;
+    
+    padding: 20px;
+    box-sizing: border-box;    /*used into websites to avoid overlapping*/
+
+    margin: 20px;
+}

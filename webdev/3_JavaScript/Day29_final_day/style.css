@@ -1,0 +1,576 @@
+/* ==== RESET & BASE ==== */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", system-ui, sans-serif;
+}
+
+:root{
+    /* themeable colors (default: light) */
+    --bg: #f8f6ef;
+    --text: #2e2e2e;
+    --accent: #00a88f;
+    --accent-hover: #008c76;
+    --header-bg: #ffffff;
+    --card-bg: #ffffff;
+    --input-bg: #fafafa;
+    --muted: #666666;
+    /* footer and link variables */
+    --footer-top: #131313;
+    --footer-bottom: #1c1c1c;
+    --footer-text: #e6efe9;
+    --footer-heading: #ffffff;
+    --link-color: #90e2d7;
+    --rate-bg: #008c76;
+    --rate-text: #ffffff;
+    /* button / control colors */
+    --filter-bg: #fcfcfc; /* small filter buttons */
+    --filter-text: #222;
+    --filter-border: #cccccc;
+    --filter-hover-bg: var(--accent);
+    --filter-hover-text: #ffffff;
+    --toggle-bg: var(--card-bg);
+    --toggle-text: var(--text);
+    /* borders for cards and headers */
+    --card-border: #e9e7de;
+    --header-border: #ddd;
+}
+
+body{
+    background: var(--bg);
+    color: var(--text);
+}
+
+/* ==== HEADER ==== */
+header.head{
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 40px;
+    background: var(--header-bg);
+    border-bottom: 1px solid var(--header-border);
+}
+
+header.head .name{
+    font-size: 35px;
+    font-weight: 700;
+    color: var(--accent);
+}
+
+header.head .input input{
+    width: 340px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    background: var(--input-bg);
+}
+
+.accout button{
+    background: var(--accent);
+    color: white;
+    border: none;
+    margin-left: 8px;
+    padding: 9px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.18s ease, box-shadow 0.12s;
+}
+
+.accout button:hover{
+    background: var(--accent-hover);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+}
+
+abc{
+    font-size: 25px;
+    color: rgb(149, 150, 150);
+}
+
+/* ==== STICKY FILTER BAR ==== */
+.main .head{
+    position: sticky;
+    top: 72px;
+    z-index: 150;
+    background: var(--header-bg);
+    display: flex;
+    gap: 14px;
+    padding: 14px 40px;
+    border-bottom: 1px solid var(--header-border);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.main .head button{
+    border: 1px solid var(--filter-border);
+    background: var(--filter-bg);
+    color: var(--filter-text);
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.18s ease, color 0.18s ease, transform 0.12s ease, box-shadow 0.12s;
+    font-size: 14px;
+}
+
+/* Label placed to the left of the filter buttons (replaces Filters button) */
+.main .head .filters-label{
+    display: inline-flex;
+    align-items: center;
+    font-size: 18px; /* increased for visibility */
+    font-weight: 600;
+    color: var(--accent); /* accent color to stand out */
+    margin-right: 10px;
+    padding-left: 2px;
+}
+
+.main .head button:hover{
+    background: var(--filter-hover-bg);
+    color: var(--filter-hover-text, #fff);
+    border-color: var(--filter-hover-bg);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+
+.main .head button:focus-visible{
+    outline: 3px solid rgba(0,168,143,0.12);
+    outline-offset: 2px;
+}
+
+/* sortControls inserted by Filters button */
+#sortControls{
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+.small-filter{
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid var(--filter-border);
+    background: var(--filter-bg);
+    color: var(--filter-text);
+    cursor: pointer;
+    font-size: 13px;
+}
+.small-filter:hover{
+    background: var(--filter-hover-bg);
+    color: var(--filter-hover-text, #fff);
+}
+
+/* Theme toggle button inside the filter bar */
+.theme-toggle{
+    margin-left: auto; /* push to the rightmost side */
+    background: var(--toggle-bg);
+    color: var(--toggle-text);
+    border: 1px solid var(--filter-border);
+    padding: 8px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.18s ease, transform 0.12s ease, color 0.18s, box-shadow 0.12s;
+}
+
+.theme-toggle[aria-pressed="true"]{
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+}
+
+.theme-toggle:focus-visible{
+    outline: 3px solid rgba(0,168,143,0.12);
+    outline-offset: 2px;
+}
+
+/* ==== GRID WRAPPER ==== */
+.root{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 26px;
+    padding: 30px 40px;
+}
+
+/* ==== RESTAURANT CARD ==== */
+#card{
+    background: var(--card-bg);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: 0.35s;
+    cursor: pointer;
+    border: 1px solid var(--card-border);
+}
+
+#card:hover{
+    transform: translateY(-6px);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.12);
+}
+
+#card img{
+    width: 100%;
+    height: 170px;
+    object-fit: cover;
+    border-bottom: 1px solid #eae9e1;
+}
+
+/* ==== CARD DETAILS ==== */
+#details{
+    padding: 15px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 14px;
+}
+
+#first, #second, #third{
+    display: flex;
+    justify-content: space-between;
+}
+
+#rest_name{
+    font-weight: 600;
+    font-size: 17px;
+    color: var(--text);
+}
+
+/* Rating Badge */
+#rate{
+    background: var(--rate-bg);
+    color: var(--rate-text);
+    padding: 3px 8px;
+    border-radius: 5px;
+    font-size: 13px;
+}
+
+/* Text Colors */
+#food_detail,
+#price,
+#distance_of_rest{
+    color: var(--muted);
+    font-size: 13.5px;
+}
+
+/* ==== FOOTER ==== */
+footer.foot{
+    background: linear-gradient(180deg, var(--footer-top) 0%, var(--footer-bottom) 100%);
+    color: var(--footer-text);
+    padding: 48px 40px;
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr; /* slightly larger first column */
+    gap: 28px;
+    align-items: start;
+}
+
+/* ==== DARK THEME OVERRIDES ==== */
+/* When the <html> has data-theme="dark" the variables below are used */
+html[data-theme="dark"]{
+    /* page background: darkest */
+    --bg: #071018;
+    --text: #e6eef0;
+    --accent: #00d4b8;
+    --accent-hover: #00b89f;
+    /* header slightly lighter than body */
+    --header-bg: #0b1620;
+    /* card panel should be visibly lighter than body */
+    --card-bg: #0f2227;
+    --input-bg: #081018;
+    --muted: #9fa9a3;
+    /* footer gradient that is separate from body */
+    --footer-top: #0e1518;
+    --footer-bottom: #11171b;
+    --footer-text: #d7e7e3;
+    --footer-heading: #f4fbf9;
+    --link-color: #7fe6d3;
+    --rate-bg: #00b89f;
+    --rate-text: #041214;
+    /* buttons in dark */
+    --filter-bg: #0f1416;
+    --filter-text: #dbeee9;
+    --filter-border: rgba(255,255,255,0.06);
+    --filter-hover-bg: var(--accent);
+    --filter-hover-text: #041214;
+    --toggle-bg: #0b1115;
+    --toggle-text: var(--text);
+    /* borders */
+    --card-border: rgba(255,255,255,0.04);
+    --header-border: rgba(255,255,255,0.04);
+}
+
+/* small transition so theme change feels smooth */
+body, header.head, .main .head, footer.foot, .root, #card{
+    transition: background 0.25s ease, color 0.25s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+/* Make each footer column a vertical stack */
+footer.foot > div{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Ensure all footer columns align their content to the left */
+footer.foot > div{
+    align-items: flex-start;
+    text-align: left;
+}
+
+/* Limit the width of the brand column so the description wraps nicely */
+footer.foot > div:first-child p{
+    max-width: 360px;
+    color: #d8e1db;
+}
+
+footer.foot h2{
+    margin-bottom: 6px;
+    color: var(--footer-heading);
+    font-size: 20px; /* larger brand/title */
+    line-height: 1.1;
+}
+
+footer.foot h3{
+    margin-bottom: 6px;
+    color: var(--footer-heading);
+    font-size: 16px; /* section headings */
+    line-height: 1.2;
+}
+
+/* Quick links list */
+footer.foot ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+footer.foot li{
+    margin: 6px 0;
+    font-size: 15px; /* match links and paragraphs for balance */
+}
+
+footer.foot a{
+    color: var(--link-color);
+    text-decoration: none;
+    transition: color 0.18s ease, transform 0.18s ease;
+    font-size: 15px;
+}
+
+footer.foot a:hover{
+    color: #00d4b8;
+    transform: translateX(4px);
+}
+
+/* Contact and small text */
+footer.foot p{
+    color: var(--footer-text);
+    line-height: 1.45;
+    font-size: 15px;
+}
+
+/* Make quick links tidy and aligned */
+footer.foot li a{
+    display: inline-block;
+    padding: 4px 0;
+}
+
+/* Social links (last column) — avoid wrapping and space them nicely */
+footer.foot > div:last-child p{
+    white-space: nowrap;
+}
+
+footer.foot > div:last-child p a{
+    margin-right: 10px;
+    color: #90e2d7;
+}
+
+/* A soft dividing rule that spans the whole footer */
+footer.foot hr{
+    grid-column: 1 / -1;
+    margin-top: 26px;
+    border: 0;
+    height: 1px;
+    background: rgba(255,255,255,0.06);
+}
+
+/* Copyright / final note */
+footer.foot p:last-child{
+    grid-column: 1 / -1;
+    text-align: center;
+    margin-top: 14px;
+    color: #9fa9a3;
+    font-size: 14px;
+}
+
+/* Small helper for social links */
+.footer-social{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+/* ==== FOOTER RESPONSIVE ==== */
+@media (max-width: 900px){
+    footer.foot{
+        grid-template-columns: repeat(2, 1fr);
+        padding: 36px 24px;
+    }
+}
+
+@media (max-width: 520px){
+    footer.foot{
+        grid-template-columns: 1fr;
+        padding: 28px 20px;
+        gap: 18px;
+    }
+    footer.foot p:last-child{
+        font-size: 12px;
+    }
+    /* Scale down typography for small screens */
+    footer.foot h2{ font-size: 18px; }
+    footer.foot h3{ font-size: 15px; }
+    footer.foot p, footer.foot a, footer.foot li{ font-size: 13px; }
+}
+
+/* ==== RESPONSIVE ==== */
+@media (max-width: 1100px){
+    .root{
+        grid-template-columns: repeat(3,1fr);
+    }
+}
+@media (max-width: 800px){
+    .root{
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+@media (max-width: 500px){
+    .root{
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Expanded card / modal styles */
+.expanded-overlay{
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.55);
+    z-index: 9999;
+    padding: 20px;
+}
+.expanded-card{
+    width: 90vw;
+    max-height: 90vh; /* ensure card doesn't force page scrolling */
+    background: var(--card-bg);
+    color: var(--text);
+    border-radius: 12px;
+    overflow: hidden; /* move scrolling to internal content area */
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    position: relative;
+    border: 1px solid var(--card-border);
+}
+.expanded-overlay{ opacity: 0; transition: opacity 320ms ease; }
+.expanded-overlay.open{ opacity: 1; }
+
+.expanded-card{ transform: translateY(18px) scale(0.98); opacity: 0; transition: transform 360ms cubic-bezier(.2,.9,.28,1), opacity 240ms ease; }
+.expanded-card.open{ transform: translateY(0) scale(1); opacity: 1; }
+.expanded-card.closing{ transform: translateY(18px) scale(0.98); opacity: 0; }
+.expanded-card .expanded-close{
+    position: absolute;
+    right: 12px;
+    top: 8px;
+    background: transparent;
+    border: none;
+    font-size: 22px;
+    color: var(--muted);
+    cursor: pointer;
+    padding: 6px 8px;
+}
+.expanded-img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px 0 0 12px;
+}
+.expanded-content{
+    padding: 20px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow: auto; /* allow inner scrolling without showing browser scrollbar */
+}
+
+/* Hide scrollbars visually but keep scrolling functional */
+.expanded-content::-webkit-scrollbar{ width: 0; height: 0; }
+.expanded-content{ -ms-overflow-style: none; scrollbar-width: none; }
+.expanded-content{
+    padding: 20px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.expanded-titleRow{
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.expanded-titleRow h2{
+    margin:0;
+    font-size: 24px;
+}
+.expanded-rate{
+    background: var(--rate-bg);
+    color: var(--rate-text);
+    padding:6px 10px;
+    border-radius:6px;
+    font-weight:600;
+}
+.expanded-rateRow{ display:flex; align-items:center; gap:8px; }
+.expanded-rate{ font-size:15px; }
+.expanded-close{ z-index:2; }
+.expanded-meta{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    color: var(--muted);
+}
+.expanded-meta > div{ padding:6px 8px; background:var(--filter-bg); border-radius:6px; border:1px solid var(--filter-border); }
+.expanded-foodType{ color:var(--muted); font-weight:600; }
+.expanded-menu-list{ margin-top:8px; padding-left:18px; color:var(--muted); }
+.expanded-details p{ margin:8px 0; color:var(--muted); }
+
+/* Mobile: stack image above content */
+@media (max-width: 900px){
+    .expanded-card{ grid-template-columns: 1fr; height: 92vh; width: 96vw; }
+    .expanded-img{ border-radius: 12px 12px 0 0; height: 38vw; }
+}
+
+/* Auth (login/signup) modal styles */
+.auth-overlay{
+    position: fixed; inset: 0; display:flex; align-items:center; justify-content:center;
+    background: rgba(0,0,0,0.5); z-index: 10010; padding: 20px;
+}
+.auth-modal{
+    width: 420px; max-width: 96vw; background: var(--card-bg); color: var(--text);
+    border-radius: 12px; padding: 20px; box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+    border: 1px solid var(--card-border);
+}
+.auth-overlay{ opacity:0; transition: opacity 240ms ease; }
+.auth-overlay.open{ opacity:1; }
+
+.auth-modal{ transform: translateY(18px) scale(0.98); opacity:0; transition: transform 300ms cubic-bezier(.2,.9,.28,1), opacity 220ms ease; }
+.auth-modal.open{ transform: translateY(0) scale(1); opacity:1; }
+.auth-modal.closing{ transform: translateY(18px) scale(0.98); opacity:0; }
+.auth-header{ display:flex; align-items:center; justify-content:space-between; margin-bottom: 10px; }
+.auth-header h3{ margin: 0; font-size:18px; }
+.auth-close{ background: transparent; border: none; font-size:18px; cursor:pointer; color:var(--muted); }
+.auth-form{ display:flex; flex-direction:column; gap:10px; }
+.auth-form label{ font-size:13px; color:var(--muted); }
+.auth-form input{ padding:10px 12px; border-radius:8px; border:1px solid var(--filter-border); background:var(--input-bg); color:var(--text); }
+.auth-actions{ display:flex; gap:8px; margin-top:8px; }
+.auth-actions button{ padding:10px 12px; border-radius:8px; cursor:pointer; border:none; background:var(--accent); color:#fff; }
+.auth-switch{ background:transparent; border:1px solid var(--filter-border); color:var(--text); }
+
+/* small responsive tweak */
+@media (max-width: 480px){ .auth-modal{ padding:12px } .auth-header h3{ font-size:16px } }

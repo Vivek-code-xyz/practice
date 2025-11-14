@@ -1,0 +1,27 @@
+/*last one name in font family is itself a 
+font famillly and other are the child of that familly */
+
+h1{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size:34px ;  /*can use em,rem as px */
+
+}
+/*here sans serif is font class and it contaions various fonts */
+h2{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 3em;  
+    /*2em means font size of h2 will be 2 times the font size of his parent tag...here parent is body*/
+}
+p{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+   font-size: 3rem;
+   /*3 rem means its size will be 3 times the font size of root tag...here html tag*/
+}
+#first{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 157%;
+    /* font size is 157 % of parent tag*/
+}
+
+/* pixel length is adjust according to length of screen ..*/ 
+

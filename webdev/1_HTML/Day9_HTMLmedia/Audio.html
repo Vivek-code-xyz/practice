@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- how to add audio in web page -->
+     <audio src="./audio1.mp3" controls></audio>  <!-- this is methode one-->
+    <audio  controls>           <!-- this is methode two-->
+        <source src="./audio2.mp3" >
+        <source src="./audio1.mp3">    <!--this will play if above is not load -->
+        the song is not loaded due to error <!--this message will pop if above two are not loaded-->
+    </audio>
+</body>
+</html>
+
+
+<!-- control key word is necessary for both audio and video content to shhow on website-->
+
+<!-- methode two is prefferded over methode one due to error handeling in case of not loading content -->

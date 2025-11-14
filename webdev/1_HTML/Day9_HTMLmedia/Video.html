@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- all syntax is same as audio -->
+    <video src="./video1.mp4" controls height="250"></video>  
+
+    <video controls height="250"  autoplay muted>
+        <source src="./video2.mp4">
+        video is not loaded perfectly  <!-- this will execute if above is not executed due to error-->
+    </video>
+
+    <iframe src="https://www.youtube.com/embed/4Ax77tnW0e8" frameborder="0"></iframe>
+    <br>
+
+    <iframe src="https://www.youtube.com/embed/ryfkwulqX5E" frameborder="0" allowfullscreen></iframe>
+
+    <!--In source link of iframe... you should remove extrapart from end of app url till begening of video id -->
+    <!-- like for youtube remove things after .com/ till v= xxx and add embed/ btw them -->
+
+    <!--example
+        https://www.youtube.com/watch?v=4Ax77tnW0e8       this url to below url(watch?v=)->(embed/)
+                        |
+        https://www.youtube.com/embed/4Ax77tnW0e8
+    -->
+    <br>
+     <!-- you can also use iframe to show other websited on your website or your local html websites also -->
+      <iframe src="../Day8_Forms/HW1.html" frameborder="0"></iframe>
+</body>
+</html>
+
+
+
+<!-- to display youtube video or any non local video by a link you can not use video tag
+    for that you have to use iframe tag
+-->
+
+<!-- now autoplay keyword in video tag will play video automatically when you open the website 
+ and same muted willl mute video initially...... for browser like crome... use both keyword together-->
+
+
+
+
+
+

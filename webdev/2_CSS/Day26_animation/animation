@@ -1,0 +1,91 @@
+/* ---------------- CSS Animation Properties Explained ---------------- */
+
+/* 1. animation-name: 
+   - Specifies the name of the @keyframes to be used for the animation.
+   - Without it, no animation will run.
+*/
+animation-name: myAnimation;
+
+/* 2. animation-duration:
+   - Defines how long the animation takes to complete one cycle.
+   - Value: time in seconds(s) or milliseconds(ms).
+*/
+animation-duration: 2s;
+
+/* 3. animation-timing-function:
+   - Controls the speed curve (how animation accelerates/decelerates).
+   - Common values:
+       linear → same speed throughout
+       ease → slow start, fast middle, slow end (default)
+       ease-in → slow start → fast end
+       ease-out → fast start → slow end
+       ease-in-out → slow start & end, fast middle
+       steps(n) → divides animation into n steps (like frame by frame)
+*/
+animation-timing-function: ease-in-out;
+
+/* 4. animation-delay:
+   - Adds waiting time before animation starts.
+   - Value: time in s/ms.
+*/
+animation-delay: 1s;
+
+/* 5. animation-iteration-count:
+   - How many times animation should repeat.
+   - Values:
+       number → e.g., 3 means runs 3 times
+       infinite → keeps running forever
+*/
+animation-iteration-count: infinite;
+
+/* 6. animation-direction:
+   - Controls direction of each animation cycle.
+   - Values:
+       normal → default, plays forward
+       reverse → plays backward
+       alternate → forward then backward
+       alternate-reverse → backward then forward
+*/
+animation-direction: alternate;
+
+/* 7. animation-fill-mode:
+   - Decides the style before & after animation.
+   - Values:
+       none → default, no effect after animation ends
+       forwards → keeps final state after animation ends
+       backwards → applies starting state before it begins
+       both → applies both before & after effects
+*/
+animation-fill-mode: forwards;
+
+/* 8. animation-play-state:
+   - Controls animation running or paused.
+   - Values:
+       running → default, animation plays normally
+       paused → stops the animation when triggered
+*/
+animation-play-state: running;
+
+/* ---------------- Shorthand property ----------------
+   Instead of writing all above individually, we can use one line:
+   Example:
+animation: name duration timing delay iteration direction fill-mode;
+*/
+animation: myAnimation 2s ease-in-out 1s infinite alternate forwards;
+
+/* ---------------- Keyframes Example ----------------
+   - Defines what changes during the animation cycle
+*/
+@keyframes myAnimation {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(100px); }
+  100% { transform: translateX(0); }
+}
+
+/* ---------------- Real Example ---------------- */
+.myBox {
+  width: 100px;
+  height: 100px;
+  background: red;
+  animation: myAnimation 3s ease-in-out 0s infinite alternate forwards;
+}

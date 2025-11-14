@@ -1,0 +1,115 @@
+.container{
+    background-color: aqua;
+
+    margin: 150px;
+    height: 1500px;
+    width: 1000px;
+    /* position: relative; if you apply this then box 3 will move relative to this */
+}
+
+.box{
+    display: inline-block;
+    height: 200px;
+    width: 200px;
+}
+
+
+.box1{
+    background-color: cadetblue;
+    position: fixed;  /*now box 1 is fixed on screen..other content will move as you scroll down but box1 cant*/
+    top: 300px;
+    left: 200px;
+}
+
+.box2{
+    background-color: crimson;
+    position: relative;
+
+    top: 30px;
+    left: 20px;
+
+    
+}
+
+.box3{
+    background-color: darkgray;
+
+    position: absolute;           /*now it is hides the box 4 due to its space occupied by box 4 and this box override the box 4*/
+    z-index: -1;      /*this comand will move box3 1 step behind the webpage(like cartesian z-axis) so box 4 is now can be seen*/
+    
+    top: 40px;
+    left: 30px;    /*now its position is changed according to its nearest ancester having position attribute assigned*/
+    /*but here non of its ancestor has position attribute(non static) defined so it is moving according to html tag or viewport*/
+}
+
+
+.box4{
+    background-color: dodgerblue;
+    position: sticky;
+    top: 15px;
+}
+
+.cont{
+    width: 100%;
+    height: 2400px;
+    background-color: burlywood;
+}
+
+
+
+
+/*default position is static...
+
+position : relative;      this attribute opens four attribute for selected element viz..top bottom left right
+
+
+these four attributes will trigger the change in position of element relative to its original position via pixels
+
+and this position attribute do not affect the naigbouring elments.... simply override it if encounter
+
+*/
+
+
+/*
+ position : absolute;
+---->>  
+
+position: absolute; makes an element positioned relative to its nearest positioned ancestor (not the whole page unless no ancestor is positioned).
+
+If no ancestor has relative, absolute, or fixed, then it positions relative to the <html> (the page itself).
+
+You can use top, right, bottom, left to move the element exactly where you want relative to its parent(which has position attribute)
+
+All other elements can take place of that element..(in reletive place is holded by element itself) and behaves like absolute element is not present in the page
+
+Often used with position: relative; on a parent to control where the absolute child is placed.
+
+
+*/
+
+
+
+
+/*
+ position:fixed;    
+
+ this attribute is same as absolute..like it give its place and other elements can goes into that place
+
+ difference is that...it always moves relative to view port weather the parent has relative position
+
+
+ and most amazing property is that...after giving its position via top bottom and left right,
+ it stays there fixly...means it can not move when you scroll down your web page(use in nav bar design)
+
+*/
+
+
+/*Position : sticky ;
+top:20px;  (must)
+
+same as fixed but it scrolls in the screen until its top margin matches with top(20px).
+after that it moves with screen but in its parent body only...
+
+
+
+*/

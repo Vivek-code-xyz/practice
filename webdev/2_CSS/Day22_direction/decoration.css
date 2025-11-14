@@ -1,0 +1,67 @@
+h1{
+    text-decoration: underline wavy blue 3px;
+    /* text-decoration: blueviolet; */
+}
+
+
+
+h3{
+    /* text-transform: lowercase;    */
+    text-transform: capitalize;  
+    /* text-transform: uppercase;  All upper case */ 
+}
+
+/* ----------------------------------------------------------
+   TEXT-DECORATION → used to add, remove, or style decorations
+   applied to text (like underline, overline, line-through, etc.)
+   ----------------------------------------------------------
+
+   This property is a shorthand for controlling 3 sub-properties:
+   1) text-decoration-line
+   2) text-decoration-style
+   3) text-decoration-color
+   (and optionally text-decoration-thickness in modern CSS)
+
+--------------------------------------------------------------
+   1) text-decoration-line → sets the type of line decoration
+--------------------------------------------------------------
+   - none        → removes any decoration (default)
+   - underline   → draws a line beneath the text
+   - overline    → draws a line above the text
+   - line-through → draws a line through the middle (like strikethrough)
+   - multiple values allowed → e.g. underline overline
+
+--------------------------------------------------------------
+   2) text-decoration-style → sets the style of the line
+--------------------------------------------------------------
+   - solid       → normal straight line (default)
+   - double      → two parallel lines
+   - dotted      → dotted line
+   - dashed      → dashed line
+   - wavy        → wavy/curvy line
+
+--------------------------------------------------------------
+   3) text-decoration-color → sets the color of the line
+--------------------------------------------------------------
+   - Any valid CSS color (name, hex, rgb, etc.)
+   - Example: red, #ff0000, rgb(255,0,0)
+
+--------------------------------------------------------------
+   4) text-decoration-thickness (optional, newer CSS)
+--------------------------------------------------------------
+   - auto        → browser decides thickness (default)
+   - from-font   → uses the thickness defined by the font
+   - length/percentage → custom thickness (e.g. 2px, 10%)
+
+--------------------------------------------------------------
+   Shorthand examples:
+--------------------------------------------------------------
+   text-decoration: underline; 
+   /* applies underline with default color, solid, auto thickness */
+
+   /* text-decoration: overline dotted red;  */
+   /* red dotted line above text */
+
+   /* text-decoration: underline wavy blue 3px;  */
+   /* thick blue wavy underline */
+

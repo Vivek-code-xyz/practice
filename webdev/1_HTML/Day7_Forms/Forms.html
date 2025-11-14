@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forms</title>
+</head>
+<body>
+
+    <form >       <!--form tag-->
+        <label for="first">Name:</label>     <!-- it labels the input tag-->
+        <input type="text" id="first" placeholder="Enter Your Name" name="servername" required>
+        <!--input tag takes input at website and type attribute specifies it's input type-->
+        <!--'name attribute in input tag is unique and is recognised by server at which your database is'-->      
+       <br>
+       <br>
+
+       <label for="second">Age:</label>
+       <input type="Number" id="second" placeholder="Enter Your Age" value="100" name="AgeofStu">
+       <!--value attribute will fills default value in input bar-->
+       <br>
+       <br>
+       <label for="third">Enrollment No. : </label>
+       <input type="number" min="240280107000" max="240280107100"
+        placeholder="Enter Your Enrollment" required name="RollNoOfStu">
+       <br>
+       <br>
+       <button>Submit</button>   <!-- it shows button Submit on webpage-->
+
+
+    </form> 
+
+</body>
+</html>
+
+
+<!-- 'required'  (line 12) keyword in name input will insure that this input can not be empty
+    like user cant submit the form without filling the name -->
+
+<!-- attributes like 'for' in lebel will points out the ids of input tag...which shows that
+ if you click at lebel then you cursor will move to the corresponding input tag the label pointing..-->
+
+ <!--now 'place holder' simply fills the input box with text it holds-->
+
+
+ <!-- min and max will decide the range of input to be  done-->

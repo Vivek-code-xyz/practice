@@ -1,0 +1,54 @@
+/*casceding*/
+
+h1{
+    background-color: aquamarine;
+}
+
+.one{
+    background-color: antiquewhite;
+}
+
+#onne{
+    background-color: grey;
+}
+
+h1[ draggable="true"]{   /*select by attribute*/
+    color: beige;
+}
+
+body h1{   /*select by decendents*/
+    background-color: coral;
+}
+
+body >h1{  /*select by child*/
+    background-color: blue;
+}
+
+
+
+
+/* casscading rules (priorities)( for same property but by different ways  --- which will display)
+ important  >  type  >  specificity  > order
+
+
+ order ---> jo last me select hoga (last me letest aayega) usi ki properties lagu hongi
+
+
+ specificity--->  tag ke selectivity method ke aadhar par uski properties display hogi
+                selectivity ==>>  id  >  attribute  >  class   >( child ==descendent)   >  (element==group element)
+                means agar id se select kiya hoga to vahi display hoga class se select hua nahi..
+ 
+ type--->  priority milegi according to type of css used...
+    means    inline  >  internal  == external      
+    internal or external me fir order ke hisab se hoga...if link tag is below style tag in .html file then external ki priority hogi
+
+ important-->
+
+
+*/
+
+
+
+
+
+

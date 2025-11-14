@@ -1,0 +1,120 @@
+.test{
+    background-color: aquamarine;
+    text-align: center;
+}
+
+
+/* p{
+    text-align: right;
+    direction: rtl;
+    unicode-bidi:bidi-override ;
+} */
+
+.water{
+    font-size: 30px;
+    font-weight: bold;
+}
+
+span{
+    vertical-align: sub;
+    font-size: 20px;
+}
+
+/* ----------------------------------------------------------
+   DIRECTION → controls text and inline content flow
+   ----------------------------------------------------------
+   1) ltr (default) → text flows left → right (English, Hindi, etc.)
+   2) rtl → text flows right → left (Arabic, Hebrew, Urdu, etc.)
+*/
+
+/* ----------------------------------------------------------
+   TEXT-ALIGN → controls horizontal alignment of text/inline content
+   ----------------------------------------------------------
+   1) left (default) → aligns text to the left edge
+   2) right → aligns text to the right edge
+   3) center → aligns text to the center
+   4) justify → stretches text so both left & right edges align
+      (extra space is added between words if needed, like newspapers)
+*/
+
+
+
+
+
+/* ----------------------------------------------------------
+   UNICODE-BIDI → works with 'direction' property to control
+   how text is handled when mixing Left-to-Right (LTR) and
+   Right-to-Left (RTL) scripts (like English + Arabic together).
+   ----------------------------------------------------------
+
+   Common values:
+
+   1) normal (default)
+      → No special handling, text flows as per 'direction'.
+
+   2) embed
+      → Embeds the text in the specified 'direction' (LTR/RTL),
+         without letting outside text override it.
+
+   3) bidi-override
+      → Overrides the normal character order and forces text
+         to strictly follow the container's 'direction'.
+         Example: English letters can be forced into RTL order.
+
+   4) isolate
+      → Ensures the element's text direction does not affect
+         and is not affected by surrounding text.
+
+   5) isolate-override
+      → Same as 'isolate' but also forces character order
+         (like combining isolate + bidi-override).
+
+   6) plaintext
+      → The direction is determined by the first strong
+         directional character inside the element,
+         ignoring any parent 'direction'.
+*/
+
+
+/* ----------------------------------------------------------
+   VERTICAL-ALIGN → controls vertical alignment of inline or
+   inline-block elements relative to the line box (not the container!).
+   ----------------------------------------------------------
+
+   Common values:
+
+   1) baseline (default)
+      → Aligns the element’s baseline with the parent’s baseline.
+      (baseline = the line where most letters "sit")
+
+   2) top
+      → Aligns the top of the element with the tallest element’s top
+        in the same line.
+
+   3) middle
+      → Aligns the middle of the element with the middle of the parent’s line.
+        Commonly used to center icons with text.
+
+   4) bottom
+      → Aligns the bottom of the element with the lowest element’s bottom
+        in the same line.
+
+   5) text-top
+      → Aligns the top of the element with the top of the parent’s text.
+
+   6) text-bottom
+      → Aligns the bottom of the element with the bottom of the parent’s text.
+
+   7) sub
+      → Lowers the element to the position of subscript text
+        (like chemical formulas: H₂O).
+
+   8) super
+      → Raises the element to the position of superscript text
+        (like exponents: x²).
+
+   ⚡ Note:
+   - Works only with inline/inline-block/table-cell elements.
+   - Does NOT vertically center block elements inside containers.
+     (For that, use Flexbox or Grid).
+*/

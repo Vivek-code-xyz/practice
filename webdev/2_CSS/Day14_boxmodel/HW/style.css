@@ -1,0 +1,39 @@
+body{
+    background-color: bisque;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+
+.card{
+    background-color: aquamarine;
+    width: 30vw;
+    height:30 vw;
+    border: 5px rgb(60, 60, 192) solid;
+
+    padding: 15px;
+    margin: 30px;
+
+    /* margin-left: 35vw; */
+}
+
+h1{
+    background-color: rgb(0, 174, 255);
+    color:white;
+    text-align: center;
+}
+
+h3{
+    text-align: center;
+    background-color: aliceblue;
+   
+}
+
+.card:hover{
+    background-color: rgb(251, 139, 174);
+    transform: scale(1.1);
+    border: 5px rgb(255, 28, 65) solid;
+}
+
+.card:hover h1{
+    background-color: rgb(255, 191, 0);
+}

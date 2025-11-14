@@ -1,0 +1,110 @@
+create database college;
+
+use college;
+
+-- Practical 1.1 --
+
+CREATE TABLE DEPOSIT(
+	ACT_NO varchar(5),
+    CNAME varchar(18),
+    BNAME varchar(18),
+    AMOUNT decimal(8,2),
+    ADATE date);
+    
+ INSERT INTO DEPOSIT (ACT_NO, CNAME, BNAME, AMOUNT, ADATE) VALUES
+(100, 'ANIL', 'VRCE', 1000.00, '1995-03-01'),
+(101, 'SUNIL', 'AJNI', 5000.00, '1996-01-04'),
+(102, 'MEHUL', 'KAROLBAGH', 3500.00, '1995-11-17'),
+(104, 'MADHURI', 'CHANDI', 1200.00, '1995-12-17'),
+(105, 'PRMOD', 'M.G.ROAD', 3000.00, '1996-03-27'),
+(106, 'SANDIP', 'ANDHERI', 2000.00, '1996-03-31'),
+(107, 'SHIVANI', 'VIRAR', 1000.00, '1995-09-05'),
+(108, 'KRANTI', 'NEHRUPLACE', 5000.00, '1995-07-02'),
+(109, 'MINU', 'POWAI', 7000.00, '1995-08-10');
+
+-- practical 1.2 -- 
+
+CREATE TABLE BRANCH (
+    BNAME VARCHAR(50),
+    CITY  VARCHAR(50)
+);
+
+INSERT INTO BRANCH (BNAME, CITY) VALUES
+('VRCE', 'NAGPUR'),
+('AJNI', 'NAGPUR'),
+('KAROLBAGH', 'DELHI'),
+('CHANDI', 'DELHI'),
+('DHARAMPETH', 'NAGPUR'),
+('M.G.ROAD', 'BANGLORE'),
+('ANDHERI', 'BOMBAY'),
+('VIRAR', 'BOMBAY'),
+('NEHRUPLACE', 'DELHI'),
+('POWAI', 'BOMBAY');
+
+-- practical 1.3 --
+
+CREATE TABLE CUSTOMER (
+    CNAME VARCHAR(50),
+    CITY  VARCHAR(50)
+);
+
+INSERT INTO CUSTOMER (CNAME, CITY) VALUES
+('ANIL', 'CALCUTTA'),
+('SUNIL', 'DELHI'),
+('MEHUL', 'BARODA'),
+('MANDAR', 'PATNA'),
+('MADHURI', 'NAGPUR'),
+('PRAMOD', 'NAGPUR'),
+('SANDIP', 'SURAT'),
+('SHIVANI', 'BOMBAY'),
+('KRANTI', 'BOMBAY'),
+('NAREN', 'BOMBAY');
+
+
+-- practical 1.4 --
+
+CREATE TABLE BORROW (
+    LOANNO INT,
+    CNAME  VARCHAR(50),
+    BNAME  VARCHAR(50),
+    AMOUNT DECIMAL(10,2)
+);
+
+INSERT INTO BORROW (LOANNO, CNAME, BNAME, AMOUNT) VALUES
+(201, 'ANIL', 'VRCE', 1000.00),
+(206, 'MEHUL', 'AJNI', 5000.00),
+(311, 'SUNIL', 'DHARAMPETH', 3000.00),
+(321, 'MADHURI', 'ANDHERI', 2000.00),
+(375, 'PRMOD', 'VIRAR', 8000.00),
+(481, 'KRANTI', 'NEHRUPLACE', 3000.00);
+
+-- practical 1_questions --
+
+-- 1 --
+DESCRIBE deposit;
+DESCRIBE branch;
+
+-- 2 --
+DESCRIBE customer;
+DESCRIBE borrow;
+
+-- 3 --
+SELECT * FROM deposit;
+
+-- 4 --
+SELECT * FROM borrow;
+
+-- 5 --
+SELECT * FROM customer;
+
+-- 6 --
+SELECT * FROM branch;
+
+-- 7 --
+SELECT ACT_NO , AMOUNT FROM deposit;
+
+-- 8 --
+SELECT cname FROM deposit WHERE amount>4000;
+
+-- 9 --
+SELECT cname FROM deposit WHERE adate>'1996-12-01';

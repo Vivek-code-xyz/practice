@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmic Insights - Astrology</title>
+    <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+    <div class="container">
+        <h1>✨ Cosmic Insights ✨</h1>
+        <p class="subtitle">Discover your astrological destiny</p>
+
+        <div id="form-section">
+            <div class="form-group">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" placeholder="Enter your name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="gender">Your Gender</label>
+                <select id="gender" required>
+                    <option value="">Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Date of Birth</label>
+                <div class="date-group">
+                    <select id="day" required>
+                        <option value="">Day</option>
+                    </select>
+                    <select id="month" required>
+                        <option value="">Month</option>
+                        <option value="0">January</option>
+                        <option value="1">February</option>
+                        <option value="2">March</option>
+                        <option value="3">April</option>
+                        <option value="4">May</option>
+                        <option value="5">June</option>
+                        <option value="6">July</option>
+                        <option value="7">August</option>
+                        <option value="8">September</option>
+                        <option value="9">October</option>
+                        <option value="10">November</option>
+                        <option value="11">December</option>
+                    </select>
+                    <select id="year" required>
+                        <option value="">Year</option>
+                    </select>
+                </div>
+            </div>
+
+            <button onclick="generatePrediction()">🔮 Reveal My Destiny</button>
+        </div>
+
+        <div id="results" class="results">
+            <div class="user-info">
+                <h2 id="userName"></h2>
+                <p id="userDetails"></p>
+            </div>
+
+            <div class="result-card zodiac-card">
+                <h3>♈ Your Zodiac Sign</h3>
+                <p id="zodiacResult"></p>
+            </div>
+
+            <div class="result-card recommendation-card">
+                <h3>💫 Daily Recommendation</h3>
+                <p id="recommendationResult"></p>
+            </div>
+
+            <div class="result-card victim-card">
+                <h3>💔 Relationship Insight</h3>
+                <p id="victimResult"></p>
+            </div>
+
+            <div class="result-card future-card">
+                <h3>🌟 Future Prediction</h3>
+                <p id="futureResult"></p>
+            </div>
+
+            <div class="result-card nature-card">
+                <h3>🎭 Your Nature</h3>
+                <p id="natureResult"></p>
+            </div>
+
+            <button class="reset-btn" onclick="resetForm()">🔄 New Reading</button>
+        </div>
+    </div>
+
+    <script src="./script.js">
+
+    </script>
+</body>
+</html>

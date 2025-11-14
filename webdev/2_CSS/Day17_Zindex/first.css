@@ -1,0 +1,52 @@
+.cont{
+    background-color:aquamarine;
+
+    margin-top: 100px;
+    /* margin-left: 100px; */
+}
+
+.box{
+    display: inline-block;
+    height: 140px;
+    width: 140px;
+    position: relative;
+}
+
+/*Sabhi ka Z index default Auto hota hai*/
+
+.box1{
+    background-color: coral;
+    left: 230px;
+    bottom: 30px;
+
+    z-index: 5;
+}
+
+.box2{
+    background-color:deeppink;
+    
+
+    top: 20px;
+    left: 20px;
+
+    z-index: 3;
+    
+}
+
+.box3{
+    background-color: darkorchid;
+
+    z-index: 2;
+}
+
+.box4{
+    background-color: lightgreen;
+}
+
+
+/*Z index is only applicable for elements having non static positions*/
+
+/*it is used to show which element shoud display on top in case of pure overlapping*/
+
+
+/*higher Z index means topper the element will be shown*/

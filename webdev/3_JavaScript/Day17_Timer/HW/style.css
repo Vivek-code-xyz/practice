@@ -1,0 +1,32 @@
+body{
+
+    background-color: rgb(70, 70, 70);
+}
+
+.two{
+    height: 100%;
+    width: 100%;
+    background-color: rgb(70, 70, 70);
+    padding: 20px;
+    font-size: 80px;
+    color: azure;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    grid-template-rows: 40px 40px;
+    gap: 20px;
+    justify-items: center;
+    align-items: center;
+    margin-top: 80px;
+}
+
+h1{
+    color: white;
+    font-size: 80px;
+    justify-self: center;
+    
+}
+
+.one{
+   justify-items: flex-start;
+   align-self: flex-start;
+}

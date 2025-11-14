@@ -1,0 +1,10 @@
+body{
+    background-color: blanchedalmond;
+    background-image: url(./photo-1520209759809-a9bcb6cb3241.jpeg);  /* to insert image as background via link */
+    background-size: cover;  /* to cover entire element in screen or set image properly in background*/
+    background-repeat: no-repeat;  /*it prevent image to repeat to fill entire background..it ensures only one image fill the entire backgroud*/
+}
+
+h1{
+    background-color: rgba(77, 200, 235,0.8);
+}

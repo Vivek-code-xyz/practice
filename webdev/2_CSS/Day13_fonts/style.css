@@ -1,0 +1,35 @@
+/* 
+view port means screen height and width
+vw-->view port width 
+vh-->view port height */
+
+h1{
+    font-size: 10vw ;
+    /*10 % widht of view port*/
+    font-weight: 500;
+    /*font weight adjust boldness of sentence   100 -- 900*/
+    font-style: italic;  /* style of font*/
+    font-stretch: expanded;
+    /*it adjust the width of characters in a text if font family supports it*/
+}
+h2{
+    font-size: 8vh;
+    font-variant:small-caps;
+    /*font variant shows lowercase letters smaller then upper case*/
+}
+
+
+
+#two{
+    line-height: 30px;  /* adjust space differece between two lines*/
+    letter-spacing: 1ch; /* space between letters*/
+    
+    word-spacing: 4ch;  /* space between words*/
+}
+
+
+#one{
+
+    text-transform:lowercase; /*transform text into lower or upper or many types*/
+    
+}

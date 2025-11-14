@@ -1,0 +1,40 @@
+
+body{
+    margin: 0;
+    padding:0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(178, 255, 229);
+}
+
+#root{
+    background-color: rgb(162, 212, 255);
+    padding: 20px;
+    text-align: center;
+    border-radius: 5px;
+}
+h1{
+    background-color: rgb(130, 192, 255);
+    
+}
+
+#input{
+    font-size: 20px;
+    padding: 4px;
+    margin-bottom: 10px;
+}
+
+button{
+    font-size: 20px;
+    background-color: rgb(46, 161, 255);
+    color: azure;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+#result{
+    font-size: 20px;
+    margin-top: 5px;
+}

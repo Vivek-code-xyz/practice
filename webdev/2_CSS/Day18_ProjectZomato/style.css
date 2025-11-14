@@ -1,0 +1,304 @@
+*{
+    margin: 0;
+}
+html,body{
+    width : 100%;
+}
+body{
+    background-color: aliceblue;
+}
+.card{
+    display: inline-block;
+    margin-top: 10px;
+    margin-left: 10px;
+    cursor: pointer;
+    border: 10px aliceblue solid;
+    border-radius: 20px;
+    margin-right: 10px;
+    
+}
+.card:hover{
+    background-color: white;
+    border-color: white;
+    transition: 0.5s;
+}
+
+.box{
+    display: inline-block;
+}
+
+.img{
+    height: 250px;
+    width: auto;
+    border-radius: 20px;
+}
+
+.name{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.restrating,.foodprice,.locatdist{
+    position: relative;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.rating{
+    background-color: rgb(10, 137, 10);
+    color: white;
+    padding: 3px;
+    height: 20px;
+
+    border-radius: 7px;
+    position: absolute;
+    right: 5px;
+}
+
+
+.price,.dist{
+    position: absolute;
+    right: 5px;
+}
+
+
+
+.rupee{
+    font-weight: 500;
+}
+
+.foodprice{
+    font-size: 15px;
+    color: rgb(86, 84, 84);
+}
+
+.locat{
+    font-size: 15px;
+    color: rgb(145, 142, 142);
+}
+
+.dist{
+    font-weight: bold;
+    font-size: 15px;
+}
+
+
+.image:hover{
+   transform: scale(1.03);
+   transition: 0.5s;
+}
+
+.image{
+    position: relative;
+}
+
+#discount{
+    background-color: rgba(16, 16, 207, 0.705);
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    position: absolute;
+    left: 3px;
+    bottom: 30px;
+    
+    padding: 2px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+
+.first{
+    margin-left: 180px;
+}
+
+.brand{
+    color: rgb(211, 15, 15);
+    margin-right: 50px;
+    font-size: 30px;
+    font-family:'Times New Roman', Times, serif
+
+}
+
+html{
+    width: 100%;
+}
+
+header{
+    background-color: white;
+}
+.searchbar{
+    width: 300px;
+    height: 40px;
+    margin-right: 50px;
+    position: relative;
+    bottom: 15px;
+}
+
+button{
+    height: 50px;
+    width: 80px;
+    position: relative;
+    bottom: 15px;
+
+    font-size: 15px;
+    margin-left: 10px;
+    margin-right: 50px;
+    background-color: white;
+    border: none;
+    color: rgb(100, 96, 96);
+}
+
+button:hover{
+    background-color: rgb(201, 201, 225);
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.lala{
+    height: 60px;
+    width: 60px;
+}
+
+
+.dining,.delivery,.night{
+    position: relative;
+    bottom: 20px;
+    margin-left: 10px;
+    margin-right: 70px;
+    color: gray;
+}
+
+.two,.one,.three{
+    margin-left: 20px;
+    margin-bottom: 5px;
+}
+
+
+.second{
+    margin-top: 10px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    position:sticky;
+    top: 0px;
+    background-color: white;
+    box-sizing: border-box;
+    height: 80px;
+    z-index: 15;
+}
+
+.one{
+    margin-left: 250px;
+}
+
+.one:hover{
+   border-bottom: 3px coral solid;
+   transition: 0.3s;
+}
+
+.two:hover{
+   border-bottom: 3px coral solid;
+   transition: 0.3s;
+}
+
+.three:hover{
+   border-bottom: 3px coral solid;
+   transition: 0.3s;
+}
+
+.third{
+    margin-top: 5px;
+    width: 100%;
+    background-color: rgb(242, 242, 242);
+    
+}
+
+
+
+.collection,.title{
+    padding-bottom: 10px;
+    padding-top: 15px;
+
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 25px;
+    margin-left: 8px;
+    margin-bottom: 10px;
+}
+
+.description{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 20px;
+    margin-bottom: 15px;
+    margin-left: 10px;
+}
+
+
+.lalalala{
+    position: relative;
+    margin-left: 10px;
+    display: inline-block;
+    z-index: 10;
+}
+
+
+
+.i{
+    margin-top: 10px;
+    margin-left: 10px;
+    height: 320px;
+    width: 260px;
+    display: inline-block;
+    border-radius: 10px;
+
+    margin-bottom: 10px;
+}
+
+
+#post{
+    position: absolute;
+    bottom:30px;
+    left: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: white;
+    background-color: rgba(0, 255, 55, 0.621);
+    padding: 3px;
+    border-radius: 5px;
+    
+}
+
+.i:hover{
+    transform: scale(1.02);
+}
+
+
+
+
+
+.first,.second,main{
+   padding-left: 150px;
+   
+}
+
+.third{
+    padding-left: 160px;
+}
+
+
+.title{
+    padding-left: 15px;
+}
+
+
+
+.brand:hover{
+    color: rgb(36, 34, 34);
+    transition: 0.3s;
+}
+
+.card:hover,.i:hover{
+    outline: 2px solid rgba(0,150,255,0.7);
+    outline-offset: 4px;
+    transition: 0.3s;
+}
+

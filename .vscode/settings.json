@@ -1,0 +1,27 @@
+{
+    "editor.fontWeight": "530",
+    "terminal.integrated.fontWeightBold": "bold",
+    "files.associations": {
+        "iostream": "cpp",
+        "vector": "cpp",
+        "queue": "cpp"
+    },
+    "C_Cpp.errorSquiggles": "enabled",
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "Local MySQL",
+            "username": "root",
+            "database": "mysql",
+            "password": "Vivek@2007"
+        }
+    ],
+    "livePreview.defaultPreviewPath": "/webdev/Day1/problem2.html"
+}

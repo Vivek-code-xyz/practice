@@ -1,0 +1,37 @@
+.one{
+    height: 200px;
+    width: auto;
+
+    float: right;
+
+    /* margin-right: 10px; */
+}
+
+
+.two{
+    height: 200px;
+    width: auto;
+
+    float: right;
+    clear: right;
+
+    /* margin-right: 10px; */
+}
+
+
+/*
+When you apply float: left or float: right, the element moves to that side of its container.
+
+Other content (like text or inline elements) flows around the floated element.
+
+The floated element is taken out of the normal document flow.
+
+If multiple elements are floated, they align side by side if space allows.
+
+To stop elements from wrapping around a float, we use the clear property
+*/
+
+
+/*clear → It is used to stop elements from flowing or wrapping around floated elements.
+
+It tells the browser to move the element below any floated elements on the specified side (left, right, or both).*/

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPP</title>
+    <style>
+        #navbar{
+            position:sticky;
+            top:0px;
+            width:100%;
+            padding:10px;
+            z-index: 1000;
+        }
+        section{
+            padding-top: 30px;
+        }
+        h1{
+            margin-top: 20px;
+        }
+
+        *{
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        h2{
+            background-color: rgb(101, 203, 169);
+            width: 25vw;
+        }
+
+        ul,ol{
+            background-color:antiquewhite;
+        }
+
+        h3{
+            background-color: rgb(194, 225, 252);
+            width: 30vw;
+        }
+
+        p{
+            background-color: rgb(202, 252, 252);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 style="text-align: center; background-color: cadetblue;" >Learn DSA for Free From Coder Army</h1>
+        
+    </header>
+    <nav id="navbar" style="background-color: #def1a0;">
+            Nav Bar : 
+            <a href="#intro">C++ Introduction</a>        |
+            <a href="#compiler">C++ Compiler</a>        |
+            <a href="#array">C++ Arrays</a>        |
+            <a href="#tree">C++ Trees</a>        |
+            <a href="#graph">C++ Graphs</a>        |
+        </nav>
+    <hr>
+    <main class="content">
+        <section id="intro">
+            <h2>Introduction To C++</h2>
+            <p> C++ is powerful general purpose programming language that was developed as an extension of C programming language by Journey Stratstroke in early 1980s c is widely used for system software development game development and applications that requires higher performance </p>
+            <h2>Features Of C++</h2>
+            <ul>
+                <li> Object oriented : C++ supports object oriented programming principles allowing for creation of classes and objects this helps in organizing code and prompting reusability </li>
+                <li> Reach standard library : C++ provides a rich set of built in features and libraries which can significantly reduce the development time </li>
+                <li> Performance : C++ offers low level memory manipulation allowing developers to optimize performance critical applications </li>
+                <li> Portability :C++ programs can be compiled and run on various platform without significant modification </li>
+                <li> compatibility with C : C++is compatible with C allowing for integration of existing C code </li>
+            </ul>
+            <h2>Basic Syntax</h2>
+            <pre style="background-color:beige"; width="50vw">
+                #include &lt;iostream&gt;
+                using namespace std;
+
+                int main(){
+                    cout&lt;&lt;"Hello world!"&lt;&lt;endl;
+                    return 0;
+                }
+            </pre>
+            <ul>
+                <li>#include &lt;iostream&gt; This includes the input outputs team library allowing the use of sea out for output and seeing  for input</li> 
+                <li> Using namespace std:: this line allows access to the standard library features without refixing them with std::</li>
+                <li>int main(): The entry point of every C++ program </li>
+                <li>cout:: News for outputting data to the console </li>
+                <li>return 0:: This land indicates that the program has ended successfully </li>
+            </ul>
+
+            <h2>Applications Of C++</h2>
+            <ol>
+                <li>System Software</li>
+                <li>Game development</li>
+                <li>Embeded system</li>
+                <li>Web browser</li>
+                
+            </ol>
+
+        </section>
+
+        <hr>
+
+        <section id="compiler">
+            <h2>Online C++ Compiler</h2>
+            <iframe src="https://onecompiler.com/embed/cpp" frameborder="10" height="400" width="100%"></iframe>
+        </section>
+
+        <hr>
+
+        <section id="array">
+            <h2>Introduction to Arrays </h2>
+            <h3>What is an array ?</h3>
+            <p>An array is a data structure that stores A collection of elements typically obtained data type array are used to store multiple values in the single variable which allows for efficient data management and manipulation </p>
+           <img src="./arrays.webp" alt="Array is there">
+           <h3>Characteristics of Arrays</h3>
+           <ul>
+            <li>Fixed Size:The size of an array is defined when it is created and cannot be changed.</li>
+            <li>Indexed:Each element in an array is accessed using an index,which typically starts from 0.</li>
+            <li>Homogeneouse Elements:all elements in an array must be of the same data type such as int or char.</li>
+           </ul>
+           <h3>Types of arrays</h3>
+           <ol>
+            <li>
+                One-dimentional arrays: A linear list of elements where each element can be accessed by single index
+                <ul style="list-style-type: circle;">
+                    <li>example: int numbers[5] : stores 5 integers </li>
+                </ul>
+            </li>
+            <li> Mighty dimensional arrays : arrays with more than one dimension commonly used for matrices and tables 
+                <ul style="list-style-type: circle;">
+                    <li> int matrix[3][3] : a 3*3 matrix of integres</li>
+                </ul>
+            </li>
+            <li> Dynamic arrays : arrays that can change size during program execution typically implemented using data structures like list </li>
+           </ol>
+
+           <h3>Tutorials for Arrays</h3>
+           <table>
+                <tr>
+                    <td><iframe src="https://www.youtube.com/embed/moZNKL37w-s" frameborder="1" allowfullscreen></iframe></td>
+                    <td><iframe src="https://www.youtube.com/embed/567332frcF0" frameborder="1"allowfullscreen></iframe></td>
+                    <td><iframe src="https://www.youtube.com/embed/hUdqNPhXOh4" frameborder="1"allowfullscreen></iframe></td>
+                    
+                </tr>
+
+                <tr>
+                    <td><iframe src="https://www.youtube.com/embed/9_B6TmAHveU" frameborder="1"allowfullscreen></iframe></td>
+                    <td><iframe src="https://www.youtube.com/embed/V3vM_m2iFtk" frameborder="1"allowfullscreen></iframe></td>
+                    <td><iframe src="https://www.youtube.com/embed/YpZUgiT1N94" frameborder="1"allowfullscreen></iframe></td>
+                </tr>
+           </table>
+           
+        </section>
+        
+        <hr>
+
+        <section id="tree">
+            <h2>Introduction to Trees</h2>
+            <p> A tree is hierarchical data structure that consists of node connected by edges each tree has a single root node at the top from which all the branched outs modes can have zero or more challenges and each child node can further branch out into more nodes trees are commonly used to represent irritable relationships such as file system or organizational structures </p>
+            <img src="./tree-data-structure-banners-(2).webp" alt="Tree" >
+
+            <h3> Characteristics of tree</h3> 
+            <ul>
+                <li>root node: the top most node in the tree which has no parent </li>
+                <li>Child node: Unload that is a descendant of another node </li>
+                <li>Parent node: A node that has one or more child node </li>
+                <li>Leaf node: A node that has no children </li>
+                <li>Depth: It is number of edges from the roof node to leaf node </li>
+                <li>Height: The number of edges on the longest path from a node to leaf</li>
+            </ul>
+            <h3>Types OF Trees</h3>
+            <ol>
+                <li> Binary tree</li>
+                <li>binary search tree </li>
+                <li> A V L Tree</li>
+                <li> Red Black Tree</li>
+                <li>N-ary Tree </li>
+            </ol>
+            <h3>Applications of Trees</h3><ul>
+                <li> Data storage: trees are used in databases for indexing data and improving search performance </li>
+                <li> File systems: architectural file system use three structures to organize files and directories </li>
+                <li> Network routing: trees are used in routing algorithm to manage and optimize the flow of data across network </li>
+                <li> Artificial intelligence: trees such as decision trees are used in ai algorithms for decision making processes </li>
+            </ul>
+            <h3>Tutorial for Tree</h3>
+            <table>
+                <tr>
+                    <td><iframe src="https://www.youtube.com/embed/_b0bfpO3b4I" frameborder="1" allowfullscreen></iframe></td>
+                    <td><iframe src="https://www.youtube.com/embed/P30p5jYsiDc" frameborder="1" allowfullscreen></iframe></td>
+                    <td><iframe src="https://www.youtube.com/embed/T78jHD4fNgc" frameborder="1" allowfullscreen></iframe></td>
+                </tr>
+                <tr>
+                    <td><iframe src="https://www.youtube.com/embed/pMHXL46exp4" frameborder="1" allowfullscreen></iframe></td>
+                    <td><iframe src="https://www.youtube.com/embed/Rq1II71_Glw" frameborder="1" allowfullscreen></iframe></td>
+                    <td><iframe src="https://www.youtube.com/embed/Ir9Ni46g8Qo" frameborder="1" allowfullscreen></iframe></td>
+
+                </tr>
+            </table>
+        </section>
+
+        <hr>
+
+        <section id="graph">
+            <h2>Introduction To Graphs</h2>
+            <p> A graph is the data structure that consists of sets of vertices and a set of edges that connects pair of vertices graphs are used to represent relationship or connection between various entities and are fundamental in computer science for modeling complex networks such as social networks transportation systems and communication network </p>
+            <img src="./graphs.webp" alt="Graphs">
+            <h3> Characteristics of graph </h3>
+            <ul>
+                <li> Vertices or notes the fundamental unit of graph representing entities in graph </li>
+                <li> Edges connection between pair of vertices which can be directed or undirected </li>
+                <li> Degree the number of edges connected to a vertex for directed graph a vertex can have an in degree and one out degree </li>
+                <li> Part a sequence of edges that connects a sequence of vertices </li>
+                <li> cycle a path that starts from and end at same vertex without repeating any edges </li>
+            </ul>
+            <h3>Types Of Graphs</h3>
+            <ol>
+                <li> directed graph</li>
+                <li> Undirected graph </li>
+                <li> cyclic graph </li>
+                <li> acyclic graph </li>
+                <li> weighted graph</li>
+                <li> unweighted graph </li>
+            </ol>
+            <h3>Applications Of Graph</h3>
+            <ol>
+                <li> Social networks: graph are used to model relationships and interaction between individuals or entities in social media platform </li>
+                <li> transportation networks: represent roads interactions in routes in transportation system helping optimize travel and logistics </li>
+                <li> web page link analysis: the structure of web can be represented as graph which web pages as vertices and hyperlinks edges enabling search engine to analyze and rank the website </li>
+                <li> network flow: graphs are utilized in flow networks to model the flow of resources such as electricity or data through network </li>
+            </ol>
+            <h3>Tutorials for a Graph</h3>
+            <table>
+                <tr>
+                    <td><iframe src="https://www.youtube.com/embed/gGlfzqPT-hE" frameborder="1" allowfullscreen></iframe></td>
+                    <td><iframe src="https://www.youtube.com/embed/bxbrUGvBCnY" frameborder="1" allowfullscreen></iframe></td>
+                    <td><iframe src="https://www.youtube.com/embed/Vtu7qgF0ksw" frameborder="1" allowfullscreen></iframe></td>
+                </tr>
+                <tr>
+                    <td><iframe src="https://www.youtube.com/embed/oz1EaP_Bw4s" frameborder="1" allowfullscreen></iframe></td>
+                    <td><iframe src="https://www.youtube.com/embed/2JgYwQ6TZ44" frameborder="1" allowfullscreen></iframe></td>
+                    <td><iframe src="https://www.youtube.com/embed/sPlN86EpjJA" frameborder="1" allowfullscreen></iframe></td>
+                    
+                </tr>
+            </table>
+        </section>
+    </main>
+
+    <hr>
+
+    <footer>
+       <p>&copy; All Rights Are reserved by vivek khasiya</p> 
+    </footer>
+    
+</body>
+</html>
