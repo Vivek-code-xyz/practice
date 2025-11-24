@@ -1,0 +1,2689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Management System</title>
+    <style>
+        /* Design System Variables */
+        :root {
+            --color-white: rgba(255, 255, 255, 1);
+            --color-black: rgba(0, 0, 0, 1);
+            --color-cream-50: rgba(252, 252, 249, 1);
+            --color-cream-100: rgba(255, 255, 253, 1);
+            --color-gray-200: rgba(245, 245, 245, 1);
+            --color-gray-300: rgba(167, 169, 169, 1);
+            --color-gray-400: rgba(119, 124, 124, 1);
+            --color-slate-500: rgba(98, 108, 113, 1);
+            --color-brown-600: rgba(94, 82, 64, 1);
+            --color-charcoal-700: rgba(31, 33, 33, 1);
+            --color-charcoal-800: rgba(38, 40, 40, 1);
+            --color-slate-900: rgba(19, 52, 59, 1);
+            --color-teal-300: rgba(50, 184, 198, 1);
+            --color-teal-400: rgba(45, 166, 178, 1);
+            --color-teal-500: rgba(33, 128, 141, 1);
+            --color-teal-600: rgba(29, 116, 128, 1);
+            --color-teal-700: rgba(26, 104, 115, 1);
+            --color-red-400: rgba(255, 84, 89, 1);
+            --color-red-500: rgba(192, 21, 47, 1);
+            --color-orange-400: rgba(230, 129, 97, 1);
+            --color-orange-500: rgba(168, 75, 47, 1);
+            --color-brown-600-rgb: 94, 82, 64;
+            --color-teal-500-rgb: 33, 128, 141;
+            --color-slate-900-rgb: 19, 52, 59;
+            --color-slate-500-rgb: 98, 108, 113;
+            --color-background: var(--color-cream-50);
+            --color-surface: var(--color-cream-100);
+            --color-text: var(--color-slate-900);
+            --color-text-secondary: var(--color-slate-500);
+            --color-primary: var(--color-teal-500);
+            --color-primary-hover: var(--color-teal-600);
+            --color-primary-active: var(--color-teal-700);
+            --color-border: rgba(var(--color-brown-600-rgb), 0.2);
+            --color-card-border: rgba(var(--color-brown-600-rgb), 0.12);
+            --font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            --font-size-sm: 12px;
+            --font-size-base: 14px;
+            --font-size-lg: 16px;
+            --font-size-xl: 18px;
+            --font-size-2xl: 20px;
+            --font-size-3xl: 24px;
+            --font-size-4xl: 30px;
+            --space-4: 4px;
+            --space-8: 8px;
+            --space-12: 12px;
+            --space-16: 16px;
+            --space-20: 20px;
+            --space-24: 24px;
+            --space-32: 32px;
+            --radius-base: 8px;
+            --radius-lg: 12px;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.04), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: var(--font-family-base);
+            background-color: var(--color-background);
+            color: var(--color-text);
+            line-height: 1.6;
+        }
+
+        .app-container {
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .sidebar {
+            width: 250px;
+            background: var(--color-surface);
+            border-right: 1px solid var(--color-border);
+            padding: var(--space-20);
+            overflow-y: auto;
+        }
+
+        .logo {
+            font-size: var(--font-size-xl);
+            font-weight: 600;
+            color: var(--color-primary);
+            margin-bottom: var(--space-32);
+            display: flex;
+            align-items: center;
+            gap: var(--space-8);
+        }
+
+        .logo::before {
+            content: "⚕️";
+            font-size: var(--font-size-3xl);
+        }
+
+        .nav-menu {
+            list-style: none;
+        }
+
+        .nav-item {
+            padding: var(--space-12) var(--space-16);
+            margin-bottom: var(--space-8);
+            border-radius: var(--radius-base);
+            cursor: pointer;
+            transition: all 0.2s;
+            color: var(--color-text);
+        }
+
+        .nav-item:hover {
+            background: rgba(var(--color-teal-500-rgb), 0.1);
+        }
+
+        .nav-item.active {
+            background: var(--color-primary);
+            color: var(--color-white);
+        }
+
+        .main-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: var(--space-32);
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-32);
+        }
+
+        .page-title {
+            font-size: var(--font-size-4xl);
+            font-weight: 600;
+            color: var(--color-text);
+        }
+
+        .btn {
+            padding: var(--space-12) var(--space-20);
+            border: none;
+            border-radius: var(--radius-base);
+            cursor: pointer;
+            font-size: var(--font-size-base);
+            font-weight: 500;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-8);
+        }
+
+        .btn-primary {
+            background: var(--color-primary);
+            color: var(--color-white);
+        }
+
+        .btn-primary:hover {
+            background: var(--color-primary-hover);
+        }
+
+        .btn-secondary {
+            background: var(--color-gray-200);
+            color: var(--color-text);
+        }
+
+        .btn-secondary:hover {
+            background: var(--color-gray-300);
+        }
+
+        .btn-danger {
+            background: var(--color-red-500);
+            color: var(--color-white);
+        }
+
+        .btn-danger:hover {
+            background: var(--color-red-400);
+        }
+
+        .btn-sm {
+            padding: var(--space-8) var(--space-12);
+            font-size: var(--font-size-sm);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-20);
+            margin-bottom: var(--space-32);
+        }
+
+        .stat-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-card-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-24);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .stat-card h3 {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-8);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .stat-card .value {
+            font-size: var(--font-size-4xl);
+            font-weight: 600;
+            color: var(--color-primary);
+        }
+
+        .card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-card-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-24);
+            box-shadow: var(--shadow-sm);
+            margin-bottom: var(--space-20);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-20);
+        }
+
+        .card-title {
+            font-size: var(--font-size-xl);
+            font-weight: 600;
+        }
+
+        .search-box {
+            padding: var(--space-12) var(--space-16);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-base);
+            font-size: var(--font-size-base);
+            width: 300px;
+            margin-bottom: var(--space-20);
+        }
+
+        .search-box:focus {
+            outline: 2px solid var(--color-primary);
+            border-color: var(--color-primary);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            text-align: left;
+            padding: var(--space-12);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        th {
+            background: rgba(var(--color-teal-500-rgb), 0.1);
+            font-weight: 600;
+            color: var(--color-text);
+            cursor: pointer;
+            user-select: none;
+        }
+
+        th:hover {
+            background: rgba(var(--color-teal-500-rgb), 0.15);
+        }
+
+        tr:hover {
+            background: rgba(var(--color-teal-500-rgb), 0.05);
+        }
+
+        .badge {
+            padding: var(--space-4) var(--space-12);
+            border-radius: 20px;
+            font-size: var(--font-size-sm);
+            font-weight: 500;
+            display: inline-block;
+        }
+
+        .badge-success {
+            background: rgba(var(--color-teal-500-rgb), 0.15);
+            color: var(--color-teal-700);
+        }
+
+        .badge-warning {
+            background: rgba(255, 193, 7, 0.15);
+            color: #f57c00;
+        }
+
+        .badge-danger {
+            background: rgba(255, 84, 89, 0.15);
+            color: var(--color-red-500);
+        }
+
+        .badge-info {
+            background: rgba(var(--color-slate-500-rgb), 0.15);
+            color: var(--color-slate-500);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--color-surface);
+            border-radius: var(--radius-lg);
+            padding: var(--space-32);
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-24);
+        }
+
+        .modal-title {
+            font-size: var(--font-size-2xl);
+            font-weight: 600;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: var(--font-size-3xl);
+            cursor: pointer;
+            color: var(--color-text-secondary);
+            padding: 0;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-btn:hover {
+            color: var(--color-text);
+        }
+
+        .form-group {
+            margin-bottom: var(--space-20);
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: var(--space-8);
+            font-weight: 500;
+            color: var(--color-text);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: var(--space-12) var(--space-16);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-base);
+            font-size: var(--font-size-base);
+            font-family: var(--font-family-base);
+        }
+
+        .form-control:focus {
+            outline: 2px solid var(--color-primary);
+            border-color: var(--color-primary);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-16);
+        }
+
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: var(--space-16) var(--space-24);
+            border-radius: var(--radius-base);
+            box-shadow: var(--shadow-md);
+            z-index: 2000;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .toast-success {
+            background: var(--color-teal-500);
+            color: var(--color-white);
+        }
+
+        .toast-error {
+            background: var(--color-red-500);
+            color: var(--color-white);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: var(--space-8);
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-8);
+            margin-top: var(--space-20);
+        }
+
+        .page-btn {
+            padding: var(--space-8) var(--space-12);
+            border: 1px solid var(--color-border);
+            background: var(--color-surface);
+            border-radius: var(--radius-base);
+            cursor: pointer;
+        }
+
+        .page-btn.active {
+            background: var(--color-primary);
+            color: var(--color-white);
+            border-color: var(--color-primary);
+        }
+
+        .page-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .filters {
+            display: flex;
+            gap: var(--space-12);
+            margin-bottom: var(--space-20);
+            flex-wrap: wrap;
+        }
+
+        select.form-control {
+            width: auto;
+            min-width: 150px;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: var(--space-32);
+            color: var(--color-text-secondary);
+        }
+
+        .empty-state-icon {
+            font-size: 48px;
+            margin-bottom: var(--space-16);
+        }
+
+        .detail-view {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-16);
+        }
+
+        .detail-item {
+            padding: var(--space-12);
+            background: rgba(var(--color-teal-500-rgb), 0.05);
+            border-radius: var(--radius-base);
+        }
+
+        .detail-label {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-4);
+        }
+
+        .detail-value {
+            font-size: var(--font-size-base);
+            font-weight: 500;
+            color: var(--color-text);
+        }
+
+        .quick-actions {
+            display: flex;
+            gap: var(--space-12);
+            margin-bottom: var(--space-32);
+        }
+
+        .reports-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-20);
+        }
+
+        .report-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-card-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-20);
+        }
+
+        .report-card h4 {
+            margin-bottom: var(--space-12);
+            color: var(--color-primary);
+        }
+
+        .required::after {
+            content: " *";
+            color: var(--color-red-500);
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo">HMS</div>
+            <ul class="nav-menu">
+                <li class="nav-item active" data-page="dashboard">Dashboard</li>
+                <li class="nav-item" data-page="patients">Patients</li>
+                <li class="nav-item" data-page="doctors">Doctors</li>
+                <li class="nav-item" data-page="appointments">Appointments</li>
+                <li class="nav-item" data-page="medical-records">Medical Records</li>
+                <li class="nav-item" data-page="billing">Billing</li>
+                <li class="nav-item" data-page="departments">Departments &amp; Rooms</li>
+                <li class="nav-item" data-page="reports">Reports</li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <div id="app-content"></div>
+        </main>
+    </div>
+
+    <script>
+        // ==================== DATABASE SIMULATION ====================
+        const DATABASE = {
+            patients: [],
+            doctors: [],
+            departments: [],
+            appointments: [],
+            rooms: [],
+            medicalRecords: [],
+            bills: [],
+            staff: [],
+            counters: {
+                patients: 0,
+                doctors: 0,
+                departments: 0,
+                appointments: 0,
+                rooms: 0,
+                medicalRecords: 0,
+                bills: 0,
+                staff: 0
+            }
+        };
+
+        // ==================== HELPER FUNCTIONS ====================
+        function generateId(table) {
+            DATABASE.counters[table]++;
+            return DATABASE.counters[table];
+        }
+
+        function findById(table, id) {
+            return DATABASE[table].find(item => item.id === parseInt(id));
+        }
+
+        function findIndex(table, id) {
+            return DATABASE[table].findIndex(item => item.id === parseInt(id));
+        }
+
+        function formatDate(dateString) {
+            if (!dateString) return '';
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-IN', { year: 'numeric', month: 'short', day: 'numeric' });
+        }
+
+        function formatCurrency(amount) {
+            return '₹' + parseFloat(amount).toLocaleString('en-IN');
+        }
+
+        function showToast(message, type = 'success') {
+            const toast = document.createElement('div');
+            toast.className = `toast toast-${type}`;
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+
+        function showModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+        }
+
+        function hideModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        function validateEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+
+        function validatePhone(phone) {
+            return /^\d{10}$/.test(phone);
+        }
+
+        // ==================== PATIENT CRUD ====================
+        function addPatient(data) {
+            const exists = DATABASE.patients.find(p => p.email === data.email || p.phone === data.phone);
+            if (exists) {
+                throw new Error('Patient with this email or phone already exists');
+            }
+
+            const patient = {
+                id: generateId('patients'),
+                ...data,
+                createdAt: new Date().toISOString()
+            };
+            DATABASE.patients.push(patient);
+            return patient;
+        }
+
+        function updatePatient(id, data) {
+            const index = findIndex('patients', id);
+            if (index === -1) throw new Error('Patient not found');
+            
+            DATABASE.patients[index] = { ...DATABASE.patients[index], ...data };
+            return DATABASE.patients[index];
+        }
+
+        function deletePatient(id) {
+            const index = findIndex('patients', id);
+            if (index === -1) throw new Error('Patient not found');
+            
+            DATABASE.patients.splice(index, 1);
+        }
+
+        function getPatients(searchQuery = '') {
+            if (!searchQuery) return DATABASE.patients;
+            
+            const query = searchQuery.toLowerCase();
+            return DATABASE.patients.filter(p => 
+                p.firstName.toLowerCase().includes(query) ||
+                p.lastName.toLowerCase().includes(query) ||
+                p.phone.includes(query) ||
+                (p.email && p.email.toLowerCase().includes(query))
+            );
+        }
+
+        // ==================== DOCTOR CRUD ====================
+        function addDoctor(data) {
+            const exists = DATABASE.doctors.find(d => d.email === data.email || d.phone === data.phone);
+            if (exists) {
+                throw new Error('Doctor with this email or phone already exists');
+            }
+
+            const doctor = {
+                id: generateId('doctors'),
+                ...data,
+                createdAt: new Date().toISOString()
+            };
+            DATABASE.doctors.push(doctor);
+            return doctor;
+        }
+
+        function updateDoctor(id, data) {
+            const index = findIndex('doctors', id);
+            if (index === -1) throw new Error('Doctor not found');
+            
+            DATABASE.doctors[index] = { ...DATABASE.doctors[index], ...data };
+            return DATABASE.doctors[index];
+        }
+
+        function deleteDoctor(id) {
+            const index = findIndex('doctors', id);
+            if (index === -1) throw new Error('Doctor not found');
+            
+            DATABASE.doctors.splice(index, 1);
+        }
+
+        function getDoctors(departmentId = null, searchQuery = '') {
+            let doctors = DATABASE.doctors;
+            
+            if (departmentId) {
+                doctors = doctors.filter(d => d.departmentId === parseInt(departmentId));
+            }
+            
+            if (searchQuery) {
+                const query = searchQuery.toLowerCase();
+                doctors = doctors.filter(d => 
+                    d.firstName.toLowerCase().includes(query) ||
+                    d.lastName.toLowerCase().includes(query) ||
+                    d.specialization.toLowerCase().includes(query)
+                );
+            }
+            
+            return doctors;
+        }
+
+        // ==================== APPOINTMENT CRUD ====================
+        function addAppointment(data) {
+            // Check for conflicts
+            const conflict = DATABASE.appointments.find(a => 
+                a.doctorId === data.doctorId &&
+                a.date === data.date &&
+                a.time === data.time &&
+                a.status !== 'Cancelled'
+            );
+            
+            if (conflict) {
+                throw new Error('This time slot is already booked for this doctor');
+            }
+
+            const appointment = {
+                id: generateId('appointments'),
+                ...data,
+                status: 'Scheduled',
+                createdAt: new Date().toISOString()
+            };
+            DATABASE.appointments.push(appointment);
+            return appointment;
+        }
+
+        function updateAppointment(id, data) {
+            const index = findIndex('appointments', id);
+            if (index === -1) throw new Error('Appointment not found');
+            
+            DATABASE.appointments[index] = { ...DATABASE.appointments[index], ...data };
+            return DATABASE.appointments[index];
+        }
+
+        function deleteAppointment(id) {
+            const index = findIndex('appointments', id);
+            if (index === -1) throw new Error('Appointment not found');
+            
+            DATABASE.appointments.splice(index, 1);
+        }
+
+        function getAppointments(filters = {}) {
+            let appointments = DATABASE.appointments;
+            
+            if (filters.date) {
+                appointments = appointments.filter(a => a.date === filters.date);
+            }
+            
+            if (filters.doctorId) {
+                appointments = appointments.filter(a => a.doctorId === parseInt(filters.doctorId));
+            }
+            
+            if (filters.patientId) {
+                appointments = appointments.filter(a => a.patientId === parseInt(filters.patientId));
+            }
+            
+            if (filters.status) {
+                appointments = appointments.filter(a => a.status === filters.status);
+            }
+            
+            return appointments;
+        }
+
+        // ==================== MEDICAL RECORD CRUD ====================
+        function addMedicalRecord(data) {
+            const record = {
+                id: generateId('medicalRecords'),
+                ...data,
+                createdAt: new Date().toISOString()
+            };
+            DATABASE.medicalRecords.push(record);
+            return record;
+        }
+
+        function updateMedicalRecord(id, data) {
+            const index = findIndex('medicalRecords', id);
+            if (index === -1) throw new Error('Medical record not found');
+            
+            DATABASE.medicalRecords[index] = { ...DATABASE.medicalRecords[index], ...data };
+            return DATABASE.medicalRecords[index];
+        }
+
+        function getMedicalRecords(patientId = null) {
+            if (!patientId) return DATABASE.medicalRecords;
+            return DATABASE.medicalRecords.filter(r => r.patientId === parseInt(patientId));
+        }
+
+        // ==================== BILLING CRUD ====================
+        function addBill(data) {
+            const bill = {
+                id: generateId('bills'),
+                ...data,
+                paymentStatus: 'Pending',
+                createdAt: new Date().toISOString()
+            };
+            DATABASE.bills.push(bill);
+            return bill;
+        }
+
+        function updateBill(id, data) {
+            const index = findIndex('bills', id);
+            if (index === -1) throw new Error('Bill not found');
+            
+            DATABASE.bills[index] = { ...DATABASE.bills[index], ...data };
+            return DATABASE.bills[index];
+        }
+
+        function getBills(patientId = null, status = null) {
+            let bills = DATABASE.bills;
+            
+            if (patientId) {
+                bills = bills.filter(b => b.patientId === parseInt(patientId));
+            }
+            
+            if (status) {
+                bills = bills.filter(b => b.paymentStatus === status);
+            }
+            
+            return bills;
+        }
+
+        // ==================== DEPARTMENT CRUD ====================
+        function addDepartment(data) {
+            const department = {
+                id: generateId('departments'),
+                ...data
+            };
+            DATABASE.departments.push(department);
+            return department;
+        }
+
+        function updateDepartment(id, data) {
+            const index = findIndex('departments', id);
+            if (index === -1) throw new Error('Department not found');
+            
+            DATABASE.departments[index] = { ...DATABASE.departments[index], ...data };
+            return DATABASE.departments[index];
+        }
+
+        function deleteDepartment(id) {
+            const index = findIndex('departments', id);
+            if (index === -1) throw new Error('Department not found');
+            
+            DATABASE.departments.splice(index, 1);
+        }
+
+        // ==================== ROOM CRUD ====================
+        function addRoom(data) {
+            const room = {
+                id: generateId('rooms'),
+                ...data,
+                status: 'Available'
+            };
+            DATABASE.rooms.push(room);
+            return room;
+        }
+
+        function updateRoom(id, data) {
+            const index = findIndex('rooms', id);
+            if (index === -1) throw new Error('Room not found');
+            
+            DATABASE.rooms[index] = { ...DATABASE.rooms[index], ...data };
+            return DATABASE.rooms[index];
+        }
+
+        function deleteRoom(id) {
+            const index = findIndex('rooms', id);
+            if (index === -1) throw new Error('Room not found');
+            
+            DATABASE.rooms.splice(index, 1);
+        }
+
+        // ==================== SAMPLE DATA ====================
+        function loadSampleData() {
+            // Departments
+            DATABASE.departments = [
+                { id: 1, name: 'Cardiology', description: 'Heart and cardiovascular diseases' },
+                { id: 2, name: 'Orthopedics', description: 'Bone and joint treatments' },
+                { id: 3, name: 'Pediatrics', description: 'Child healthcare' },
+                { id: 4, name: 'Neurology', description: 'Brain and nervous system' },
+                { id: 5, name: 'General Medicine', description: 'General health consultations' }
+            ];
+            DATABASE.counters.departments = 5;
+
+            // Doctors
+            DATABASE.doctors = [
+                { id: 1, firstName: 'Neha', lastName: 'Patel', specialization: 'Cardiologist', qualification: 'MD, DM Cardiology', experienceYears: 12, phone: '9898000001', email: 'neha.patel@hospital.com', departmentId: 1, consultationFee: 1500 },
+                { id: 2, firstName: 'Rahul', lastName: 'Shah', specialization: 'Orthopedic Surgeon', qualification: 'MS Orthopedics', experienceYears: 15, phone: '9898000002', email: 'rahul.shah@hospital.com', departmentId: 2, consultationFee: 1200 },
+                { id: 3, firstName: 'Priya', lastName: 'Mehta', specialization: 'Pediatrician', qualification: 'MD Pediatrics', experienceYears: 8, phone: '9898000003', email: 'priya.mehta@hospital.com', departmentId: 3, consultationFee: 1000 },
+                { id: 4, firstName: 'Amit', lastName: 'Kumar', specialization: 'Neurologist', qualification: 'MD, DM Neurology', experienceYears: 10, phone: '9898000004', email: 'amit.kumar@hospital.com', departmentId: 4, consultationFee: 1800 },
+                { id: 5, firstName: 'Sneha', lastName: 'Desai', specialization: 'General Physician', qualification: 'MBBS, MD', experienceYears: 6, phone: '9898000005', email: 'sneha.desai@hospital.com', departmentId: 5, consultationFee: 800 },
+                { id: 6, firstName: 'Rajesh', lastName: 'Verma', specialization: 'Cardiologist', qualification: 'MD, DM Cardiology', experienceYears: 20, phone: '9898000006', email: 'rajesh.verma@hospital.com', departmentId: 1, consultationFee: 2000 },
+                { id: 7, firstName: 'Kavita', lastName: 'Nair', specialization: 'Pediatrician', qualification: 'MD Pediatrics', experienceYears: 5, phone: '9898000007', email: 'kavita.nair@hospital.com', departmentId: 3, consultationFee: 900 },
+                { id: 8, firstName: 'Suresh', lastName: 'Reddy', specialization: 'Orthopedic Surgeon', qualification: 'MS Orthopedics', experienceYears: 18, phone: '9898000008', email: 'suresh.reddy@hospital.com', departmentId: 2, consultationFee: 1500 }
+            ];
+            DATABASE.counters.doctors = 8;
+
+            // Patients
+            DATABASE.patients = [
+                { id: 1, firstName: 'Ravi', lastName: 'Sharma', dob: '1985-04-12', gender: 'Male', phone: '9898123456', email: 'ravi.sharma@email.com', address: '123 MG Road, Mumbai', emergencyContact: 'Sunita Sharma', emergencyPhone: '9898123457', bloodGroup: 'O+' },
+                { id: 2, firstName: 'Anita', lastName: 'Patel', dob: '1990-08-25', gender: 'Female', phone: '9898234567', email: 'anita.patel@email.com', address: '456 FC Road, Pune', emergencyContact: 'Ramesh Patel', emergencyPhone: '9898234568', bloodGroup: 'A+' },
+                { id: 3, firstName: 'Vikram', lastName: 'Singh', dob: '1978-11-30', gender: 'Male', phone: '9898345678', email: 'vikram.singh@email.com', address: '789 Park Street, Kolkata', emergencyContact: 'Meera Singh', emergencyPhone: '9898345679', bloodGroup: 'B+' },
+                { id: 4, firstName: 'Deepa', lastName: 'Iyer', dob: '1995-03-15', gender: 'Female', phone: '9898456789', email: 'deepa.iyer@email.com', address: '321 Anna Nagar, Chennai', emergencyContact: 'Lakshmi Iyer', emergencyPhone: '9898456780', bloodGroup: 'AB+' },
+                { id: 5, firstName: 'Arun', lastName: 'Joshi', dob: '1982-07-20', gender: 'Male', phone: '9898567890', email: 'arun.joshi@email.com', address: '654 Banjara Hills, Hyderabad', emergencyContact: 'Pooja Joshi', emergencyPhone: '9898567891', bloodGroup: 'O-' },
+                { id: 6, firstName: 'Meena', lastName: 'Gupta', dob: '1988-12-05', gender: 'Female', phone: '9898678901', email: 'meena.gupta@email.com', address: '987 Sector 12, Noida', emergencyContact: 'Raj Gupta', emergencyPhone: '9898678902', bloodGroup: 'A-' },
+                { id: 7, firstName: 'Karthik', lastName: 'Rao', dob: '1992-05-18', gender: 'Male', phone: '9898789012', email: 'karthik.rao@email.com', address: '159 Whitefield, Bangalore', emergencyContact: 'Divya Rao', emergencyPhone: '9898789013', bloodGroup: 'B-' },
+                { id: 8, firstName: 'Shalini', lastName: 'Menon', dob: '1975-09-22', gender: 'Female', phone: '9898890123', email: 'shalini.menon@email.com', address: '753 MG Road, Kochi', emergencyContact: 'Prakash Menon', emergencyPhone: '9898890124', bloodGroup: 'AB-' },
+                { id: 9, firstName: 'Nikhil', lastName: 'Chopra', dob: '1998-01-10', gender: 'Male', phone: '9898901234', email: 'nikhil.chopra@email.com', address: '246 Civil Lines, Jaipur', emergencyContact: 'Alok Chopra', emergencyPhone: '9898901235', bloodGroup: 'O+' },
+                { id: 10, firstName: 'Preeti', lastName: 'Bansal', dob: '1987-06-28', gender: 'Female', phone: '9898012345', email: 'preeti.bansal@email.com', address: '852 Model Town, Ludhiana', emergencyContact: 'Rohit Bansal', emergencyPhone: '9898012346', bloodGroup: 'A+' }
+            ];
+            DATABASE.counters.patients = 10;
+
+            // Rooms
+            DATABASE.rooms = [
+                { id: 1, number: '101', type: 'Consultation', floor: 1, status: 'Available' },
+                { id: 2, number: '102', type: 'Consultation', floor: 1, status: 'Available' },
+                { id: 3, number: '103', type: 'Consultation', floor: 1, status: 'Available' },
+                { id: 4, number: '201', type: 'ICU', floor: 2, status: 'Available' },
+                { id: 5, number: '202', type: 'ICU', floor: 2, status: 'Occupied' },
+                { id: 6, number: '301', type: 'General Ward', floor: 3, status: 'Available' },
+                { id: 7, number: '302', type: 'General Ward', floor: 3, status: 'Available' },
+                { id: 8, number: '401', type: 'Private Room', floor: 4, status: 'Available' }
+            ];
+            DATABASE.counters.rooms = 8;
+
+            // Appointments
+            DATABASE.appointments = [
+                { id: 1, patientId: 1, doctorId: 1, date: '2025-11-20', time: '10:00', roomId: 1, reason: 'Chest pain and irregular heartbeat', status: 'Scheduled' },
+                { id: 2, patientId: 2, doctorId: 3, date: '2025-11-20', time: '11:00', roomId: 2, reason: 'Child vaccination', status: 'Scheduled' },
+                { id: 3, patientId: 3, doctorId: 2, date: '2025-11-19', time: '09:00', roomId: 1, reason: 'Knee pain', status: 'Completed' },
+                { id: 4, patientId: 4, doctorId: 4, date: '2025-11-19', time: '14:00', roomId: 3, reason: 'Persistent headaches', status: 'Completed' },
+                { id: 5, patientId: 5, doctorId: 5, date: '2025-11-21', time: '10:30', roomId: 1, reason: 'General checkup', status: 'Scheduled' },
+                { id: 6, patientId: 6, doctorId: 1, date: '2025-11-21', time: '15:00', roomId: 2, reason: 'Follow-up for blood pressure', status: 'Scheduled' },
+                { id: 7, patientId: 7, doctorId: 2, date: '2025-11-18', time: '11:00', roomId: 1, reason: 'Back pain', status: 'Completed' },
+                { id: 8, patientId: 8, doctorId: 3, date: '2025-11-22', time: '09:30', roomId: 3, reason: 'Child fever', status: 'Scheduled' },
+                { id: 9, patientId: 9, doctorId: 4, date: '2025-11-18', time: '16:00', roomId: 2, reason: 'Migraine', status: 'Completed' },
+                { id: 10, patientId: 10, doctorId: 5, date: '2025-11-23', time: '10:00', roomId: 1, reason: 'Annual health screening', status: 'Scheduled' },
+                { id: 11, patientId: 1, doctorId: 6, date: '2025-11-25', time: '11:00', roomId: 2, reason: 'ECG test', status: 'Scheduled' },
+                { id: 12, patientId: 3, doctorId: 8, date: '2025-11-19', time: '15:30', roomId: 3, reason: 'Post-surgery checkup', status: 'Completed' },
+                { id: 13, patientId: 5, doctorId: 7, date: '2025-11-24', time: '14:00', roomId: 1, reason: 'Vaccination for child', status: 'Scheduled' },
+                { id: 14, patientId: 2, doctorId: 1, date: '2025-11-26', time: '10:30', roomId: 2, reason: 'Cardiac screening', status: 'Scheduled' },
+                { id: 15, patientId: 4, doctorId: 2, date: '2025-11-27', time: '09:00', roomId: 3, reason: 'Joint pain assessment', status: 'Scheduled' }
+            ];
+            DATABASE.counters.appointments = 15;
+
+            // Medical Records
+            DATABASE.medicalRecords = [
+                { id: 1, patientId: 3, doctorId: 2, appointmentId: 3, visitDate: '2025-11-19', symptoms: 'Severe knee pain, difficulty walking', diagnosis: 'Osteoarthritis', prescription: 'Painkiller tablets, Calcium supplements', treatmentPlan: 'Physiotherapy for 4 weeks', followUpDate: '2025-12-17', notes: 'Patient advised to avoid strenuous activities' },
+                { id: 2, patientId: 4, doctorId: 4, appointmentId: 4, visitDate: '2025-11-19', symptoms: 'Recurring headaches, nausea', diagnosis: 'Migraine', prescription: 'Sumatriptan 50mg, Anti-nausea medication', treatmentPlan: 'Stress management, regular sleep schedule', followUpDate: '2025-12-03', notes: 'Advised to maintain headache diary' },
+                { id: 3, patientId: 7, doctorId: 2, appointmentId: 7, visitDate: '2025-11-18', symptoms: 'Lower back pain', diagnosis: 'Lumbar strain', prescription: 'Muscle relaxants, Pain relief gel', treatmentPlan: 'Rest and gentle stretching exercises', followUpDate: '2025-12-02', notes: 'Avoid heavy lifting' },
+                { id: 4, patientId: 9, doctorId: 4, appointmentId: 9, visitDate: '2025-11-18', symptoms: 'Severe headache with visual disturbance', diagnosis: 'Acute Migraine', prescription: 'Ergotamine, Rest in dark room', treatmentPlan: 'Trigger identification, lifestyle modification', followUpDate: '2025-12-01', notes: 'Patient responded well to treatment' }
+            ];
+            DATABASE.counters.medicalRecords = 4;
+
+            // Bills
+            DATABASE.bills = [
+                { id: 1, patientId: 3, appointmentId: 3, services: 'Consultation, X-Ray, Physiotherapy', amount: 3500, paymentStatus: 'Paid', paymentMethod: 'Card', paymentDate: '2025-11-19' },
+                { id: 2, patientId: 4, appointmentId: 4, services: 'Consultation, MRI Scan', amount: 8500, paymentStatus: 'Paid', paymentMethod: 'Insurance', paymentDate: '2025-11-19' },
+                { id: 3, patientId: 7, appointmentId: 7, services: 'Consultation, Pain relief therapy', amount: 2200, paymentStatus: 'Pending', paymentMethod: null, paymentDate: null },
+                { id: 4, patientId: 9, appointmentId: 9, services: 'Emergency consultation, Medications', amount: 2500, paymentStatus: 'Paid', paymentMethod: 'Cash', paymentDate: '2025-11-18' },
+                { id: 5, patientId: 1, appointmentId: null, services: 'Blood Test, ECG', amount: 1500, paymentStatus: 'Pending', paymentMethod: null, paymentDate: null }
+            ];
+            DATABASE.counters.bills = 5;
+        }
+
+        // ==================== PAGE RENDERING ====================
+        function renderDashboard() {
+            const today = new Date().toISOString().split('T')[0];
+            const todayAppointments = DATABASE.appointments.filter(a => a.date === today);
+            const pendingBills = DATABASE.bills.filter(b => b.paymentStatus === 'Pending');
+            const totalPending = pendingBills.reduce((sum, b) => sum + b.amount, 0);
+            const recentAppointments = [...DATABASE.appointments].sort((a, b) => 
+                new Date(b.date + ' ' + b.time) - new Date(a.date + ' ' + a.time)
+            ).slice(0, 5);
+            const upcomingAppointments = DATABASE.appointments
+                .filter(a => new Date(a.date) >= new Date() && a.status === 'Scheduled')
+                .sort((a, b) => new Date(a.date + ' ' + a.time) - new Date(b.date + ' ' + b.time))
+                .slice(0, 5);
+
+            return `
+                <div class="page-header">
+                    <h1 class="page-title">Dashboard</h1>
+                </div>
+
+                <div class="quick-actions">
+                    <button class="btn btn-primary" onclick="openAddPatientModal()">+ Add Patient</button>
+                    <button class="btn btn-primary" onclick="openAddAppointmentModal()">+ Book Appointment</button>
+                    <button class="btn btn-primary" onclick="openAddBillModal()">+ Generate Bill</button>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Total Patients</h3>
+                        <div class="value">${DATABASE.patients.length}</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Total Doctors</h3>
+                        <div class="value">${DATABASE.doctors.length}</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Today's Appointments</h3>
+                        <div class="value">${todayAppointments.length}</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Pending Bills</h3>
+                        <div class="value">${formatCurrency(totalPending)}</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Upcoming Appointments</h3>
+                    </div>
+                    ${upcomingAppointments.length === 0 ? 
+                        '<div class="empty-state"><div class="empty-state-icon">📅</div><p>No upcoming appointments</p></div>' :
+                        `<table>
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    <th>Patient</th>
+                                    <th>Doctor</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${upcomingAppointments.map(a => {
+                                    const patient = findById('patients', a.patientId);
+                                    const doctor = findById('doctors', a.doctorId);
+                                    return `
+                                        <tr>
+                                            <td>${formatDate(a.date)}</td>
+                                            <td>${a.time}</td>
+                                            <td>${patient ? patient.firstName + ' ' + patient.lastName : 'N/A'}</td>
+                                            <td>Dr. ${doctor ? doctor.firstName + ' ' + doctor.lastName : 'N/A'}</td>
+                                            <td><span class="badge badge-warning">${a.status}</span></td>
+                                        </tr>
+                                    `;
+                                }).join('')}
+                            </tbody>
+                        </table>`
+                    }
+                </div>
+            `;
+        }
+
+        function renderPatients() {
+            return `
+                <div class="page-header">
+                    <h1 class="page-title">Patients Management</h1>
+                    <button class="btn btn-primary" onclick="openAddPatientModal()">+ Add Patient</button>
+                </div>
+
+                <input type="text" class="search-box" id="patientSearch" placeholder="Search by name or phone..." oninput="filterPatients()">
+
+                <div class="card">
+                    <table id="patientsTable">
+                        <thead>
+                            <tr>
+                                <th onclick="sortTable('patients', 'id')">ID</th>
+                                <th onclick="sortTable('patients', 'firstName')">Name</th>
+                                <th onclick="sortTable('patients', 'dob')">DOB</th>
+                                <th>Gender</th>
+                                <th>Phone</th>
+                                <th>Blood Group</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${renderPatientsTable()}
+                        </tbody>
+                    </table>
+                </div>
+
+                ${createPatientModal()}
+            `;
+        }
+
+        function renderPatientsTable(patients = DATABASE.patients) {
+            if (patients.length === 0) {
+                return '<tr><td colspan="7" class="empty-state"><div class="empty-state-icon">👥</div><p>No patients found</p></td></tr>';
+            }
+
+            return patients.map(p => `
+                <tr>
+                    <td>${p.id}</td>
+                    <td><a href="#" onclick="viewPatientDetails(${p.id}); return false;">${p.firstName} ${p.lastName}</a></td>
+                    <td>${formatDate(p.dob)}</td>
+                    <td>${p.gender}</td>
+                    <td>${p.phone}</td>
+                    <td><span class="badge badge-info">${p.bloodGroup}</span></td>
+                    <td>
+                        <div class="action-buttons">
+                            <button class="btn btn-sm btn-secondary" onclick="editPatient(${p.id})">Edit</button>
+                            <button class="btn btn-sm btn-danger" onclick="confirmDeletePatient(${p.id})">Delete</button>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function createPatientModal() {
+            return `
+                <div class="modal" id="patientModal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 class="modal-title" id="patientModalTitle">Add Patient</h2>
+                            <button class="close-btn" onclick="hideModal('patientModal')">&times;</button>
+                        </div>
+                        <form id="patientForm" onsubmit="handlePatientSubmit(event)">
+                            <input type="hidden" id="patientId">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label required">First Name</label>
+                                    <input type="text" class="form-control" id="firstName" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label required">Last Name</label>
+                                    <input type="text" class="form-control" id="lastName" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label required">Date of Birth</label>
+                                    <input type="date" class="form-control" id="dob" required max="${new Date().toISOString().split('T')[0]}">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label required">Gender</label>
+                                    <select class="form-control" id="gender" required>
+                                        <option value="">Select</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label required">Phone</label>
+                                    <input type="tel" class="form-control" id="phone" required pattern="[0-9]{10}" placeholder="10 digit number">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label required">Email</label>
+                                    <input type="email" class="form-control" id="email" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label required">Address</label>
+                                <textarea class="form-control" id="address" rows="2" required></textarea>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label required">Blood Group</label>
+                                    <select class="form-control" id="bloodGroup" required>
+                                        <option value="">Select</option>
+                                        <option value="A+">A+</option>
+                                        <option value="A-">A-</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B-">B-</option>
+                                        <option value="AB+">AB+</option>
+                                        <option value="AB-">AB-</option>
+                                        <option value="O+">O+</option>
+                                        <option value="O-">O-</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Emergency Contact Name</label>
+                                    <input type="text" class="form-control" id="emergencyContact">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Emergency Contact Phone</label>
+                                <input type="tel" class="form-control" id="emergencyPhone" pattern="[0-9]{10}" placeholder="10 digit number">
+                            </div>
+                            <div style="display: flex; gap: 12px; justify-content: flex-end;">
+                                <button type="button" class="btn btn-secondary" onclick="hideModal('patientModal')">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Save Patient</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderDoctors() {
+            return `
+                <div class="page-header">
+                    <h1 class="page-title">Doctors Management</h1>
+                    <button class="btn btn-primary" onclick="openAddDoctorModal()">+ Add Doctor</button>
+                </div>
+
+                <div class="filters">
+                    <select class="form-control" id="departmentFilter" onchange="filterDoctors()">
+                        <option value="">All Departments</option>
+                        ${DATABASE.departments.map(d => `<option value="${d.id}">${d.name}</option>`).join('')}
+                    </select>
+                    <input type="text" class="search-box" id="doctorSearch" placeholder="Search by name or specialization..." oninput="filterDoctors()" style="margin: 0;">
+                </div>
+
+                <div class="card">
+                    <table id="doctorsTable">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Specialization</th>
+                                <th>Department</th>
+                                <th>Experience</th>
+                                <th>Fee</th>
+                                <th>Phone</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${renderDoctorsTable()}
+                        </tbody>
+                    </table>
+                </div>
+
+                ${createDoctorModal()}
+            `;
+        }
+
+        function renderDoctorsTable(doctors = DATABASE.doctors) {
+            if (doctors.length === 0) {
+                return '<tr><td colspan="8" class="empty-state"><div class="empty-state-icon">👨‍⚕️</div><p>No doctors found</p></td></tr>';
+            }
+
+            return doctors.map(d => {
+                const dept = findById('departments', d.departmentId);
+                const appointmentCount = DATABASE.appointments.filter(a => a.doctorId === d.id).length;
+                return `
+                    <tr>
+                        <td>${d.id}</td>
+                        <td>Dr. ${d.firstName} ${d.lastName}</td>
+                        <td>${d.specialization}</td>
+                        <td>${dept ? dept.name : 'N/A'}</td>
+                        <td>${d.experienceYears} years</td>
+                        <td>${formatCurrency(d.consultationFee)}</td>
+                        <td>${d.phone}</td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="btn btn-sm btn-secondary" onclick="editDoctor(${d.id})">Edit</button>
+                                <button class="btn btn-sm btn-danger" onclick="confirmDeleteDoctor(${d.id})">Delete</button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function createDoctorModal() {
+            return `
+                <div class="modal" id="doctorModal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 class="modal-title" id="doctorModalTitle">Add Doctor</h2>
+                            <button class="close-btn" onclick="hideModal('doctorModal')">&times;</button>
+                        </div>
+                        <form id="doctorForm" onsubmit="handleDoctorSubmit(event)">
+                            <input type="hidden" id="doctorId">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label required">First Name</label>
+                                    <input type="text" class="form-control" id="doctorFirstName" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label required">Last Name</label>
+                                    <input type="text" class="form-control" id="doctorLastName" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label required">Specialization</label>
+                                    <input type="text" class="form-control" id="specialization" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label required">Qualification</label>
+                                    <input type="text" class="form-control" id="qualification" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label required">Department</label>
+                                    <select class="form-control" id="doctorDepartment" required>
+                                        <option value="">Select Department</option>
+                                        ${DATABASE.departments.map(d => `<option value="${d.id}">${d.name}</option>`).join('')}
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label required">Experience (Years)</label>
+                                    <input type="number" class="form-control" id="experienceYears" required min="0">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label required">Phone</label>
+                                    <input type="tel" class="form-control" id="doctorPhone" required pattern="[0-9]{10}">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label required">Email</label>
+                                    <input type="email" class="form-control" id="doctorEmail" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label required">Consultation Fee</label>
+                                <input type="number" class="form-control" id="consultationFee" required min="0">
+                            </div>
+                            <div style="display: flex; gap: 12px; justify-content: flex-end;">
+                                <button type="button" class="btn btn-secondary" onclick="hideModal('doctorModal')">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Save Doctor</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderAppointments() {
+            return `
+                <div class="page-header">
+                    <h1 class="page-title">Appointments</h1>
+                    <button class="btn btn-primary" onclick="openAddAppointmentModal()">+ Book Appointment</button>
+                </div>
+
+                <div class="filters">
+                    <input type="date" class="form-control" id="appointmentDateFilter" onchange="filterAppointments()">
+                    <select class="form-control" id="appointmentDoctorFilter" onchange="filterAppointments()">
+                        <option value="">All Doctors</option>
+                        ${DATABASE.doctors.map(d => `<option value="${d.id}">Dr. ${d.firstName} ${d.lastName}</option>`).join('')}
+                    </select>
+                    <select class="form-control" id="appointmentStatusFilter" onchange="filterAppointments()">
+                        <option value="">All Status</option>
+                        <option value="Scheduled">Scheduled</option>
+                        <option value="Completed">Completed</option>
+                        <option value="Cancelled">Cancelled</option>
+                    </select>
+                </div>
+
+                <div class="card">
+                    <table id="appointmentsTable">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Patient</th>
+                                <th>Doctor</th>
+                                <th>Room</th>
+                                <th>Reason</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${renderAppointmentsTable()}
+                        </tbody>
+                    </table>
+                </div>
+
+                ${createAppointmentModal()}
+            `;
+        }
+
+        function renderAppointmentsTable(appointments = DATABASE.appointments) {
+            if (appointments.length === 0) {
+                return '<tr><td colspan="9" class="empty-state"><div class="empty-state-icon">📅</div><p>No appointments found</p></td></tr>';
+            }
+
+            return appointments.map(a => {
+                const patient = findById('patients', a.patientId);
+                const doctor = findById('doctors', a.doctorId);
+                const room = findById('rooms', a.roomId);
+                const statusClass = a.status === 'Completed' ? 'badge-success' : a.status === 'Cancelled' ? 'badge-danger' : 'badge-warning';
+                
+                return `
+                    <tr>
+                        <td>${a.id}</td>
+                        <td>${formatDate(a.date)}</td>
+                        <td>${a.time}</td>
+                        <td>${patient ? patient.firstName + ' ' + patient.lastName : 'N/A'}</td>
+                        <td>Dr. ${doctor ? doctor.firstName + ' ' + doctor.lastName : 'N/A'}</td>
+                        <td>${room ? room.number : 'N/A'}</td>
+                        <td>${a.reason}</td>
+                        <td><span class="badge ${statusClass}">${a.status}</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                ${a.status === 'Scheduled' ? `
+                                    <button class="btn btn-sm btn-secondary" onclick="updateAppointmentStatus(${a.id}, 'Completed')">Complete</button>
+                                    <button class="btn btn-sm btn-danger" onclick="updateAppointmentStatus(${a.id}, 'Cancelled')">Cancel</button>
+                                ` : ''}
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function createAppointmentModal() {
+            return `
+                <div class="modal" id="appointmentModal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 class="modal-title">Book Appointment</h2>
+                            <button class="close-btn" onclick="hideModal('appointmentModal')">&times;</button>
+                        </div>
+                        <form id="appointmentForm" onsubmit="handleAppointmentSubmit(event)">
+                            <div class="form-group">
+                                <label class="form-label required">Patient</label>
+                                <select class="form-control" id="appointmentPatient" required>
+                                    <option value="">Select Patient</option>
+                                    ${DATABASE.patients.map(p => `<option value="${p.id}">${p.firstName} ${p.lastName} - ${p.phone}</option>`).join('')}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label required">Department</label>
+                                <select class="form-control" id="appointmentDepartment" onchange="updateDoctorsList()" required>
+                                    <option value="">Select Department</option>
+                                    ${DATABASE.departments.map(d => `<option value="${d.id}">${d.name}</option>`).join('')}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label required">Doctor</label>
+                                <select class="form-control" id="appointmentDoctor" required>
+                                    <option value="">Select Doctor</option>
+                                </select>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label required">Date</label>
+                                    <input type="date" class="form-control" id="appointmentDate" required min="${new Date().toISOString().split('T')[0]}">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label required">Time</label>
+                                    <input type="time" class="form-control" id="appointmentTime" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label required">Room</label>
+                                <select class="form-control" id="appointmentRoom" required>
+                                    <option value="">Select Room</option>
+                                    ${DATABASE.rooms.filter(r => r.status === 'Available').map(r => `<option value="${r.id}">Room ${r.number} - ${r.type}</option>`).join('')}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label required">Reason for Visit</label>
+                                <textarea class="form-control" id="appointmentReason" rows="3" required></textarea>
+                            </div>
+                            <div style="display: flex; gap: 12px; justify-content: flex-end;">
+                                <button type="button" class="btn btn-secondary" onclick="hideModal('appointmentModal')">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Book Appointment</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderMedicalRecords() {
+            return `
+                <div class="page-header">
+                    <h1 class="page-title">Medical Records</h1>
+                    <button class="btn btn-primary" onclick="openAddMedicalRecordModal()">+ Add Record</button>
+                </div>
+
+                <div class="filters">
+                    <select class="form-control" id="medicalRecordPatientFilter" onchange="filterMedicalRecords()">
+                        <option value="">All Patients</option>
+                        ${DATABASE.patients.map(p => `<option value="${p.id}">${p.firstName} ${p.lastName}</option>`).join('')}
+                    </select>
+                </div>
+
+                <div class="card">
+                    <table id="medicalRecordsTable">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Date</th>
+                                <th>Patient</th>
+                                <th>Doctor</th>
+                                <th>Diagnosis</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${renderMedicalRecordsTable()}
+                        </tbody>
+                    </table>
+                </div>
+
+                ${createMedicalRecordModal()}
+            `;
+        }
+
+        function renderMedicalRecordsTable(records = DATABASE.medicalRecords) {
+            if (records.length === 0) {
+                return '<tr><td colspan="6" class="empty-state"><div class="empty-state-icon">📋</div><p>No medical records found</p></td></tr>';
+            }
+
+            return records.map(r => {
+                const patient = findById('patients', r.patientId);
+                const doctor = findById('doctors', r.doctorId);
+                return `
+                    <tr>
+                        <td>${r.id}</td>
+                        <td>${formatDate(r.visitDate)}</td>
+                        <td>${patient ? patient.firstName + ' ' + patient.lastName : 'N/A'}</td>
+                        <td>Dr. ${doctor ? doctor.firstName + ' ' + doctor.lastName : 'N/A'}</td>
+                        <td>${r.diagnosis}</td>
+                        <td>
+                            <button class="btn btn-sm btn-secondary" onclick="viewMedicalRecord(${r.id})">View Details</button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function createMedicalRecordModal() {
+            return `
+                <div class="modal" id="medicalRecordModal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 class="modal-title" id="medicalRecordModalTitle">Add Medical Record</h2>
+                            <button class="close-btn" onclick="hideModal('medicalRecordModal')">&times;</button>
+                        </div>
+                        <form id="medicalRecordForm" onsubmit="handleMedicalRecordSubmit(event)">
+                            <div class="form-group">
+                                <label class="form-label required">Patient</label>
+                                <select class="form-control" id="recordPatient" required>
+                                    <option value="">Select Patient</option>
+                                    ${DATABASE.patients.map(p => `<option value="${p.id}">${p.firstName} ${p.lastName}</option>`).join('')}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label required">Doctor</label>
+                                <select class="form-control" id="recordDoctor" required>
+                                    <option value="">Select Doctor</option>
+                                    ${DATABASE.doctors.map(d => `<option value="${d.id}">Dr. ${d.firstName} ${d.lastName}</option>`).join('')}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Appointment (Optional)</label>
+                                <select class="form-control" id="recordAppointment">
+                                    <option value="">Not linked to appointment</option>
+                                    ${DATABASE.appointments.filter(a => a.status === 'Completed').map(a => {
+                                        const patient = findById('patients', a.patientId);
+                                        return `<option value="${a.id}">${formatDate(a.date)} - ${patient ? patient.firstName + ' ' + patient.lastName : 'N/A'}</option>`;
+                                    }).join('')}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label required">Visit Date</label>
+                                <input type="date" class="form-control" id="visitDate" required max="${new Date().toISOString().split('T')[0]}">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label required">Symptoms</label>
+                                <textarea class="form-control" id="symptoms" rows="2" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label required">Diagnosis</label>
+                                <textarea class="form-control" id="diagnosis" rows="2" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label required">Prescription</label>
+                                <textarea class="form-control" id="prescription" rows="2" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Treatment Plan</label>
+                                <textarea class="form-control" id="treatmentPlan" rows="2"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Follow-up Date</label>
+                                <input type="date" class="form-control" id="followUpDate">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Notes</label>
+                                <textarea class="form-control" id="recordNotes" rows="2"></textarea>
+                            </div>
+                            <div style="display: flex; gap: 12px; justify-content: flex-end;">
+                                <button type="button" class="btn btn-secondary" onclick="hideModal('medicalRecordModal')">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Save Record</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderBilling() {
+            return `
+                <div class="page-header">
+                    <h1 class="page-title">Billing</h1>
+                    <button class="btn btn-primary" onclick="openAddBillModal()">+ Generate Bill</button>
+                </div>
+
+                <div class="filters">
+                    <select class="form-control" id="billStatusFilter" onchange="filterBills()">
+                        <option value="">All Bills</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Paid">Paid</option>
+                    </select>
+                </div>
+
+                <div class="card">
+                    <table id="billsTable">
+                        <thead>
+                            <tr>
+                                <th>Bill ID</th>
+                                <th>Patient</th>
+                                <th>Services</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Payment Method</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${renderBillsTable()}
+                        </tbody>
+                    </table>
+                </div>
+
+                ${createBillModal()}
+            `;
+        }
+
+        function renderBillsTable(bills = DATABASE.bills) {
+            if (bills.length === 0) {
+                return '<tr><td colspan="8" class="empty-state"><div class="empty-state-icon">💰</div><p>No bills found</p></td></tr>';
+            }
+
+            return bills.map(b => {
+                const patient = findById('patients', b.patientId);
+                const statusClass = b.paymentStatus === 'Paid' ? 'badge-success' : 'badge-danger';
+                return `
+                    <tr>
+                        <td>${b.id}</td>
+                        <td>${patient ? patient.firstName + ' ' + patient.lastName : 'N/A'}<br><small>${patient ? patient.phone : ''}</small></td>
+                        <td>${b.services}</td>
+                        <td><strong>${formatCurrency(b.amount)}</strong></td>
+                        <td><span class="badge ${statusClass}">${b.paymentStatus}</span></td>
+                        <td>${b.paymentMethod || '-'}</td>
+                        <td>${b.paymentDate ? formatDate(b.paymentDate) : '-'}</td>
+                        <td>
+                            ${b.paymentStatus === 'Pending' ? `
+                                <button class="btn btn-sm btn-primary" onclick="markBillAsPaid(${b.id})">Mark as Paid</button>
+                            ` : ''}
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function createBillModal() {
+            return `
+                <div class="modal" id="billModal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 class="modal-title">Generate Bill</h2>
+                            <button class="close-btn" onclick="hideModal('billModal')">&times;</button>
+                        </div>
+                        <form id="billForm" onsubmit="handleBillSubmit(event)">
+                            <div class="form-group">
+                                <label class="form-label required">Patient</label>
+                                <select class="form-control" id="billPatient" required>
+                                    <option value="">Select Patient</option>
+                                    ${DATABASE.patients.map(p => `<option value="${p.id}">${p.firstName} ${p.lastName} - ${p.phone}</option>`).join('')}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Appointment (Optional)</label>
+                                <select class="form-control" id="billAppointment">
+                                    <option value="">Not linked to appointment</option>
+                                    ${DATABASE.appointments.map(a => {
+                                        const patient = findById('patients', a.patientId);
+                                        return `<option value="${a.id}">${formatDate(a.date)} - ${patient ? patient.firstName + ' ' + patient.lastName : 'N/A'}</option>`;
+                                    }).join('')}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label required">Services</label>
+                                <textarea class="form-control" id="billServices" rows="3" required placeholder="e.g., Consultation, X-Ray, Blood Test"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label required">Total Amount (₹)</label>
+                                <input type="number" class="form-control" id="billAmount" required min="0" step="0.01">
+                            </div>
+                            <div style="display: flex; gap: 12px; justify-content: flex-end;">
+                                <button type="button" class="btn btn-secondary" onclick="hideModal('billModal')">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Generate Bill</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="modal" id="paymentModal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 class="modal-title">Record Payment</h2>
+                            <button class="close-btn" onclick="hideModal('paymentModal')">&times;</button>
+                        </div>
+                        <form id="paymentForm" onsubmit="handlePaymentSubmit(event)">
+                            <input type="hidden" id="paymentBillId">
+                            <div class="form-group">
+                                <label class="form-label required">Payment Method</label>
+                                <select class="form-control" id="paymentMethod" required>
+                                    <option value="">Select Method</option>
+                                    <option value="Cash">Cash</option>
+                                    <option value="Card">Card</option>
+                                    <option value="Insurance">Insurance</option>
+                                    <option value="Online">Online Payment</option>
+                                </select>
+                            </div>
+                            <div style="display: flex; gap: 12px; justify-content: flex-end;">
+                                <button type="button" class="btn btn-secondary" onclick="hideModal('paymentModal')">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Record Payment</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderDepartments() {
+            return `
+                <div class="page-header">
+                    <h1 class="page-title">Departments &amp; Rooms</h1>
+                    <div style="display: flex; gap: 12px;">
+                        <button class="btn btn-primary" onclick="openAddDepartmentModal()">+ Add Department</button>
+                        <button class="btn btn-primary" onclick="openAddRoomModal()">+ Add Room</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Departments</h3>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Doctors</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${DATABASE.departments.map(d => {
+                                const doctorCount = DATABASE.doctors.filter(doc => doc.departmentId === d.id).length;
+                                return `
+                                    <tr>
+                                        <td>${d.id}</td>
+                                        <td>${d.name}</td>
+                                        <td>${d.description}</td>
+                                        <td>${doctorCount}</td>
+                                        <td>
+                                            <div class="action-buttons">
+                                                <button class="btn btn-sm btn-secondary" onclick="editDepartment(${d.id})">Edit</button>
+                                                <button class="btn btn-sm btn-danger" onclick="confirmDeleteDepartment(${d.id})">Delete</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                `;
+                            }).join('')}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Rooms</h3>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Number</th>
+                                <th>Type</th>
+                                <th>Floor</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${DATABASE.rooms.map(r => {
+                                const statusClass = r.status === 'Available' ? 'badge-success' : 'badge-danger';
+                                return `
+                                    <tr>
+                                        <td>${r.id}</td>
+                                        <td>${r.number}</td>
+                                        <td>${r.type}</td>
+                                        <td>${r.floor}</td>
+                                        <td><span class="badge ${statusClass}">${r.status}</span></td>
+                                        <td>
+                                            <div class="action-buttons">
+                                                <button class="btn btn-sm btn-secondary" onclick="editRoom(${r.id})">Edit</button>
+                                                <button class="btn btn-sm btn-danger" onclick="confirmDeleteRoom(${r.id})">Delete</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                `;
+                            }).join('')}
+                        </tbody>
+                    </table>
+                </div>
+
+                ${createDepartmentModal()}
+                ${createRoomModal()}
+            `;
+        }
+
+        function createDepartmentModal() {
+            return `
+                <div class="modal" id="departmentModal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 class="modal-title" id="departmentModalTitle">Add Department</h2>
+                            <button class="close-btn" onclick="hideModal('departmentModal')">&times;</button>
+                        </div>
+                        <form id="departmentForm" onsubmit="handleDepartmentSubmit(event)">
+                            <input type="hidden" id="departmentId">
+                            <div class="form-group">
+                                <label class="form-label required">Department Name</label>
+                                <input type="text" class="form-control" id="departmentName" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label required">Description</label>
+                                <textarea class="form-control" id="departmentDescription" rows="3" required></textarea>
+                            </div>
+                            <div style="display: flex; gap: 12px; justify-content: flex-end;">
+                                <button type="button" class="btn btn-secondary" onclick="hideModal('departmentModal')">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Save Department</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            `;
+        }
+
+        function createRoomModal() {
+            return `
+                <div class="modal" id="roomModal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 class="modal-title" id="roomModalTitle">Add Room</h2>
+                            <button class="close-btn" onclick="hideModal('roomModal')">&times;</button>
+                        </div>
+                        <form id="roomForm" onsubmit="handleRoomSubmit(event)">
+                            <input type="hidden" id="roomId">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label required">Room Number</label>
+                                    <input type="text" class="form-control" id="roomNumber" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label required">Floor</label>
+                                    <input type="number" class="form-control" id="roomFloor" required min="1">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label required">Room Type</label>
+                                    <select class="form-control" id="roomType" required>
+                                        <option value="">Select Type</option>
+                                        <option value="Consultation">Consultation</option>
+                                        <option value="ICU">ICU</option>
+                                        <option value="General Ward">General Ward</option>
+                                        <option value="Private Room">Private Room</option>
+                                        <option value="Operation Theater">Operation Theater</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label required">Status</label>
+                                    <select class="form-control" id="roomStatus" required>
+                                        <option value="Available">Available</option>
+                                        <option value="Occupied">Occupied</option>
+                                        <option value="Maintenance">Maintenance</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div style="display: flex; gap: 12px; justify-content: flex-end;">
+                                <button type="button" class="btn btn-secondary" onclick="hideModal('roomModal')">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Save Room</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderReports() {
+            const totalRevenue = DATABASE.bills.filter(b => b.paymentStatus === 'Paid').reduce((sum, b) => sum + b.amount, 0);
+            const pendingRevenue = DATABASE.bills.filter(b => b.paymentStatus === 'Pending').reduce((sum, b) => sum + b.amount, 0);
+            
+            const departmentStats = DATABASE.departments.map(dept => {
+                const patients = new Set();
+                DATABASE.appointments.forEach(a => {
+                    const doctor = findById('doctors', a.doctorId);
+                    if (doctor && doctor.departmentId === dept.id) {
+                        patients.add(a.patientId);
+                    }
+                });
+                return { name: dept.name, count: patients.size };
+            });
+
+            const doctorStats = DATABASE.doctors.map(d => {
+                const appointmentCount = DATABASE.appointments.filter(a => a.doctorId === d.id).length;
+                return { name: `Dr. ${d.firstName} ${d.lastName}`, count: appointmentCount };
+            }).sort((a, b) => b.count - a.count);
+
+            return `
+                <div class="page-header">
+                    <h1 class="page-title">Reports &amp; Analytics</h1>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Total Revenue</h3>
+                        <div class="value">${formatCurrency(totalRevenue)}</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Pending Revenue</h3>
+                        <div class="value">${formatCurrency(pendingRevenue)}</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Total Appointments</h3>
+                        <div class="value">${DATABASE.appointments.length}</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Completed Appointments</h3>
+                        <div class="value">${DATABASE.appointments.filter(a => a.status === 'Completed').length}</div>
+                    </div>
+                </div>
+
+                <div class="reports-grid">
+                    <div class="report-card">
+                        <h4>Department-wise Patient Distribution</h4>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Department</th>
+                                    <th>Patients</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${departmentStats.map(d => `
+                                    <tr>
+                                        <td>${d.name}</td>
+                                        <td>${d.count}</td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="report-card">
+                        <h4>Doctor-wise Appointments</h4>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Doctor</th>
+                                    <th>Appointments</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${doctorStats.slice(0, 5).map(d => `
+                                    <tr>
+                                        <td>${d.name}</td>
+                                        <td>${d.count}</td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="report-card">
+                        <h4>Payment Status Overview</h4>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Status</th>
+                                    <th>Count</th>
+                                    <th>Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Paid</td>
+                                    <td>${DATABASE.bills.filter(b => b.paymentStatus === 'Paid').length}</td>
+                                    <td>${formatCurrency(totalRevenue)}</td>
+                                </tr>
+                                <tr>
+                                    <td>Pending</td>
+                                    <td>${DATABASE.bills.filter(b => b.paymentStatus === 'Pending').length}</td>
+                                    <td>${formatCurrency(pendingRevenue)}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="report-card">
+                        <h4>Appointment Status</h4>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Status</th>
+                                    <th>Count</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Scheduled</td>
+                                    <td>${DATABASE.appointments.filter(a => a.status === 'Scheduled').length}</td>
+                                </tr>
+                                <tr>
+                                    <td>Completed</td>
+                                    <td>${DATABASE.appointments.filter(a => a.status === 'Completed').length}</td>
+                                </tr>
+                                <tr>
+                                    <td>Cancelled</td>
+                                    <td>${DATABASE.appointments.filter(a => a.status === 'Cancelled').length}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `;
+        }
+
+        // ==================== EVENT HANDLERS ====================
+        function handlePatientSubmit(event) {
+            event.preventDefault();
+            
+            const id = document.getElementById('patientId').value;
+            const data = {
+                firstName: document.getElementById('firstName').value,
+                lastName: document.getElementById('lastName').value,
+                dob: document.getElementById('dob').value,
+                gender: document.getElementById('gender').value,
+                phone: document.getElementById('phone').value,
+                email: document.getElementById('email').value,
+                address: document.getElementById('address').value,
+                bloodGroup: document.getElementById('bloodGroup').value,
+                emergencyContact: document.getElementById('emergencyContact').value,
+                emergencyPhone: document.getElementById('emergencyPhone').value
+            };
+
+            try {
+                if (!validateEmail(data.email)) {
+                    throw new Error('Invalid email format');
+                }
+                if (!validatePhone(data.phone)) {
+                    throw new Error('Phone number must be 10 digits');
+                }
+                if (data.emergencyPhone && !validatePhone(data.emergencyPhone)) {
+                    throw new Error('Emergency phone number must be 10 digits');
+                }
+
+                if (id) {
+                    updatePatient(parseInt(id), data);
+                    showToast('Patient updated successfully');
+                } else {
+                    addPatient(data);
+                    showToast('Patient added successfully');
+                }
+
+                hideModal('patientModal');
+                navigateTo('patients');
+            } catch (error) {
+                showToast(error.message, 'error');
+            }
+        }
+
+        function handleDoctorSubmit(event) {
+            event.preventDefault();
+            
+            const id = document.getElementById('doctorId').value;
+            const data = {
+                firstName: document.getElementById('doctorFirstName').value,
+                lastName: document.getElementById('doctorLastName').value,
+                specialization: document.getElementById('specialization').value,
+                qualification: document.getElementById('qualification').value,
+                experienceYears: parseInt(document.getElementById('experienceYears').value),
+                phone: document.getElementById('doctorPhone').value,
+                email: document.getElementById('doctorEmail').value,
+                departmentId: parseInt(document.getElementById('doctorDepartment').value),
+                consultationFee: parseFloat(document.getElementById('consultationFee').value)
+            };
+
+            try {
+                if (!validateEmail(data.email)) {
+                    throw new Error('Invalid email format');
+                }
+                if (!validatePhone(data.phone)) {
+                    throw new Error('Phone number must be 10 digits');
+                }
+
+                if (id) {
+                    updateDoctor(parseInt(id), data);
+                    showToast('Doctor updated successfully');
+                } else {
+                    addDoctor(data);
+                    showToast('Doctor added successfully');
+                }
+
+                hideModal('doctorModal');
+                navigateTo('doctors');
+            } catch (error) {
+                showToast(error.message, 'error');
+            }
+        }
+
+        function handleAppointmentSubmit(event) {
+            event.preventDefault();
+            
+            const data = {
+                patientId: parseInt(document.getElementById('appointmentPatient').value),
+                doctorId: parseInt(document.getElementById('appointmentDoctor').value),
+                date: document.getElementById('appointmentDate').value,
+                time: document.getElementById('appointmentTime').value,
+                roomId: parseInt(document.getElementById('appointmentRoom').value),
+                reason: document.getElementById('appointmentReason').value
+            };
+
+            try {
+                addAppointment(data);
+                showToast('Appointment booked successfully');
+                hideModal('appointmentModal');
+                navigateTo('appointments');
+            } catch (error) {
+                showToast(error.message, 'error');
+            }
+        }
+
+        function handleMedicalRecordSubmit(event) {
+            event.preventDefault();
+            
+            const appointmentId = document.getElementById('recordAppointment').value;
+            const data = {
+                patientId: parseInt(document.getElementById('recordPatient').value),
+                doctorId: parseInt(document.getElementById('recordDoctor').value),
+                appointmentId: appointmentId ? parseInt(appointmentId) : null,
+                visitDate: document.getElementById('visitDate').value,
+                symptoms: document.getElementById('symptoms').value,
+                diagnosis: document.getElementById('diagnosis').value,
+                prescription: document.getElementById('prescription').value,
+                treatmentPlan: document.getElementById('treatmentPlan').value,
+                followUpDate: document.getElementById('followUpDate').value || null,
+                notes: document.getElementById('recordNotes').value
+            };
+
+            try {
+                addMedicalRecord(data);
+                showToast('Medical record added successfully');
+                hideModal('medicalRecordModal');
+                navigateTo('medical-records');
+            } catch (error) {
+                showToast(error.message, 'error');
+            }
+        }
+
+        function handleBillSubmit(event) {
+            event.preventDefault();
+            
+            const appointmentId = document.getElementById('billAppointment').value;
+            const data = {
+                patientId: parseInt(document.getElementById('billPatient').value),
+                appointmentId: appointmentId ? parseInt(appointmentId) : null,
+                services: document.getElementById('billServices').value,
+                amount: parseFloat(document.getElementById('billAmount').value)
+            };
+
+            try {
+                addBill(data);
+                showToast('Bill generated successfully');
+                hideModal('billModal');
+                navigateTo('billing');
+            } catch (error) {
+                showToast(error.message, 'error');
+            }
+        }
+
+        function handleDepartmentSubmit(event) {
+            event.preventDefault();
+            
+            const id = document.getElementById('departmentId').value;
+            const data = {
+                name: document.getElementById('departmentName').value,
+                description: document.getElementById('departmentDescription').value
+            };
+
+            try {
+                if (id) {
+                    updateDepartment(parseInt(id), data);
+                    showToast('Department updated successfully');
+                } else {
+                    addDepartment(data);
+                    showToast('Department added successfully');
+                }
+
+                hideModal('departmentModal');
+                navigateTo('departments');
+            } catch (error) {
+                showToast(error.message, 'error');
+            }
+        }
+
+        function handleRoomSubmit(event) {
+            event.preventDefault();
+            
+            const id = document.getElementById('roomId').value;
+            const data = {
+                number: document.getElementById('roomNumber').value,
+                type: document.getElementById('roomType').value,
+                floor: parseInt(document.getElementById('roomFloor').value),
+                status: document.getElementById('roomStatus').value
+            };
+
+            try {
+                if (id) {
+                    updateRoom(parseInt(id), data);
+                    showToast('Room updated successfully');
+                } else {
+                    addRoom(data);
+                    showToast('Room added successfully');
+                }
+
+                hideModal('roomModal');
+                navigateTo('departments');
+            } catch (error) {
+                showToast(error.message, 'error');
+            }
+        }
+
+        function handlePaymentSubmit(event) {
+            event.preventDefault();
+            
+            const billId = parseInt(document.getElementById('paymentBillId').value);
+            const paymentMethod = document.getElementById('paymentMethod').value;
+
+            try {
+                updateBill(billId, {
+                    paymentStatus: 'Paid',
+                    paymentMethod: paymentMethod,
+                    paymentDate: new Date().toISOString().split('T')[0]
+                });
+                showToast('Payment recorded successfully');
+                hideModal('paymentModal');
+                navigateTo('billing');
+            } catch (error) {
+                showToast(error.message, 'error');
+            }
+        }
+
+        // ==================== MODAL FUNCTIONS ====================
+        function openAddPatientModal() {
+            document.getElementById('patientForm').reset();
+            document.getElementById('patientId').value = '';
+            document.getElementById('patientModalTitle').textContent = 'Add Patient';
+            showModal('patientModal');
+        }
+
+        function editPatient(id) {
+            const patient = findById('patients', id);
+            if (!patient) return;
+
+            document.getElementById('patientId').value = patient.id;
+            document.getElementById('firstName').value = patient.firstName;
+            document.getElementById('lastName').value = patient.lastName;
+            document.getElementById('dob').value = patient.dob;
+            document.getElementById('gender').value = patient.gender;
+            document.getElementById('phone').value = patient.phone;
+            document.getElementById('email').value = patient.email;
+            document.getElementById('address').value = patient.address;
+            document.getElementById('bloodGroup').value = patient.bloodGroup;
+            document.getElementById('emergencyContact').value = patient.emergencyContact || '';
+            document.getElementById('emergencyPhone').value = patient.emergencyPhone || '';
+            document.getElementById('patientModalTitle').textContent = 'Edit Patient';
+            showModal('patientModal');
+        }
+
+        function confirmDeletePatient(id) {
+            if (confirm('Are you sure you want to delete this patient? This action cannot be undone.')) {
+                try {
+                    deletePatient(id);
+                    showToast('Patient deleted successfully');
+                    navigateTo('patients');
+                } catch (error) {
+                    showToast(error.message, 'error');
+                }
+            }
+        }
+
+        function viewPatientDetails(id) {
+            const patient = findById('patients', id);
+            if (!patient) return;
+
+            const appointments = DATABASE.appointments.filter(a => a.patientId === id);
+            const records = DATABASE.medicalRecords.filter(r => r.patientId === id);
+
+            const content = `
+                <div class="modal" id="patientDetailModal" style="display: flex;">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 class="modal-title">Patient Details</h2>
+                            <button class="close-btn" onclick="document.getElementById('patientDetailModal').remove()">&times;</button>
+                        </div>
+                        <div class="detail-view">
+                            <div class="detail-item">
+                                <div class="detail-label">Name</div>
+                                <div class="detail-value">${patient.firstName} ${patient.lastName}</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">DOB</div>
+                                <div class="detail-value">${formatDate(patient.dob)}</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Gender</div>
+                                <div class="detail-value">${patient.gender}</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Blood Group</div>
+                                <div class="detail-value">${patient.bloodGroup}</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Phone</div>
+                                <div class="detail-value">${patient.phone}</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Email</div>
+                                <div class="detail-value">${patient.email}</div>
+                            </div>
+                        </div>
+                        <div style="margin-top: 20px;">
+                            <h3>Medical History (${records.length} records)</h3>
+                            ${records.length > 0 ? `
+                                <table style="margin-top: 12px;">
+                                    <thead>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Diagnosis</th>
+                                            <th>Doctor</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        ${records.map(r => {
+                                            const doctor = findById('doctors', r.doctorId);
+                                            return `
+                                                <tr>
+                                                    <td>${formatDate(r.visitDate)}</td>
+                                                    <td>${r.diagnosis}</td>
+                                                    <td>Dr. ${doctor ? doctor.firstName + ' ' + doctor.lastName : 'N/A'}</td>
+                                                </tr>
+                                            `;
+                                        }).join('')}
+                                    </tbody>
+                                </table>
+                            ` : '<p style="color: var(--color-text-secondary); margin-top: 12px;">No medical history available</p>'}
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.body.insertAdjacentHTML('beforeend', content);
+        }
+
+        function openAddDoctorModal() {
+            document.getElementById('doctorForm').reset();
+            document.getElementById('doctorId').value = '';
+            document.getElementById('doctorModalTitle').textContent = 'Add Doctor';
+            showModal('doctorModal');
+        }
+
+        function editDoctor(id) {
+            const doctor = findById('doctors', id);
+            if (!doctor) return;
+
+            document.getElementById('doctorId').value = doctor.id;
+            document.getElementById('doctorFirstName').value = doctor.firstName;
+            document.getElementById('doctorLastName').value = doctor.lastName;
+            document.getElementById('specialization').value = doctor.specialization;
+            document.getElementById('qualification').value = doctor.qualification;
+            document.getElementById('doctorDepartment').value = doctor.departmentId;
+            document.getElementById('experienceYears').value = doctor.experienceYears;
+            document.getElementById('doctorPhone').value = doctor.phone;
+            document.getElementById('doctorEmail').value = doctor.email;
+            document.getElementById('consultationFee').value = doctor.consultationFee;
+            document.getElementById('doctorModalTitle').textContent = 'Edit Doctor';
+            showModal('doctorModal');
+        }
+
+        function confirmDeleteDoctor(id) {
+            if (confirm('Are you sure you want to delete this doctor?')) {
+                try {
+                    deleteDoctor(id);
+                    showToast('Doctor deleted successfully');
+                    navigateTo('doctors');
+                } catch (error) {
+                    showToast(error.message, 'error');
+                }
+            }
+        }
+
+        function openAddAppointmentModal() {
+            document.getElementById('appointmentForm').reset();
+            showModal('appointmentModal');
+        }
+
+        function updateDoctorsList() {
+            const deptId = document.getElementById('appointmentDepartment').value;
+            const doctorSelect = document.getElementById('appointmentDoctor');
+            
+            if (!deptId) {
+                doctorSelect.innerHTML = '<option value="">Select Doctor</option>';
+                return;
+            }
+
+            const doctors = DATABASE.doctors.filter(d => d.departmentId === parseInt(deptId));
+            doctorSelect.innerHTML = '<option value="">Select Doctor</option>' + 
+                doctors.map(d => `<option value="${d.id}">Dr. ${d.firstName} ${d.lastName} - ${d.specialization} (${formatCurrency(d.consultationFee)})</option>`).join('');
+        }
+
+        function updateAppointmentStatus(id, status) {
+            try {
+                updateAppointment(id, { status });
+                showToast(`Appointment ${status.toLowerCase()} successfully`);
+                navigateTo('appointments');
+            } catch (error) {
+                showToast(error.message, 'error');
+            }
+        }
+
+        function openAddMedicalRecordModal() {
+            document.getElementById('medicalRecordForm').reset();
+            showModal('medicalRecordModal');
+        }
+
+        function viewMedicalRecord(id) {
+            const record = findById('medicalRecords', id);
+            if (!record) return;
+
+            const patient = findById('patients', record.patientId);
+            const doctor = findById('doctors', record.doctorId);
+
+            const content = `
+                <div class="modal" id="recordDetailModal" style="display: flex;">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 class="modal-title">Medical Record Details</h2>
+                            <button class="close-btn" onclick="document.getElementById('recordDetailModal').remove()">&times;</button>
+                        </div>
+                        <div class="detail-view">
+                            <div class="detail-item">
+                                <div class="detail-label">Patient</div>
+                                <div class="detail-value">${patient ? patient.firstName + ' ' + patient.lastName : 'N/A'}</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Doctor</div>
+                                <div class="detail-value">Dr. ${doctor ? doctor.firstName + ' ' + doctor.lastName : 'N/A'}</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Visit Date</div>
+                                <div class="detail-value">${formatDate(record.visitDate)}</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Follow-up Date</div>
+                                <div class="detail-value">${record.followUpDate ? formatDate(record.followUpDate) : 'N/A'}</div>
+                            </div>
+                        </div>
+                        <div style="margin-top: 20px;">
+                            <h4>Symptoms</h4>
+                            <p>${record.symptoms}</p>
+                        </div>
+                        <div style="margin-top: 16px;">
+                            <h4>Diagnosis</h4>
+                            <p>${record.diagnosis}</p>
+                        </div>
+                        <div style="margin-top: 16px;">
+                            <h4>Prescription</h4>
+                            <p>${record.prescription}</p>
+                        </div>
+                        ${record.treatmentPlan ? `
+                            <div style="margin-top: 16px;">
+                                <h4>Treatment Plan</h4>
+                                <p>${record.treatmentPlan}</p>
+                            </div>
+                        ` : ''}
+                        ${record.notes ? `
+                            <div style="margin-top: 16px;">
+                                <h4>Notes</h4>
+                                <p>${record.notes}</p>
+                            </div>
+                        ` : ''}
+                    </div>
+                </div>
+            `;
+            document.body.insertAdjacentHTML('beforeend', content);
+        }
+
+        function openAddBillModal() {
+            document.getElementById('billForm').reset();
+            showModal('billModal');
+        }
+
+        function markBillAsPaid(id) {
+            document.getElementById('paymentBillId').value = id;
+            document.getElementById('paymentForm').reset();
+            showModal('paymentModal');
+        }
+
+        function openAddDepartmentModal() {
+            document.getElementById('departmentForm').reset();
+            document.getElementById('departmentId').value = '';
+            document.getElementById('departmentModalTitle').textContent = 'Add Department';
+            showModal('departmentModal');
+        }
+
+        function editDepartment(id) {
+            const dept = findById('departments', id);
+            if (!dept) return;
+
+            document.getElementById('departmentId').value = dept.id;
+            document.getElementById('departmentName').value = dept.name;
+            document.getElementById('departmentDescription').value = dept.description;
+            document.getElementById('departmentModalTitle').textContent = 'Edit Department';
+            showModal('departmentModal');
+        }
+
+        function confirmDeleteDepartment(id) {
+            if (confirm('Are you sure you want to delete this department?')) {
+                try {
+                    deleteDepartment(id);
+                    showToast('Department deleted successfully');
+                    navigateTo('departments');
+                } catch (error) {
+                    showToast(error.message, 'error');
+                }
+            }
+        }
+
+        function openAddRoomModal() {
+            document.getElementById('roomForm').reset();
+            document.getElementById('roomId').value = '';
+            document.getElementById('roomModalTitle').textContent = 'Add Room';
+            showModal('roomModal');
+        }
+
+        function editRoom(id) {
+            const room = findById('rooms', id);
+            if (!room) return;
+
+            document.getElementById('roomId').value = room.id;
+            document.getElementById('roomNumber').value = room.number;
+            document.getElementById('roomType').value = room.type;
+            document.getElementById('roomFloor').value = room.floor;
+            document.getElementById('roomStatus').value = room.status;
+            document.getElementById('roomModalTitle').textContent = 'Edit Room';
+            showModal('roomModal');
+        }
+
+        function confirmDeleteRoom(id) {
+            if (confirm('Are you sure you want to delete this room?')) {
+                try {
+                    deleteRoom(id);
+                    showToast('Room deleted successfully');
+                    navigateTo('departments');
+                } catch (error) {
+                    showToast(error.message, 'error');
+                }
+            }
+        }
+
+        // ==================== FILTER FUNCTIONS ====================
+        function filterPatients() {
+            const query = document.getElementById('patientSearch').value;
+            const filtered = getPatients(query);
+            document.querySelector('#patientsTable tbody').innerHTML = renderPatientsTable(filtered);
+        }
+
+        function filterDoctors() {
+            const deptId = document.getElementById('departmentFilter').value;
+            const query = document.getElementById('doctorSearch').value;
+            const filtered = getDoctors(deptId || null, query);
+            document.querySelector('#doctorsTable tbody').innerHTML = renderDoctorsTable(filtered);
+        }
+
+        function filterAppointments() {
+            const filters = {
+                date: document.getElementById('appointmentDateFilter').value || null,
+                doctorId: document.getElementById('appointmentDoctorFilter').value || null,
+                status: document.getElementById('appointmentStatusFilter').value || null
+            };
+            const filtered = getAppointments(filters);
+            document.querySelector('#appointmentsTable tbody').innerHTML = renderAppointmentsTable(filtered);
+        }
+
+        function filterMedicalRecords() {
+            const patientId = document.getElementById('medicalRecordPatientFilter').value;
+            const filtered = getMedicalRecords(patientId || null);
+            document.querySelector('#medicalRecordsTable tbody').innerHTML = renderMedicalRecordsTable(filtered);
+        }
+
+        function filterBills() {
+            const status = document.getElementById('billStatusFilter').value;
+            const filtered = getBills(null, status || null);
+            document.querySelector('#billsTable tbody').innerHTML = renderBillsTable(filtered);
+        }
+
+        // ==================== NAVIGATION ====================
+        function navigateTo(page) {
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+                if (item.dataset.page === page) {
+                    item.classList.add('active');
+                }
+            });
+
+            const content = document.getElementById('app-content');
+            
+            switch(page) {
+                case 'dashboard':
+                    content.innerHTML = renderDashboard();
+                    break;
+                case 'patients':
+                    content.innerHTML = renderPatients();
+                    break;
+                case 'doctors':
+                    content.innerHTML = renderDoctors();
+                    break;
+                case 'appointments':
+                    content.innerHTML = renderAppointments();
+                    break;
+                case 'medical-records':
+                    content.innerHTML = renderMedicalRecords();
+                    break;
+                case 'billing':
+                    content.innerHTML = renderBilling();
+                    break;
+                case 'departments':
+                    content.innerHTML = renderDepartments();
+                    break;
+                case 'reports':
+                    content.innerHTML = renderReports();
+                    break;
+            }
+        }
+
+        // ==================== INITIALIZATION ====================
+        function init() {
+            loadSampleData();
+            navigateTo('dashboard');
+
+            // Setup navigation
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    navigateTo(item.dataset.page);
+                });
+            });
+        }
+
+        // Start the application
+        init();
+    </script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+1. npm install <packagename>            install all the package into node modules
+
+2. npx parcel index.html           builds a local host to run your html file
+
+3. npx parcel build index.html      it makes your program files most optimized and production ready and sent them to dist folder...dist folder is the production ready
+
+4. .parcelcache       this stores the package cached data and reduce the time of execution
+
+5.dist folder also has mapping files of js which can retain back the encrepted js file of dist folder to the actualfile
+    thats why we dont have to insert map files in production
+
+
+6. babel(already present on parcel) converts JSX code into react code Then Render proceess
+    of REACTDOM converts it into the HTML code
+
+   6.1      JSX code --------> ReactCode(JS Object)----------------> HTML tag
+                        babel                     REACTDOM(render process)
