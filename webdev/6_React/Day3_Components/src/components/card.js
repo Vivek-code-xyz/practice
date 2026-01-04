@@ -7,6 +7,7 @@ function Card(props) {
       />
       <h3>{props.product}</h3>
       <h1>{props.offer}</h1>
+      <h2>Price : {props.prices}</h2>
       <h3>Shop Now</h3>
     </div>
   );

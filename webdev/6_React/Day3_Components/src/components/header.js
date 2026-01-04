@@ -1,4 +1,10 @@
+import productDetails from "../utils/DataArray";
+import {useState} from "react";
+
 export default function Header() {
+
+  
+
   return (
     <div className="header">
       <img
@@ -13,6 +19,7 @@ export default function Header() {
         <button>Home&Living</button>
         <button>Bueaty</button>
         <button>Studio</button>
+        
       </div>
       <input placeholder="Search a product or service"></input>
       <div className="Profile">

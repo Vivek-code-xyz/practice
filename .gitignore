@@ -1,0 +1,153 @@
+# =================================================
+# Node.js / JavaScript / TypeScript
+# =================================================
+node_modules/
+dist/
+build/
+out/
+.next/
+.nuxt/
+.vite/
+.parcel-cache/
+.cache/
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
+
+# =================================================
+# Environment & Secrets
+# =================================================
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.crt
+
+# =================================================
+# Python / AI / ML / Data Science
+# =================================================
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pkl
+*.joblib
+*.h5
+*.pt
+*.ckpt
+
+.venv/
+venv/
+ENV/
+env/
+pip-wheel-metadata/
+
+.ipynb_checkpoints/
+.pytest_cache/
+.mypy_cache/
+
+# ML / DL outputs
+runs/
+wandb/
+mlruns/
+logs/
+data/
+datasets/
+checkpoints/
+models/
+
+# =================================================
+# C / C++ / Java / Go / Rust
+# =================================================
+*.o
+*.out
+*.exe
+*.class
+*.jar
+*.war
+*.ear
+target/
+
+bin/
+obj/
+
+# Rust
+target/
+
+# Go
+*.test
+*.prof
+
+# =================================================
+# Mobile / Android / iOS
+# =================================================
+.gradle/
+build/
+*.apk
+*.aab
+*.ipa
+*.iml
+
+# =================================================
+# Web3 / Blockchain
+# =================================================
+node_modules/
+artifacts/
+cache/
+typechain/
+coverage/
+hardhat.config.local.js
+
+# =================================================
+# Docker / DevOps
+# =================================================
+*.tar
+*.gz
+docker-data/
+docker-volumes/
+
+# =================================================
+# OS & System junk
+# =================================================
+.DS_Store
+Thumbs.db
+desktop.ini
+ehthumbs.db
+
+# =================================================
+# Editors / IDEs
+# =================================================
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+.history/
+
+# =================================================
+# Temporary / Backup files
+# =================================================
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+*.bak
+
+# =================================================
+# Database files
+# =================================================
+*.db
+*.sqlite
+*.sqlite3
+
+# =================================================
+# Misc
+# =================================================
+coverage/
+*.pid
+*.seed
+*.tgz

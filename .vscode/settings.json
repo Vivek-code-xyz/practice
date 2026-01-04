@@ -23,5 +23,7 @@
             "password": "Vivek@2007"
         }
     ],
-    "livePreview.defaultPreviewPath": "/webdev/Day1/problem2.html"
+    "livePreview.defaultPreviewPath": "/webdev/Day1/problem2.html",
+    "liveServer.settings.port": 5501,
+    "git.ignoreLimitWarning": true
 }

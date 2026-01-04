@@ -1,0 +1,126 @@
+/* Page center */
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #e0f2fe, #fdf2f8);
+  font-family: system-ui, sans-serif;
+}
+
+/* Central stopwatch box */
+#root {
+  background: linear-gradient(145deg, #ffffff, #f8fafc);
+  padding: 42px 52px;
+  border-radius: 18px;
+  text-align: center;
+  min-width: 340px;
+
+  box-shadow:
+    0 15px 35px rgba(0, 0, 0, 0.12),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.6);
+
+  animation: float 4s ease-in-out infinite;
+}
+
+/* Floating animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+/* Heading */
+#root > div:first-child {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 26px;
+  background: linear-gradient(90deg, #6366f1, #ec4899);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Time display */
+.display {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 32px;
+}
+
+/* Seconds */
+.sec {
+  font-size: 58px;
+  font-weight: 700;
+
+  width: 96px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+
+  background: linear-gradient(90deg, #0ea5e9, #22c55e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  animation: pulse 1s ease-in-out infinite;
+}
+
+/* Milliseconds */
+.mili {
+  font-size: 22px;
+  font-weight: 600;
+
+  width: 42px;
+  text-align: left;
+  font-variant-numeric: tabular-nums;
+
+  color: #64748b;
+}
+
+/* Subtle pulse animation */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.75; }
+}
+
+/* Buttons */
+button {
+  padding: 11px 20px;
+  margin: 0 7px;
+  border-radius: 10px;
+  border: none;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  color: white;
+
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    opacity 0.15s ease;
+}
+
+/* Individual colors */
+button:nth-of-type(1) {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+}
+
+button:nth-of-type(2) {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+button:nth-of-type(3) {
+  background: linear-gradient(135deg, #eab308, #f59e0b);
+}
+
+/* Hover */
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+  opacity: 0.95;
+}
+
+/* Active */
+button:active {
+  transform: scale(0.95);
+}
