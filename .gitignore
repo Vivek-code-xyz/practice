@@ -151,3 +151,6 @@ coverage/
 *.pid
 *.seed
 *.tgz
+
+
+connect.txt

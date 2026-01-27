@@ -1,0 +1,16 @@
+const mongoose = require("mongoose")
+
+const {Schema} = mongoose
+
+ // Defining schema
+    const userSchema = Schema({
+        name:String,
+        age:Number,
+        gender:String,
+        city:String
+    })
+    const User = mongoose.model("user",userSchema)
+
+module.exports = {
+    User
+}
