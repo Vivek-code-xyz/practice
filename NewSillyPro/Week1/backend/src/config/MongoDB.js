@@ -1,0 +1,7 @@
+import mongoose from "mongoose"
+
+
+export default async function main(){
+    await mongoose.connect(process.env.DB_CONNECT_URL)
+    console.log("DB Connected Successfully")
+}

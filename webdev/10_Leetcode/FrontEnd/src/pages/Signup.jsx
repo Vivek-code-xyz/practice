@@ -5,6 +5,7 @@ import { z } from "zod"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { registerUser } from "../Redux/authSlice"
+import { NavLink } from "react-router-dom"
 
 
 const signupSchema = z.object({
@@ -37,6 +38,7 @@ export default function Signup() {
     }, [isAuthenticated, navigate])
 
 
+
     function submitData(data) {
         dispatch(registerUser(data))
     }
@@ -62,6 +64,7 @@ export default function Signup() {
                     <div className="animate-fade-down text-3xl font-semibold text-center bg-linear-to-r from-blue-600 via-emerald-500 to-purple-600 bg-clip-text text-transparent mb-8 tracking-tight">Create Account</div>
 
                     <form onSubmit={handleSubmit(submitData)} className="bg-white border border-gray-200 rounded-2xl p-8 space-y-5 shadow-xl shadow-blue-100/40 animate-fade-slide transition-all duration-300 hover:shadow-purple-200/40">
+                        {error && <div className="text-red-600 text-sm mb-2">{error}</div>}
 
                         <div className="flex flex-col space-y-1.5 fade-1">
                             <label htmlFor="firstname" className="text-sm font-medium text-gray-600">Username</label>
@@ -88,7 +91,11 @@ export default function Signup() {
                             <span className="text-xs h-2.5 text-red-500">{errors.confirmPassword?.message}</span>
                         </div>
 
-                        <button type="submit" className="btn w-full bg-linear-to-r fade-5 from-blue-600 via-emerald-500 to-purple-600 border-none text-white font-semibold rounded-lg transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg active:scale-95">Sign Up</button>
+                        <button type="submit" className="btn w-full bg-linear-to-r fade-5 from-blue-600 via-emerald-500 to-purple-600 border-none text-white font-semibold rounded-lg transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg active:scale-95" disabled={loading}>Sign Up</button>
+
+                        <div className="text-center text-sm text-gray-600 mt-4">
+                            Already have an Account? <NavLink to="/login" className="link link-primary">Login</NavLink>
+                        </div>
 
                     </form>
 

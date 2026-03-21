@@ -16,34 +16,43 @@ export const createProblem =  async (req,res)=>{
         tags,visibleTestCases,hiddenTestCases,
         startCode,referenceCode} = req.body
 
-    //does this is valid problem? is handled by middleware
     try{
-
+        let testCount = 0;
+        let passedCount = 0;
 
         for(const {language,completeCode} of referenceCode){
             
             for(const testCase of [...visibleTestCases,...hiddenTestCases]){
-
+                
+                testCount++;
                 const result = await judgeSubmission({language,completeCode,input:testCase.input,expectedOutput:testCase.output})
+                
+                console.log(`Test ${testCount} (${language}):`, result)
 
                 if(result.status !== 'Accepted'){
-                    throw new Error(`Reference Failde in ${language}`)
+                    const errorDetail = result.error || result.message || JSON.stringify(result);
+                    throw new Error(`Reference Failed in ${language} - Test failed: ${result.status}. Details: ${errorDetail}`)
                 }
+                passedCount++;
             }
 
         }
 
+        console.log(`All ${testCount} tests passed for reference code`)
         await Problem.create({...req.body,problemCreater:req.result._id})
         
 
         res.status(201).json({
-            message: "Reference code validated successfully"
+            message: "Problem created successfully",
+            testsPassed: passedCount,
+            totalTests: testCount
         })
 
 
 
     }catch(e){
-        res.status(401).send("Error : "+e.message)
+        console.error("createProblem Error:", e.message)
+        res.status(400).json({error: e.message})
     }
 
 }
@@ -57,43 +66,59 @@ export const updateProblem = async(req,res)=>{
     try{ 
 
         if(!id){
-            return res.status(400).send("Id is missing")
+            return res.status(400).json({error: "Id is missing"})
         }
 
         const prob = await Problem.findById(id)
 
         if(!prob){
-            return res.status(404).send("Problem Not Found")
+            return res.status(404).json({error: "Problem Not Found"})
         }
 
         const {title,description,difficulty,
         tags,visibleTestCases,hiddenTestCases,
         startCode,referenceCode} = req.body
 
+        let testCount = 0;
+        let passedCount = 0;
+
         for(const {language,completeCode} of referenceCode){
             
-            for(const testCase of visibleTestCases){
-
+            for(const testCase of [...visibleTestCases,...hiddenTestCases]){
+                
+                testCount++;
                 const result = await judgeSubmission({language,completeCode,input:testCase.input,expectedOutput:testCase.output})
+                
+                console.log(`Test ${testCount} (${language}):`, result)
 
                 if(result.status !== 'Accepted'){
-                    throw new Error(`Reference Failde in ${language}`)
+                    const errorDetail = result.error || result.message || JSON.stringify(result);
+                    throw new Error(`Reference Failed in ${language} - Test failed: ${result.status}. Details: ${errorDetail}`)
                 }
+                passedCount++;
             }
 
         }
 
+        console.log(`All ${testCount} tests passed for reference code`)
         const updatedProb = await Problem.findByIdAndUpdate(id,{...req.body},{runValidators:true,new:true})
-        res.status(200).send(updatedProb)
+        res.status(200).json({
+            message: "Problem updated successfully",
+            testsPassed: passedCount,
+            totalTests: testCount,
+            problem: updatedProb
+        })
 
 
         
 
 
     }catch(e){
-        res.status(401).send("Error : "+e.message)
+        console.error("updateProblem Error:", e.message)
+        res.status(400).json({error: e.message})
     }
 }
+
 
 export const deleteProblem = async(req,res)=>{
     if (req.result.role !== "admin") 
@@ -128,12 +153,22 @@ export const readProblemById = async (req,res)=>{
             return res.status(400).send("Id is missing")
         }
 
-        const prob = await Problem.findById(id).select('_id title description difficulty tags visibleTestCases startCode')
+        let prob = await Problem.findById(id)
 
         if(!prob){
             return res.status(404).send("Problem Not Found")
         }
-        
+
+        // Map any legacy field names to the new camelCase ones
+        if(prob.VideoUrl && !prob.videoUrl){
+            prob = prob.toObject()
+            prob.videoUrl = prob.VideoUrl
+        }
+        if(prob.videoDescprition && !prob.videoDescription){
+            prob = prob.toObject()
+            prob.videoDescription = prob.videoDescprition
+        }
+
         res.status(200).send(prob)
 
     }catch(e){

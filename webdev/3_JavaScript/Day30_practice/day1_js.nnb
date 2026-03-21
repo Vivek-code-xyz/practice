@@ -1,0 +1,44 @@
+{
+    "cells": [
+        {
+            "language": "javascript",
+            "source": [
+                "console.log(\"hello\")"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "hello",
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "function greet(){\r\n    return \"you are welcome bro\"\r\n}\r\nconst a =greet()\r\nconsole.log(a)"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "you are welcome bro",
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

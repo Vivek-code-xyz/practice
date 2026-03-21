@@ -30,7 +30,8 @@ export const register = async(req,res)=>{
                 firstName:user.firstName,
                 lastName:user.lastName || "",
                 emailId:user.emailId,
-                _id:user._id
+                _id:user._id,
+                role: user.role
             }
         })
 
@@ -68,7 +69,8 @@ export const login = async(req,res)=>{
             user:{
                 firstName:user.firstName+" "+user.lastName,
                 emailId:user.emailId,
-                _id:user._id
+                _id:user._id,
+                role: user.role
             }
         })
 
@@ -139,6 +141,7 @@ export const deleteProfile = async(req,res)=>{
         res.status(400).send("Error : "+e.message)
     }
 }
+
 
 
 

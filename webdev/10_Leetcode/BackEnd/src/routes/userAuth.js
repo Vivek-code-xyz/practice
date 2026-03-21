@@ -1,5 +1,5 @@
 import express from 'express'
-import { register ,login,logout ,adminRegister,deleteProfile} from '../Controllers/userAuthControll.js'
+import { register ,login,logout ,adminRegister,deleteProfile } from '../Controllers/userAuthControll.js'
 import VarifyTokenMW from '../middleware/validateToken.js'
 
 
@@ -25,10 +25,12 @@ authRouter.get('/check',VarifyTokenMW,(req,res)=>{
             user:{
                 firstName:req.result.firstName,
                 emailId:req.result.emailId,
-                _id:req.result._id
+                _id:req.result._id,
+                role: req.result.role
             }
     })
 })
+
 
 //on my own
 //googleSignIn

@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { loginUser } from "../Redux/authSlice"
 import { useSelector } from "react-redux"
-
+import { NavLink } from "react-router-dom"
 
 
 const loginSchema = z.object({
@@ -29,6 +29,7 @@ export default function Login() {
         }
     }, [isAuthenticated, navigate])
 
+
     function submitData(data) {
         dispatch(loginUser(data))
     }
@@ -44,6 +45,7 @@ export default function Login() {
                     </div>
 
                     <form onSubmit={handleSubmit(submitData)} className="bg-white border border-gray-200 rounded-2xl p-8 space-y-5 shadow-xl shadow-blue-100/40 animate-fade-slide transition-all duration-300 hover:shadow-purple-200/40">
+                        {error && <div className="text-red-600 text-sm mb-2">{error}</div>}
 
                         <div className="flex flex-col space-y-1.5 fade-1">
                             <label htmlFor="email" className="text-sm font-medium text-gray-600">Email</label>
@@ -60,9 +62,13 @@ export default function Login() {
                             <span className="text-xs h-4.5 text-red-500">{errors.password?.message}</span>
                         </div>
 
-                        <button type="submit" className="btn w-full bg-linear-to-r fade-3 from-blue-600 via-emerald-500 to-purple-600 border-none text-white font-semibold rounded-lg transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg active:scale-95">
+                        <button type="submit" className="btn w-full bg-linear-to-r fade-3 from-blue-600 via-emerald-500 to-purple-600 border-none text-white font-semibold rounded-lg transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg active:scale-95" disabled={loading}>
                             Login
                         </button>
+
+                        <div className="text-center text-sm text-gray-600 mt-4">
+                            Don't have an account? <NavLink to="/signup" className="link link-primary">Register</NavLink>
+                        </div>
 
                     </form>
 

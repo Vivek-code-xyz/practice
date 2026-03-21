@@ -63,7 +63,12 @@ const authSlice = createSlice({
         error:null,
         isAuthenticated:false
     },
-    reducers:{},
+    reducers:{
+        // allow components to clear error after showing it
+        clearError(state) {
+            state.error = null;
+        }
+    },
     extraReducers:(builder)=>{
         builder
         .addCase(registerUser.pending,(state)=>{
@@ -72,7 +77,8 @@ const authSlice = createSlice({
         })
         .addCase(registerUser.fulfilled,(state,action)=>{
             state.loading = false,
-            state.user = !!action.payload,
+            // store the full user object returned from the API
+            state.user = action.payload,
             state.isAuthenticated = true
         })
         .addCase(registerUser.rejected,(state,action)=>{
@@ -87,7 +93,7 @@ const authSlice = createSlice({
         })
         .addCase(loginUser.fulfilled,(state,action)=>{
             state.loading = false, 
-            state.user = !!action.payload,
+            state.user = action.payload,
             state.isAuthenticated = true
         })
         .addCase(loginUser.rejected,(state,action)=>{
@@ -102,12 +108,12 @@ const authSlice = createSlice({
         })
         .addCase(checkAuth.fulfilled,(state,action)=>{
             state.loading = false,
-            state.user = !!action.payload,
+            state.user = action.payload,
             state.isAuthenticated = true
         })
         .addCase(checkAuth.rejected,(state,action)=>{
             state.loading = false,
-            state.error = action.payload?.message || "Check auth failed",
+            // do not set error for checkAuth failures; they are expected on initial load
             state.isAuthenticated = false,
             state.user = null
         })
@@ -130,5 +136,8 @@ const authSlice = createSlice({
     }        
 
 })
+
+// export the clearError action for components
+export const { clearError } = authSlice.actions;
 
 export default authSlice.reducer

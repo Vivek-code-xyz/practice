@@ -7,6 +7,9 @@ import { authRouter } from './routes/userAuth.js'
 import { redisClient } from './config/redis.js'
 import { problemRouter } from './routes/problemSet.js'
 import { submitRouter } from './routes/submitProb.js'
+import { AiRouter } from './routes/AiRouter.js'
+// import { videoRouter} from './routes/videoRouter.js'
+
 
 dotenv.config()           //configuring .env file to index.jsx
 const app = express()
@@ -20,7 +23,9 @@ app.use(cookieParser());
 
 app.use('/user',authRouter)
 app.use('/problem',problemRouter)
-app.use('/solution',submitRouter)
+app.use('/submit',submitRouter)
+app.use('/ai',AiRouter)
+// app.use("/video",videoRouter)
 
 
 // main()
