@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Chapter 3 – Basic Computer Organization and Design</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.7;
+      margin: 0;
+      padding: 0;
+      background: #f5f7fb;
+      color: #222;
+    }
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 30px 35px 40px;
+      background: #ffffff;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+      border-radius: 10px;
+    }
+    h1, h2, h3 {
+      color: #1b3b73;
+      margin-top: 1.4em;
+    }
+    h1 {
+      text-align: center;
+      margin-top: 0;
+      margin-bottom: 0.3em;
+      font-size: 2rem;
+    }
+    .subtitle {
+      text-align: center;
+      color: #555;
+      margin-bottom: 1.8em;
+      font-size: 0.98rem;
+    }
+    h2 {
+      border-left: 4px solid #1b3b73;
+      padding-left: 10px;
+      font-size: 1.3rem;
+    }
+    h3 {
+      font-size: 1.08rem;
+    }
+    p {
+      margin: 0.4em 0 0.8em;
+      text-align: justify;
+    }
+    ul {
+      margin: 0.2em 0 0.8em 1.4em;
+    }
+    li {
+      margin: 0.2em 0;
+    }
+    code {
+      background: #f1f3fa;
+      padding: 2px 5px;
+      border-radius: 3px;
+      font-size: 0.9em;
+    }
+    .note {
+      background: #eef5ff;
+      border-left: 4px solid #1b3b73;
+      padding: 8px 10px;
+      margin: 1em 0;
+      border-radius: 4px;
+      font-size: 0.92rem;
+    }
+    .keyword {
+      font-weight: 600;
+      color: #1b3b73;
+    }
+    .example {
+      background: #f9fafc;
+      border: 1px dashed #c4cce5;
+      padding: 8px 10px;
+      border-radius: 4px;
+      font-size: 0.92rem;
+      margin-bottom: 1em;
+    }
+    .section-label {
+      display: inline-block;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #666;
+      margin-bottom: 0.3em;
+    }
+    .question-block {
+      margin-bottom: 1.4em;
+      padding: 10px 12px;
+      border-radius: 6px;
+      background: #f8f9ff;
+      border: 1px solid #dce3ff;
+    }
+    .question {
+      font-weight: 600;
+      color: #1b2233;
+    }
+    .answer {
+      margin-top: 0.4em;
+      color: #333;
+    }
+    .solution {
+      margin-top: 0.2em;
+      font-size: 0.94rem;
+      color: #444;
+    }
+    .inline-heading {
+      font-weight: 600;
+      color: #1b3b73;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Chapter 3 – Basic Computer Organization and Design</h1>
+    <div class="subtitle">Instruction Codes, Registers, Timing and Control, Instruction Cycle, Memory-Reference Instructions, I/O &amp; Interrupt, Basic Computer &amp; Accumulator Design</div>
+
+    <span class="section-label">3.1 Overview</span>
+    <h2>Introduction</h2>
+    <p>
+      In this chapter we study a simplified model of a digital computer, often called the
+      <span class="keyword">basic computer</span>. It is not a real commercial CPU, but it captures all
+      fundamental concepts that you need for exams and for understanding real processors later.
+      We focus on how instructions are encoded, how registers are organized, how control signals
+      are generated in time, and how a simple accumulator-based CPU is designed.
+    </p>
+    <div class="note">
+      Idea to remember: A computer can be understood as <b>data</b> stored in memory, a
+      <b>set of registers</b> that hold temporary values, and a <b>control unit</b> that
+      repeatedly fetches, decodes, and executes instructions.
+    </div>
+
+    <span class="section-label">3.2 Instruction codes</span>
+    <h2>Instruction Codes</h2>
+    <p>
+      An <span class="keyword">instruction code</span> is a binary pattern stored in memory that tells the
+      computer which operation to perform and on which data. In the basic computer, each word in
+      memory is 16 bits long, and every instruction is stored in one word.
+    </p>
+    <p>
+      The most common instruction format for memory-reference instructions is:
+    </p>
+    <div class="example">
+      <span class="inline-heading">Memory-reference format (16 bits):</span><br />
+      <code>I | Opcode (3 bits) | Address (12 bits)</code><br />
+      Here, <code>I</code> is the addressing-mode bit (0 for direct, 1 for indirect), the
+      next 3 bits are the <b>operation code</b>, and the last 12 bits specify a memory
+      address (allowing 4096 = 2<sup>12</sup> distinct locations).
+    </div>
+    <p>
+      Example: If the 3-bit opcode is <code>010</code>, it may represent the <code>LDA</code>
+      (load accumulator) instruction. If the 12-bit address is <code>0010 1011 1100</code>,
+      the CPU will load the contents of memory location <code>0x2BC</code> into the
+      accumulator, either directly or indirectly depending on the <code>I</code> bit.
+    </p>
+
+    <h3>Types of instructions in the basic computer</h3>
+    <p>
+      For the basic computer model, all instructions are divided into three broad groups by
+      opcode and addressing mode:
+    </p>
+    <ul>
+      <li>
+        <span class="keyword">Memory-reference instructions</span> (e.g., <code>AND, ADD, LDA, STA, BUN, BSA, ISZ</code>):
+        operate on data in memory using the address field.
+      </li>
+      <li>
+        <span class="keyword">Register-reference instructions</span>: operate directly on the accumulator (AC) and
+        other flags, without an explicit memory operand; usually identified by opcode
+        <code>111</code> and addressing bit <code>I = 0</code>.
+      </li>
+      <li>
+        <span class="keyword">Input–output instructions</span>: transfer data between AC and I/O registers or control
+        interrupts; typically opcode <code>111</code> with <code>I = 1</code>.
+      </li>
+    </ul>
+
+    <span class="section-label">3.3 Processor and other registers</span>
+    <h2>Computer Registers</h2>
+    <p>
+      The basic computer uses a small set of registers with fixed roles. These registers are
+      connected through a common bus and controlled by the control unit. You should remember
+      their names and functions, because they are frequently asked in exams.
+    </p>
+    <ul>
+      <li>
+        <span class="keyword">AR</span> (Address Register, 12 bits): Holds a memory address for the next read or write
+        operation.
+      </li>
+      <li>
+        <span class="keyword">PC</span> (Program Counter, 12 bits): Holds the address of the next instruction to be
+        fetched from memory.
+      </li>
+      <li>
+        <span class="keyword">DR</span> (Data Register, 16 bits): Holds data read from memory, or data to be written
+        into memory.
+      </li>
+      <li>
+        <span class="keyword">AC</span> (Accumulator, 16 bits): The main processing register used for arithmetic and
+        logic operations.
+      </li>
+      <li>
+        <span class="keyword">IR</span> (Instruction Register, 16 bits): Holds the current instruction word being
+        decoded and executed.
+      </li>
+      <li>
+        <span class="keyword">TR</span> (Temporary Register, 16 bits): Used as a temporary storage during certain
+        operations or micro-operations.
+      </li>
+      <li>
+        <span class="keyword">INPR</span> (Input Register, 8 bits) and <span class="keyword">OUTR</span> (Output Register, 8 bits):
+        Communicate serially with external input and output devices and in parallel with AC.
+      </li>
+      <li>
+        <span class="keyword">SC</span> (Sequence Counter, 4 bits): Generates timing steps <code>T0</code> to
+        <code>T15</code> for micro-operations.
+      </li>
+      <li>
+        <span class="keyword">Flip-flops</span>: such as <span class="keyword">E</span> (extend carry), <span class="keyword">IEN</span>
+        (interrupt enable), and <span class="keyword">R</span> (interrupt request).
+      </li>
+    </ul>
+    <div class="note">
+      Important: The basic computer is an <b>accumulator-based</b> machine, meaning that almost
+      every arithmetic or logic instruction uses AC as one of the operands and also stores the
+      result back into AC.
+    </div>
+
+    <span class="section-label">3.4 Computer instructions</span>
+    <h2>Computer Instructions</h2>
+    <p>
+      A <span class="keyword">computer instruction</span> specifies four things: operation to perform, where
+      operands are located, where to store the result, and how to move to the next instruction.
+      In the basic computer, this information is compressed into the 16-bit instruction word.
+    </p>
+    <p>
+      Memory-reference instructions use the address field, while register-reference and I/O
+      instructions interpret the address bits as control flags. For example, a register-reference
+      instruction can set or clear specific flip-flops in AC or E depending on which bit is 1 in
+      the instruction.
+    </p>
+
+    <span class="section-label">3.5 Timing and control</span>
+    <h2>Timing and Control</h2>
+    <p>
+      The <span class="keyword">timing and control unit</span> generates the control signals that tell each
+      register and functional block what to do at each clock pulse. A master clock generator
+      produces uniform clock pulses that drive all flip-flops and registers in the system.
+    </p>
+    <p>
+      The sequence counter <span class="keyword">SC</span> is incremented with each clock pulse. Its outputs
+      are decoded to generate timing signals <code>T0, T1, ..., T15</code>. Together with the
+      decoded opcode bits <code>D0 ... D7</code> (from IR) and current status bits, these timing
+      signals activate the required micro-operations in the correct order.
+    </p>
+    <div class="example">
+      <span class="inline-heading">Example of timing:</span><br />
+      At <code>T0</code>, the control unit loads the program counter value into AR and starts a
+      memory read. At <code>T1</code>, the instruction word from memory is loaded into IR and PC
+      is incremented. At <code>T2</code>, the instruction is decoded and the next phase (indirect
+      or direct execution) is selected.
+    </div>
+
+    <span class="section-label">3.6 Instruction execution</span>
+    <h2>Instruction Cycle</h2>
+    <p>
+      The <span class="keyword">instruction cycle</span> is the repeating sequence of operations that the
+      CPU performs for every instruction in a program. In the basic computer, each instruction
+      cycle is divided into smaller phases, each associated with specific timing signals.
+    </p>
+    <h3>Phases of the instruction cycle</h3>
+    <ul>
+      <li>
+        <span class="keyword">Fetch phase</span>: The address in PC is transferred to AR, and the instruction at that
+        address is read from memory into IR. Then PC is incremented to point to the next
+        instruction.
+      </li>
+      <li>
+        <span class="keyword">Decode phase</span>: The opcode bits of IR are decoded to determine the type of
+        instruction. If the instruction is memory-reference and has indirect addressing, the
+        indirect phase is triggered.
+      </li>
+      <li>
+        <span class="keyword">Indirect address phase</span> (if needed): If <code>I = 1</code>, the 12-bit address
+        field in IR is used to read the effective address from memory into AR.
+      </li>
+      <li>
+        <span class="keyword">Execute phase</span>: Depending on the instruction type, one of several execution
+        sequences (memory-reference, register-reference, or I/O) is activated.
+      </li>
+    </ul>
+    <div class="note">
+      The instruction cycle continues endlessly until a <code>HLT</code> (halt) instruction is
+      executed, which stops the sequence counter and disables further micro-operations.
+    </div>
+
+    <span class="section-label">3.7 Memory-reference instructions</span>
+    <h2>Memory-Reference Instructions</h2>
+    <p>
+      Memory-reference instructions use the 12-bit address field of IR to specify an operand in
+      memory. They may use direct addressing (<code>I = 0</code>) or indirect addressing
+      (<code>I = 1</code>). Common memory-reference instructions of the basic computer include:
+    </p>
+    <ul>
+      <li><code>AND</code>: AC &larr; AC &amp; M[AR] (bitwise AND)</li>
+      <li><code>ADD</code>: AC &larr; AC + M[AR] (add memory operand to AC)</li>
+      <li><code>LDA</code>: AC &larr; M[AR] (load AC from memory)</li>
+      <li><code>STA</code>: M[AR] &larr; AC (store AC to memory)</li>
+      <li><code>BUN</code>: PC &larr; AR (unconditional branch)</li>
+      <li><code>BSA</code>: M[AR] &larr; PC, PC &larr; AR + 1 (branch and save return address)</li>
+      <li><code>ISZ</code>: M[AR] &larr; M[AR] + 1; if result = 0 then PC &larr; PC + 1 (used in loops)</li>
+    </ul>
+    <p>
+      For each of these instructions, the control unit generates a specific micro-operation
+      sequence after the fetch and decode phases. For example, <code>LDA</code> will cause a memory
+      read into DR followed by a transfer from DR to AC.
+    </p>
+
+    <span class="section-label">3.8 Input-output and interrupt</span>
+    <h2>Input–Output and Interrupt</h2>
+    <p>
+      The basic computer communicates with external devices using <span class="keyword">input</span> and
+      <span class="keyword">output</span> instructions. Two special 8-bit registers are involved: <span class="keyword">INPR</span>
+      receives serial input from a keyboard or similar device, and <span class="keyword">OUTR</span> holds data to
+      be sent to an output device such as a printer or display.
+    </p>
+    <p>
+      Simple I/O instructions include transferring data between AC and these registers and
+      checking flag bits that indicate whether input is ready or output is complete. To avoid
+      wasting CPU time in polling, the basic computer also supports <span class="keyword">interrupt-initiated
+      I/O</span> using an interrupt enable flip-flop <span class="keyword">IEN</span> and an interrupt request flip-flop
+      <span class="keyword">R</span>.
+    </p>
+    <h3>Interrupt cycle (concept)</h3>
+    <p>
+      When an interrupt is enabled and an I/O device sets the request flag, the control unit
+      completes the current instruction, then enters an <span class="keyword">interrupt cycle</span>. The content
+      of PC is saved (for example, at location 0), PC is loaded with the starting address of the
+      interrupt service routine, and <code>R</code> is cleared. After servicing the device, a branch
+      instruction returns control to the main program.
+    </p>
+
+    <span class="section-label">3.9 Complete basic computer</span>
+    <h2>Complete Computer Description</h2>
+    <p>
+      The <span class="keyword">complete basic computer</span> includes a 4096 × 16 memory, the processor
+      registers (AR, PC, DR, AC, IR, TR, INPR, OUTR, SC), the adder and logic circuit connected to
+      AC, status flip-flops (E, IEN, R), and the control unit that decodes instructions and
+      generates micro-operations.
+    </p>
+    <p>
+      Hardware-wise, all registers are connected through a common bus system implemented using
+      multiplexers or tri-state gates. The control unit decides which register places its content
+      on the bus and which register loads from the bus at each timing step. This arrangement
+      minimizes the number of physical wires while still allowing flexible data transfers.
+    </p>
+
+    <span class="section-label">3.10 Design of basic computer</span>
+    <h2>Design of Basic Computer</h2>
+    <p>
+      Designing the basic computer means specifying all its hardware components and the
+      micro-operations they can perform. Major components include the memory unit, the
+      register set, the common bus, the adder and logic circuit, and the control logic (hardwired).
+    </p>
+    <p>
+      The control logic uses the decoded instruction bits (<code>D0 ... D7</code>), the timing
+      signals (<code>T0 ... T15</code>), and status flags to produce control outputs such as
+      <code>LD</code>, <code>INR</code>, and <code>CLR</code> for each register, as well as select
+      signals for the adder-logic circuit and the bus. A collection of Boolean equations or a
+      control table defines exactly which micro-operations are active at each time step for
+      each instruction.
+    </p>
+
+    <span class="section-label">3.11 Design of accumulator unit</span>
+    <h2>Design of Accumulator Unit</h2>
+    <p>
+      The <span class="keyword">accumulator unit</span> centers around the 16-bit AC register and an associated
+      adder and logic circuit. AC typically has control inputs <code>LD</code> (load),
+      <code>INR</code> (increment), and <code>CLR</code> (clear). Its input can come from the common
+      bus, from the output of the adder-logic unit, or from DR, depending on the micro-operation
+      being performed.
+    </p>
+    <p>
+      The adder and logic circuit usually supports operations such as addition, complement,
+      logical AND, and shift operations. For example, instruction <code>CMA</code> (complement AC)
+      will pass the bitwise complement of AC back into AC, while <code>CIL</code> (circular shift
+      left through E) shifts AC left and brings in the E flip-flop as the least significant bit.
+      All these operations are controlled by a small set of select lines from the control unit.
+    </p>
+    <div class="note">
+      In exam answers, clearly state: “AC is the main processing register of the basic computer.
+      It works with an adder/logic circuit controlled by micro-operations like ADD, AND,
+      complement, and shift, and is connected to memory via DR and the common bus.”
+    </div>
+
+    <span class="section-label">3.12 Practice</span>
+    <h2>Practice Questions (With Answers)</h2>
+
+    <div class="question-block">
+      <div class="question">Q1. Define an instruction code. What is the general format of a memory-reference instruction in the basic computer?</div>
+      <div class="answer"><b>Answer:</b> An instruction code is a binary pattern stored in memory that specifies an operation and its operands. In the basic computer, a memory-reference instruction has 16 bits arranged as <code>I | Opcode (3 bits) | Address (12 bits)</code>, where <code>I</code> is the addressing-mode bit, the opcode selects the operation, and the address field specifies the memory location of the operand.</div>
+      <div class="solution"><b>Solution approach:</b> Start from the definition (binary representation of an instruction) and then clearly write the 1 + 3 + 12 bit structure, mentioning the purpose of each field.</div>
+    </div>
+
+    <div class="question-block">
+      <div class="question">Q2. List any five processor registers of the basic computer and write one line for the function of each.</div>
+      <div class="answer"><b>Answer:</b> Example set of five registers: (1) AR – holds the address of the memory location to be accessed. (2) PC – holds the address of the next instruction to be fetched. (3) DR – holds data read from memory or data to be written to memory. (4) AC – general-purpose processing register used for arithmetic and logic operations. (5) IR – holds the current instruction being decoded and executed.</div>
+      <div class="solution"><b>Solution approach:</b> Choose any five standard registers (AR, PC, DR, AC, IR, TR, INPR, OUTR) and write a clear, exam-style functional description.</div>
+    </div>
+
+    <div class="question-block">
+      <div class="question">Q3. What is the role of the sequence counter (SC) and the timing signals T0–T15 in the basic computer?</div>
+      <div class="answer"><b>Answer:</b> The sequence counter (SC) is a 4-bit register that is incremented by the clock, and its output is decoded to generate a sequence of timing signals T0–T15. Each timing signal represents a micro-time step in which a specific set of micro-operations is enabled. Together with the decoded opcode and status flags, these timing signals control the exact order in which micro-operations are executed during the instruction cycle.</div>
+      <div class="solution"><b>Solution approach:</b> Explain SC as a small counter, then mention decoding into T0–T15 and state that these signals drive micro-operations in each phase.</div>
+    </div>
+
+    <div class="question-block">
+      <div class="question">Q4. Explain the different phases of the instruction cycle in the basic computer.</div>
+      <div class="answer"><b>Answer:</b> The instruction cycle consists of: (1) Fetch phase – the instruction at the address in PC is fetched into IR, and PC is incremented. (2) Decode phase – the opcode in IR is decoded to determine the instruction type. (3) Indirect address phase – if the addressing bit I is 1, the effective address is obtained from memory and loaded into AR. (4) Execute phase – the control unit generates micro-operations to carry out the instruction, which may be memory-reference, register-reference, or I/O.</div>
+      <div class="solution"><b>Solution approach:</b> Write each phase in order with 1–2 lines: fetch, decode, optional indirect, and execute, emphasizing the role of PC, IR, and AR.</div>
+    </div>
+
+    <div class="question-block">
+      <div class="question">Q5. Write the function of the following memory-reference instructions: AND, ADD, LDA, STA.</div>
+      <div class="answer"><b>Answer:</b> AND: AC &larr; AC &amp; M[AR]. ADD: AC &larr; AC + M[AR]. LDA: AC &larr; M[AR]. STA: M[AR] &larr; AC. Here M[AR] denotes the contents of the memory location whose address is in AR.</div>
+      <div class="solution"><b>Solution approach:</b> Use symbolic micro-operation notation, always mentioning AC and M[AR]. Keep the format “AC &larr; expression” or “M[AR] &larr; AC”.</div>
+    </div>
+
+    <div class="question-block">
+      <div class="question">Q6. Distinguish between register-reference and memory-reference instructions in the basic computer.</div>
+      <div class="answer"><b>Answer:</b> Memory-reference instructions use the 12-bit address field of the instruction to specify a memory operand, may use direct or indirect addressing, and typically perform operations like AND, ADD, LDA, STA, BUN, BSA, ISZ on memory data. Register-reference instructions, identified by opcode 111 with I = 0, do not access memory; instead they interpret the remaining bits of the instruction as control flags to perform operations directly on AC, E, and other internal flip-flops (for example, clear AC, complement AC, shift AC).</div>
+      <div class="solution"><b>Solution approach:</b> Compare on three points: (1) use of address field, (2) type of operand (memory vs. register/flag), and (3) typical examples.</div>
+    </div>
+
+    <div class="question-block">
+      <div class="question">Q7. What is interrupt-initiated I/O? How does the basic computer handle an interrupt request?</div>
+      <div class="answer"><b>Answer:</b> Interrupt-initiated I/O is a technique where an I/O device signals the CPU when it is ready for data transfer, instead of the CPU repeatedly polling the device. In the basic computer, when interrupts are enabled (IEN = 1) and a device sets the request flip-flop R, the CPU completes the current instruction and then enters an interrupt cycle: it saves the current PC value in a fixed memory location (e.g., address 0), loads PC with the starting address of the interrupt service routine, clears R, and executes the service routine. At the end, a branch instruction returns control to the main program.</div>
+      <div class="solution"><b>Solution approach:</b> Define the concept in one line, then describe the steps: finish current instruction, save PC, branch to service routine, clear request, and return.</div>
+    </div>
+
+    <div class="question-block">
+      <div class="question">Q8. Briefly describe the hardware components of the basic computer.</div>
+      <div class="answer"><b>Answer:</b> The basic computer contains: a 4096 × 16 memory unit; a set of processor registers (AR, PC, DR, AC, IR, TR, INPR, OUTR, SC); an adder and logic unit connected to AC; status flip-flops such as E, IEN, and R; a common bus system that interconnects all registers; and a hardwired control unit that decodes instruction codes and generates the timing and control signals required for micro-operations.</div>
+      <div class="solution"><b>Solution approach:</b> List components in a structured way – memory, registers, ALU/adder-logic, bus, status flip-flops, and control unit – each in a few words.</div>
+    </div>
+
+    <div class="question-block">
+      <div class="question">Q9. Explain the design and function of the accumulator (AC) in the basic computer.</div>
+      <div class="answer"><b>Answer:</b> The accumulator AC is a 16-bit general-purpose processing register. It receives data from memory via DR and the common bus, interacts with the adder and logic circuit to perform arithmetic and logic operations, and supplies results back to memory or I/O. AC has control inputs such as LD, INR, and CLR that are driven by the control unit, and many instructions (ADD, AND, LDA, CMA, CIL, CIR) explicitly use AC as their main operand and result register.</div>
+      <div class="solution"><b>Solution approach:</b> Emphasize that AC is central to execution: mention its size, its connection to the adder-logic unit and bus, and the typical micro-operations involving AC.</div>
+    </div>
+
+    <div class="question-block">
+      <div class="question">Q10. Why is a common bus system used in the basic computer? How is it controlled?</div>
+      <div class="answer"><b>Answer:</b> A common bus system is used to reduce the number of physical wires needed to interconnect all registers and the memory. Instead of having dedicated lines between every pair of registers, a shared set of lines carries data from one selected source register to one or more destination registers. The control unit enables the appropriate source on the bus and asserts the load (LD) signals of the destination registers at the correct timing signals, usually using multiplexer select inputs or tri-state enable lines.</div>
+      <div class="solution"><b>Solution approach:</b> First explain the purpose (hardware economy and flexibility), then state that the control unit selects the data source and destination through control signals synchronized with the clock.</div>
+    </div>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "name": "Codembly",
+  "short_name": "Codembly",
+  "description": "Basic Computer Assembly Language workspace with live registers, memory, and runtime inspection.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f151c",
+  "theme_color": "#0f151c",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
